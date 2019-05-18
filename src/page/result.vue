@@ -30,7 +30,7 @@ export default {
         };
     },
     created(){
-        let url = `http://api.map.baidu.com/telematics/v3/weather?location=杭州&output=json&ak=H7W5CxI0BPzKtwGcBHmpGPAz50xP1Qjw`;
+        let url = `/telematics/v3/weather?location=杭州&output=json&ak=H7W5CxI0BPzKtwGcBHmpGPAz50xP1Qjw`;
         this.axios.get(url).then((response) => {
             console.log(response.data);
         });
