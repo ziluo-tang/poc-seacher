@@ -1,37 +1,20 @@
-# poc-seacher
+# element-admin
+> A simple project of admin
 
-#### 介绍
-警务搜索系统
+## Build Setup
 
-#### 软件架构
-软件架构说明
+``` bash
+# get code
+pull all code
 
+# install dependencies
+npm install or yarn or cnpm insall
 
-#### 安装教程
+# start project
+npm run dev
+```
 
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 参与贡献
-
-1. Fork 本仓库
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
-
-
-#### 码云特技
-
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+## 说明
+本项目集成了axios、vue-router、vuex、v-charts，是一个完善的后台管理系统框架；其中包括数据交互配置、路有权限配置、状态管理配置都已经配置完善，并且还在处于不断优化的阶段。
+需要快速搭建项目开发的，可以直接采用本框架，或者参考本项目搭建简化版本项目架构，初始登录密码任意输入，点击登录即可，需要者可放心使用。
+权限配置写在home.vue文件里
