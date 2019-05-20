@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import store from './store';
 import ElementUI from 'element-ui';
+import './assets/iconfont/iconfont.css';
 import 'element-ui/lib/theme-chalk/index.css';
 import Router from 'vue-router';
 import axios from 'axios';

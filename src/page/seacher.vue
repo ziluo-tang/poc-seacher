@@ -1,43 +1,63 @@
 <template>
     <div class="seacher-box">
         <div class="seacher-container">
-            <el-input v-model="keyword" placeholder="输入关键词" style="margin-right: 15px;"></el-input>
-            <el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+            <div class="seacher-log">
+                <i class="iconfont iconjingwuicon_svg-"></i>
+                <span>警务云搜</span>
+            </div>
+            <autocompleteSeacher :search="search" :keyword="keyword" @valChange="keywordChange"></autocompleteSeacher>
         </div>
     </div>
 </template>
 
 <script>
+import autocompleteSeacher from '../components/autocomplete-seacher/index.vue';
 export default {
     data() {
         return {
-                keyword: ''
-            };
+            keyword: ''
+        };
+    },
+    components:{
+        autocompleteSeacher
     },
     methods: {
+        keywordChange(value){
+            this.keyword = value;
+        },
         search() {
-            this.$router.push({ path: "/result", query: {keyword: this.keyword} });
+            console.log(1);
+            if(this.keyword){
+                this.$router.push({ path: "/result", query: {keyword: this.keyword} });
+            }
         }
     }
 }
 </script>
 
-<style>
+<style lang="scss">
 .seacher-box{
     position: relative;
     width: 100%;
     height: 100%;
+    .seacher-container{
+        position: absolute;
+        width: 50%;
+        left: 50%;
+        top: 30%;
+        transform: translate(-50%, 0);
+        .seacher-log{
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1em;
+            i, span{
+                font-size: 2.8em;
+                color: #aaaaaa;
+                letter-spacing: 0.05em
+            }
+        }
+    }
 }
-.seacher-container{
-    position: absolute;
-    width: 50%;
-    left: 50%;
-    top: 30%;
-    transform: translate(-50%, 0);
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-}
+
 </style>
 
