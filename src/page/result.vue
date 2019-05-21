@@ -20,44 +20,10 @@
         <el-main class="content">
             <el-row :gutter="20">
                 <el-col :span="16">
-                    <el-col :span="12">
-                        <el-card class="box-card">
-                            <div slot="header" class="clearfix">
-                                <span>人员信息</span>
-                                <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-                            </div>
-                            <div v-for="o in 4" :key="o" class="text item">
-                                {{'列表内容 ' + o }}
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-card class="box-card">
-                            <div slot="header" class="clearfix">
-                                <span>人员信息</span>
-                                <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-                            </div>
-                            <div v-for="o in 4" :key="o" class="text item">
-                                {{'列表内容 ' + o }}
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-card class="box-card">
-                        <div slot="header" class="clearfix">
-                            <span>人员信息</span>
-                            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-                        </div>
-                        <div v-for="o in 4" :key="o" class="text item">
-                            {{'列表内容 ' + o }}
-                        </div>
-                    </el-card>
+                    <person-group :persons="persons"></person-group>
                 </el-col>
                 <el-col :span="8" class="content-right">
-                    <el-card class="box-card">
-                        <div v-for="o in 4" :key="o" class="text item">
-                            {{'列表内容 ' + o }}
-                        </div>
-                    </el-card>
+                    <secret :confidential="confidential"></secret>
                 </el-col>
             </el-row>
         </el-main>
@@ -68,19 +34,56 @@
 import { mapGetters } from "vuex";
 import { mapMutations } from "vuex";
 import autocompleteSeacher from '../components/autocomplete-seacher/index.vue';
+import personGroup from '../components/cards/person/personGroup.vue';
+import secret from '../components/cards/secret/secretest';
 export default {
     data() {
         return {
             keyword: this.$route.query.keyword,
             sysUserName: 'admin',
-            result: 1
+            persons: [
+                {
+                    header: require(`../assets/img/u65.png`),
+                    name: '张爱丽',
+                    IDcard: '341003198607012524',
+                    type: '欺诈在逃',
+                    address: '浙江省杭州市西湖区西溪云庐1栋1201'
+                },
+                {
+                    header: require(`../assets/img/u70.png`),
+                    name: '王一凡',
+                    IDcard: '341013198712011102',
+                    type: '常驻人口',
+                    address: '浙江省杭州市滨江区浦沿路口江南文苑15栋2单元1901'
+                },
+                {
+                    header: require(`../assets/img/u65.png`),
+                    name: '张爱丽',
+                    IDcard: '341003198607012524',
+                    type: '欺诈在逃',
+                    address: '浙江省杭州市西湖区西溪云庐1栋1201'
+                },
+                {
+                    header: require(`../assets/img/u70.png`),
+                    name: '王一凡',
+                    IDcard: '341013198712011102',
+                    type: '常驻人口',
+                    address: '浙江省杭州市滨江区浦沿路口江南文苑15栋2单元1901'
+                }
+            ],
+            confidential: {
+                name: '高敏信息',
+                info: []
+            }
         };
     },
     created(){
         this.search();
     },
     components: {
-        autocompleteSeacher
+        autocompleteSeacher,
+        personGroup,
+        secret
     },
     computed: {
         ...mapGetters(["username", "password", "treeData"])
@@ -116,15 +119,18 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // @import "../assets/css/them.scss";
 .header{
-    // position: fixed;
+    width: 100%;
+    position: fixed;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    // z-index: 1000;
+    border-bottom: 1px solid #dddddd;
+    background-color: #ffffff;
+    z-index: 1000;
     .header-seacher{
         display: flex;
         flex-flow: row nowrap;
@@ -150,10 +156,20 @@ export default {
     }
 }
 .content{
+    margin-top: 60px;
     .el-row {
         margin-bottom: 20px;
         &:last-child {
             margin-bottom: 0;
+        }
+        .el-col{
+            margin-bottom: 8px;
+        }
+        .el-col-12:nth-child(2n+1){
+            padding: 0 !important;
+        }
+         .el-col-12:nth-child(2n){
+            padding-right: 0 !important;
         }
     }
     .content-right{

@@ -15,8 +15,7 @@ body {
     padding: 0;
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
-    overflow: scroll;
-    overflow-y: hidden;
+    overflow: auto;
 }
 
 #app {

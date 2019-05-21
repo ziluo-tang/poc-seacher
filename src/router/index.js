@@ -17,7 +17,7 @@ Vue.use(VueRouter);
 let routes = [
   {
     path: "/",
-    redirect: '/login',
+    redirect: '/seacher',
     hidden: true
   },
   {

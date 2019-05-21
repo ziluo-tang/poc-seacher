@@ -102,7 +102,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .seacher-input{
     display: flex;
     flex-flow: row nowrap;
@@ -110,7 +110,7 @@ export default {
     align-items: center;
     .el-autocomplete{
         width: 100%;
-        input{
+        .el-input__inner{
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
             border-right: none;
