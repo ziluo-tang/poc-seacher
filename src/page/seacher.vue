@@ -26,7 +26,6 @@ export default {
             this.keyword = value;
         },
         search() {
-            console.log(1);
             if(this.keyword){
                 this.$router.push({ path: "/result", query: {keyword: this.keyword} });
             }

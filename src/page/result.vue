@@ -6,7 +6,7 @@
                     <i class="iconfont iconjingwuicon_svg-"></i>
                     <span>警务云搜</span>
                  </div>
-                <autocompleteSeacher :search="search" :keyword="keyword" @valChange="keywordChange"></autocompleteSeacher>
+                <autocomplete-seacher :search="search" :keyword="keyword" @valChange="keywordChange"></autocomplete-seacher>
             </div>
             <!-- <div class="userinfo">
                 <el-dropdown trigger="hover">
@@ -17,25 +17,35 @@
                 </el-dropdown>
             </div> -->
         </el-header>
-        <el-main class="content">
-            <el-row :gutter="20">
-                <el-col :span="16">
-                    <person-group :persons="persons"></person-group>
-                </el-col>
-                <el-col :span="8" class="content-right">
+        <el-container class="content">
+            <el-container>
+                <el-main>
+                    <el-row :gutter="20">
+                        <result-person :persons="persons" :relation="1"></result-person>
+                    </el-row>
+                </el-main>
+                <el-footer>
+                    <relate-search :relate="relate"></relate-search>
+                </el-footer>
+            </el-container>
+             <el-aside style="padding: 20px;">
+                <div class="content-right">
                     <secret :confidential="confidential"></secret>
-                </el-col>
-            </el-row>
-        </el-main>
+                    <secret :confidential="secretest"></secret>
+                </div>
+            </el-aside>
+        </el-container>
     </el-container>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import { mapMutations } from "vuex";
+import card from '../components/cards/index';
 import autocompleteSeacher from '../components/autocomplete-seacher/index.vue';
-import personGroup from '../components/cards/person/personGroup.vue';
-import secret from '../components/cards/secret/secretest';
+import resultPerson from '../components/cards/person/person-group';
+import secret from '../components/secret/index';
+import relateSearch from '../components/related-search/index';
 export default {
     data() {
         return {
@@ -49,13 +59,13 @@ export default {
                     type: '欺诈在逃',
                     address: '浙江省杭州市西湖区西溪云庐1栋1201'
                 },
-                {
-                    header: require(`../assets/img/u70.png`),
-                    name: '王一凡',
-                    IDcard: '341013198712011102',
-                    type: '常驻人口',
-                    address: '浙江省杭州市滨江区浦沿路口江南文苑15栋2单元1901'
-                },
+                // {
+                //     header: require(`../assets/img/u70.png`),
+                //     name: '王一凡',
+                //     IDcard: '341013198712011102',
+                //     type: '常驻人口',
+                //     address: '浙江省杭州市滨江区浦沿路口江南文苑15栋2单元1901'
+                // },
                 {
                     header: require(`../assets/img/u65.png`),
                     name: '张爱丽',
@@ -63,32 +73,103 @@ export default {
                     type: '欺诈在逃',
                     address: '浙江省杭州市西湖区西溪云庐1栋1201'
                 },
-                {
-                    header: require(`../assets/img/u70.png`),
-                    name: '王一凡',
-                    IDcard: '341013198712011102',
-                    type: '常驻人口',
-                    address: '浙江省杭州市滨江区浦沿路口江南文苑15栋2单元1901'
-                }
+                // {
+                //     header: require(`../assets/img/u70.png`),
+                //     name: '王一凡',
+                //     IDcard: '341013198712011102',
+                //     type: '常驻人口',
+                //     address: '浙江省杭州市滨江区浦沿路口江南文苑15栋2单元1901'
+                // }
             ],
             confidential: {
                 name: '高敏信息',
-                info: []
+                info: [
+                    {
+                        title: '涉事案情详情'
+                    },
+                    {
+                        title: '人员信息详情'
+                    },
+                    {
+                        title: '王源吸烟照曝光'
+                    },
+                    {
+                        title: '2019胡润慈善榜'
+                    },
+                    {
+                        title: '华为概念股涨停'
+                    },
+                    {
+                        title: '男子徒手爬埃菲尔'
+                    }
+                ]
+            },
+            secretest: {
+                name: '绝密信息',
+                info: [
+                    {
+                        title: '涉事案情详情'
+                    },
+                    {
+                        title: '人员信息详情'
+                    },
+                    {
+                        title: '王源吸烟照曝光'
+                    },
+                    {
+                        title: '2019胡润慈善榜'
+                    },
+                    {
+                        title: '华为概念股涨停'
+                    },
+                    {
+                        title: '男子徒手爬埃菲尔'
+                    }
+                ]
+            },
+            relate: {
+                name: '相关搜索',
+                info: [
+                    {
+                        title: '涉事案情详情'
+                    },
+                    {
+                        title: '人员信息详情'
+                    },
+                    {
+                        title: '王源吸烟照曝光'
+                    },
+                    {
+                        title: '2019胡润慈善榜'
+                    },
+                    {
+                        title: '华为概念股涨停'
+                    },
+                    {
+                        title: '男子徒手爬埃菲尔'
+                    },
+                    {
+                        title: '王源吸烟照曝光'
+                    },
+                    {
+                        title: '2019胡润慈善榜'
+                    }
+                ]
             }
         };
     },
-    created(){
-        this.search();
-    },
     components: {
         autocompleteSeacher,
-        personGroup,
-        secret
+        card,
+        resultPerson,
+        secret,
+        relateSearch
     },
     computed: {
         ...mapGetters(["username", "password", "treeData"])
     },
     mounted() {
+        this.search();
         var user = sessionStorage.getItem("user");
         if (user) {
             user = JSON.parse(user);
@@ -115,6 +196,12 @@ export default {
             })
             .catch(() => {});
             }
+    },
+    watch:{
+        $route(){
+            this.keywordChange(this.$route.query.keyword);
+            this.search();
+        }
     }
 }
 </script>
@@ -157,22 +244,8 @@ export default {
 }
 .content{
     margin-top: 60px;
-    .el-row {
-        margin-bottom: 20px;
-        &:last-child {
-            margin-bottom: 0;
-        }
-        .el-col{
-            margin-bottom: 8px;
-        }
-        .el-col-12:nth-child(2n+1){
-            padding: 0 !important;
-        }
-         .el-col-12:nth-child(2n){
-            padding-right: 0 !important;
-        }
-    }
     .content-right{
+        padding: 0 20px;
         border-left: 1px solid #dddddd;
     }
 }

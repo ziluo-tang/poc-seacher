@@ -1,12 +1,14 @@
 <template>
   <div class="pagination-content">
     <el-pagination
+      background
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
+      @prev-click="handlePrevClick"
+      @next-click="handleNextClick"
       :current-page="currentPage"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size="100"
-      layout="total, sizes, prev, pager, next, jumper"
+      :page-size="2"
+      layout="prev, pager, next"
       :total="totalPage"
     ></el-pagination>
   </div>
@@ -29,6 +31,14 @@ export default {
     },
     handleCurrentChange(val) {
       this.$emit("sendCurrentPage", val);
+    },
+    handlePrevClick(val) {
+      console.log(1);
+      this.$emit("sendPrevPage", val);
+    },
+    handleNextClick(val) {
+      console.log(2);
+      this.$emit("sendNextPage", val);
     }
   }
 };
@@ -36,10 +46,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../../assets/css/them.scss";
-.pagination-content {
-  // text-align: right;
-  // margin-right: 50px;
-  margin-top: 10px;
-  margin-left: 10px;
-}
+  .pagination-content{
+    text-align: center;
+  }
 </style>

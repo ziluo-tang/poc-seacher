@@ -11,10 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '/api/': {
+        '/apis': {
           target: 'http://api.map.baidu.com',
           secure: false,
-          changeOrigin: true
+          changeOrigin: true,
+          pathRewrite: {
+            '^/apis': ''
+          }   
         }
     },
 

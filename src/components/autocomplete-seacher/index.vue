@@ -23,6 +23,17 @@ export default {
             inputValue: this.$props.keyword
         }
     },
+    // computed:{
+    //     inputValue: {
+    //         get: function(){
+    //             return this.keyword;
+    //         },
+    //         set: function(keyword){
+    //             console.log(keyword);
+    //             return keyword;
+    //         }
+    //     }
+    // },
     methods: {
         querySearch(queryString, cb) {
             var restaurants = this.restaurants;
@@ -110,16 +121,19 @@ export default {
     align-items: center;
     .el-autocomplete{
         width: 100%;
-        .el-input__inner{
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            border-right: none;
-            box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
-        }
     }
     button{
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
 }
+</style>
+
+<style>
+    .el-input__inner {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: none;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    }
 </style>
