@@ -1,5 +1,5 @@
 import * as types from './mutations_type'
-export const mutations = {
+export default {
     [types.INSERT_KEYWORD] (state, keyword){
         state.keyword = keyword;
     }

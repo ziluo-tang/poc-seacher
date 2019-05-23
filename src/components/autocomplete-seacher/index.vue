@@ -1,7 +1,7 @@
 <template>
     <div class="seacher-input">
         <el-autocomplete 
-            v-model.trim="inputValue" 
+            v-model.trim="keyword" 
             placeholder="输入关键词"
             :fetch-suggestions="querySearch"
             :trigger-on-focus="false"
@@ -17,23 +17,20 @@
 </template>
 <script>
 export default {
-    props: ['search', 'keyword'],
+    props: ['search'],
     data(){
-        return {
-            inputValue: this.$props.keyword
+        return {};
+    },
+    computed:{
+        keyword: {
+            get(){
+                return this.$store.state.search.keyword;
+            },
+            set(val){
+                this.$store.commit('INSERT_KEYWORD', val);
+            }
         }
     },
-    // computed:{
-    //     inputValue: {
-    //         get: function(){
-    //             return this.keyword;
-    //         },
-    //         set: function(keyword){
-    //             console.log(keyword);
-    //             return keyword;
-    //         }
-    //     }
-    // },
     methods: {
         querySearch(queryString, cb) {
             var restaurants = this.restaurants;
@@ -103,12 +100,7 @@ export default {
         }
     },
     mounted() {
-      this.restaurants = this.loadAll();
-    },
-    watch: {
-        inputValue: function(value){
-            this.$emit('valChange', value);
-        }
+        this.restaurants = this.loadAll();
     }
 }
 </script>

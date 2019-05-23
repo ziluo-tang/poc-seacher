@@ -6,7 +6,7 @@
                     <i class="iconfont iconjingwuicon_svg-"></i>
                     <span>警务云搜</span>
                  </div>
-                <autocomplete-seacher :search="search" :keyword="keyword" @valChange="keywordChange"></autocomplete-seacher>
+                <autocomplete-seacher :search="search"></autocomplete-seacher>
             </div>
             <!-- <div class="userinfo">
                 <el-dropdown trigger="hover">
@@ -50,7 +50,7 @@ import { getWeather } from '../api/axios.js';
 export default {
     data() {
         return {
-            keyword: this.$route.query.keyword,
+            keyword: this.$store.state.search.keyword,
             sysUserName: 'admin',
             persons: [
                 {
@@ -166,9 +166,6 @@ export default {
         secret,
         relateSearch
     },
-    computed: {
-        ...mapGetters(["username", "password", "treeData"])
-    },
     mounted() {
         this.search();
         var user = sessionStorage.getItem("user");
@@ -178,9 +175,6 @@ export default {
         }
     },
     methods:{
-        keywordChange(value){
-            this.keyword = value;
-        },
         search() {
             let url = `/telematics/v3/weather?location=杭州&output=json&ak=H7W5CxI0BPzKtwGcBHmpGPAz50xP1Qjw`;
             getWeather(url).then((response) => {
@@ -200,7 +194,7 @@ export default {
     },
     watch:{
         $route(){
-            this.keywordChange(this.$route.query.keyword);
+            this.$store.commit('INSERT_KEYWORD', this.$route.query.keyword);
             this.search();
         }
     }

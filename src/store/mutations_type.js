@@ -1,1 +1,1 @@
-export const INSERT_KEYWORD = 'INSERT_KWYWORD'
+export const INSERT_KEYWORD = 'INSERT_KEYWORD'

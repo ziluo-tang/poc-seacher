@@ -1,3 +1,6 @@
+import actions from '../actions';
+import mutations from '../mutations';
+
 const state = {
     keyword: ''
 };
@@ -8,5 +11,7 @@ const getters = {
 
 export default {
     state,
-    getters
+    getters,
+    mutations,
+    actions
 }

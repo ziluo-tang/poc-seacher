@@ -1,5 +1,5 @@
 export default {
-    insertKeyword(context) {
-        context.commit('insertKeyword');
+    insertKeyword({commit}) {
+        commit('INSERT_KEYWORD');
     }
 }

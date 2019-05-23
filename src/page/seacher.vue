@@ -5,7 +5,7 @@
                 <i class="iconfont iconjingwuicon_svg-"></i>
                 <span>警务云搜</span>
             </div>
-            <autocompleteSeacher :search="search" :keyword="keyword" @valChange="keywordChange"></autocompleteSeacher>
+            <autocompleteSeacher :search="search"></autocompleteSeacher>
         </div>
     </div>
 </template>
@@ -14,21 +14,14 @@
 import autocompleteSeacher from '../components/autocomplete-seacher/index.vue';
 export default {
     data() {
-        return {
-            keyword: ''
-        };
+        return {};
     },
     components:{
         autocompleteSeacher
     },
     methods: {
-        keywordChange(value){
-            this.keyword = value;
-        },
         search() {
-            if(this.keyword){
-                this.$router.push({ path: "/result", query: {keyword: this.keyword} });
-            }
+            this.$router.push({ path: "/result"});
         }
     }
 }
