@@ -1,0 +1,1 @@
+export const INSERT_KEYWORD = 'INSERT_KWYWORD'

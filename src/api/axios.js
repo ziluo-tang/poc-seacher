@@ -1,3 +1,4 @@
-let base = '/api';
+import axios from 'axios';
+let base = '/apis';
 
-export const search = params => { return this.axios.get(`${base}/search`, params).then(res => res.data);};
+export const getWeather = (url, params={}) => { return axios.post(`${base}/${url}`, params).then(res => res.data);};

@@ -46,6 +46,7 @@ import autocompleteSeacher from '../components/autocomplete-seacher/index.vue';
 import resultPerson from '../components/cards/person/person-group';
 import secret from '../components/secret/index';
 import relateSearch from '../components/related-search/index';
+import { getWeather } from '../api/axios.js';
 export default {
     data() {
         return {
@@ -181,10 +182,10 @@ export default {
             this.keyword = value;
         },
         search() {
-            // let url = `/telematics/v3/weather?location=杭州&output=json&ak=H7W5CxI0BPzKtwGcBHmpGPAz50xP1Qjw`;
-            // this.axios.get(url).then((response) => {
-            //     console.log(response.data);
-            // });
+            let url = `/telematics/v3/weather?location=杭州&output=json&ak=H7W5CxI0BPzKtwGcBHmpGPAz50xP1Qjw`;
+            getWeather(url).then((response) => {
+                console.log(response.data);
+            });
         },
         logout(){
             var _this = this;
