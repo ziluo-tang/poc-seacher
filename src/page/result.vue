@@ -8,20 +8,12 @@
                  </div>
                 <autocomplete-seacher :search="search"></autocomplete-seacher>
             </div>
-            <!-- <div class="userinfo">
-                <el-dropdown trigger="hover">
-                    <span class="el-dropdown-link userinfo-inner">{{sysUserName}}</span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </div> -->
         </el-header>
         <el-container class="content">
             <el-container>
                 <el-main>
                     <el-row :gutter="20">
-                        <result-person :persons="persons" :relation="1"></result-person>
+                        <result-cards :result="result"></result-cards>
                     </el-row>
                 </el-main>
                 <el-footer>
@@ -30,8 +22,8 @@
             </el-container>
              <el-aside style="padding: 20px;">
                 <div class="content-right">
-                    <secret :confidential="confidential"></secret>
-                    <secret :confidential="secretest"></secret>
+                    <secret-search :confidential="confidential"></secret-search>
+                    <secret-search :confidential="secretest"></secret-search>
                 </div>
             </el-aside>
         </el-container>
@@ -39,19 +31,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { mapMutations } from "vuex";
-import card from '../components/cards/index';
-import autocompleteSeacher from '../components/autocomplete-seacher/index.vue';
-import resultPerson from '../components/cards/person/person-group';
-import secret from '../components/secret/index';
+import { mapGetters, mapState, mapMutations } from "vuex";
+import autocompleteSeacher from '../components/autocomplete-seacher/index';
+import resultCards from '../components/cards/index';
+import secretSearch from '../components/secret-search/index';
 import relateSearch from '../components/related-search/index';
-import { getWeather } from '../api/axios.js';
+
 export default {
     data() {
         return {
-            keyword: this.$store.state.search.keyword,
-            sysUserName: 'admin',
             persons: [
                 {
                     header: require(`../assets/img/u65.png`),
@@ -159,42 +147,26 @@ export default {
             }
         };
     },
+    computed: {
+        ...mapGetters(['keyword', 'result'])
+    },
     components: {
         autocompleteSeacher,
-        card,
-        resultPerson,
-        secret,
+        resultCards,
+        secretSearch,
         relateSearch
     },
-    mounted() {
+    created() {
         this.search();
-        var user = sessionStorage.getItem("user");
-        if (user) {
-            user = JSON.parse(user);
-            this.sysUserName = user.userName || "";
-        }
     },
     methods:{
         search() {
-            let url = `/telematics/v3/weather?location=杭州&output=json&ak=H7W5CxI0BPzKtwGcBHmpGPAz50xP1Qjw`;
-            getWeather(url).then((response) => {
-                console.log(response.data);
-            });
-        },
-        logout(){
-            var _this = this;
-            this.$confirm("确认退出吗?", "提示", {
-            })
-            .then(() => {
-                sessionStorage.removeItem("user");
-                _this.$router.push("/login");
-            })
-            .catch(() => {});
-            }
+            this.$store.dispatch('INSERT_RESULT', this.keyword);
+        }
     },
     watch:{
         $route(){
-            this.$store.commit('INSERT_KEYWORD', this.$route.query.keyword);
+            this.$store.dispatch('INSERT_KEYWORD', this.$route.query.keyword);
             this.search();
         }
     }

@@ -27,7 +27,7 @@ export default {
                 return this.$store.state.search.keyword;
             },
             set(val){
-                this.$store.commit('INSERT_KEYWORD', val);
+                this.$store.dispatch('INSERT_KEYWORD', val);
             }
         }
     },
@@ -96,11 +96,12 @@ export default {
             ];
         },
         handleSelect(item) {
-            console.log(item);
+            this.keyword = item.value;
         }
     },
     mounted() {
         this.restaurants = this.loadAll();
+        this.keyword = window.sessionStorage.getItem('keyword') || '';
     }
 }
 </script>

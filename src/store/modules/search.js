@@ -2,11 +2,13 @@ import actions from '../actions';
 import mutations from '../mutations';
 
 const state = {
-    keyword: ''
+    keyword: '',
+    result: null
 };
 
 const getters = {
-    keyword: state => state.keyword
+    keyword: state => state.keyword,
+    result: state => state.result
 };
 
 export default {

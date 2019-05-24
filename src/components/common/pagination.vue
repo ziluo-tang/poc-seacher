@@ -7,7 +7,7 @@
       @prev-click="handlePrevClick"
       @next-click="handleNextClick"
       :current-page="currentPage"
-      :page-size="2"
+      :page-size="1"
       layout="prev, pager, next"
       :total="totalPage"
     ></el-pagination>

@@ -1,1 +1,2 @@
 export const INSERT_KEYWORD = 'INSERT_KEYWORD'
+export const INSERT_RESULT = 'INSERT_RESULT'

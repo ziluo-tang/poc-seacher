@@ -3,7 +3,7 @@
         <div class="person-group">
             <el-row :gutter="20">
                 <div class="sort-tag">人员信息</div>
-                <el-col :span="col" v-for="(person, index) in persons" :key="index">
+                <el-col :span="24" v-for="(person, index) in persons" :key="index">
                     <personnel :person="person"></personnel>
                 </el-col>
             </el-row>
@@ -20,10 +20,7 @@ import personnelRelation from './person-relation';
 export default {
     props: ['persons', 'relation'],
     data(){
-        var col = this.$props.persons.length>1 ? 12 : 24;
-        return {
-            col: col
-        };
+        return {};
     },
     components: {
         personnel,

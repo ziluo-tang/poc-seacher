@@ -38,11 +38,9 @@ export default {
             justify-content: flex-start;
             align-items: center;
             .person-header{
-                width: 5em;
-                height: 5em;
                 margin-right: 1em;
                 img{
-                    width: 5em;
+                    width: 4em;
                 }
             }
             p{
@@ -50,10 +48,11 @@ export default {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow:hidden;
-                margin-bottom: 0.3em;
-                &:last-child {
-                    margin-bottom: 0;
-                }
+                margin-top: 0;
+                margin-bottom: 0.4em;
+                // &:last-child {
+                //     margin-bottom: 0;
+                // }
             }
         }
     }
