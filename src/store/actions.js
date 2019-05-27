@@ -6,7 +6,11 @@ export default {
     },
     [types.INSERT_RESULT]({commit}, keyword){
         cloudQuery({queryDetail: keyword}).then((response) => {
-            commit(types.INSERT_RESULT, response.data);
+            if(response.resultCode==0){
+                commit(types.INSERT_RESULT, response.data);
+            }else{
+                alarm(response.resultMsg);
+            }
         });
     }
 }

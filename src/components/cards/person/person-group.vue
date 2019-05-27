@@ -3,7 +3,7 @@
         <div class="person-group">
             <el-row :gutter="20">
                 <div class="sort-tag">人员信息</div>
-                <el-col :span="24" v-for="(person, index) in persons" :key="index">
+                <el-col :span="24" v-for="(person, index) in result" :key="index">
                     <personnel :person="person"></personnel>
                 </el-col>
             </el-row>
@@ -18,7 +18,7 @@ import personnel from './personnel.vue';
 import pagination from '../../common/pagination';
 import personnelRelation from './person-relation';
 export default {
-    props: ['persons', 'relation'],
+    props: ['result', 'relation'],
     data(){
         return {};
     },
@@ -58,7 +58,7 @@ export default {
             padding-right: 0 !important;
         }
         .el-col-24{
-            padding-left: 0 !important;
+            padding: 0 !important;
         }
     }
 }

@@ -53,38 +53,38 @@ export default {
                             }
                         },
                         data: [{
-                            name: '节点1',
+                            name: '张爱丽',
                             x: 300,
                             y: 300
                         }, {
-                            name: '节点2',
+                            name: '王一帆',
                             x: 800,
                             y: 300
                         }, {
-                            name: '节点3',
+                            name: '张xx',
                             x: 550,
                             y: 100
                         }, {
-                            name: '节点4',
+                            name: '李xx',
                             x: 550,
                             y: 500
                         }],
                         // links: [],
                         links: [ {
-                            source: '节点2',
-                            target: '节点1'
+                            source: '张爱丽',
+                            target: '王一帆'
                         }, {
-                            source: '节点1',
-                            target: '节点3'
+                            source: '张爱丽',
+                            target: '张xx'
                         }, {
-                            source: '节点2',
-                            target: '节点3'
+                            source: '王一帆',
+                            target: '李xx'
                         }, {
-                            source: '节点2',
-                            target: '节点4'
+                            source: '张爱丽',
+                            target: '李xx'
                         }, {
-                            source: '节点1',
-                            target: '节点4'
+                            source: '王一帆',
+                            target: '张爱丽'
                         }],
                         lineStyle: {
                             normal: {

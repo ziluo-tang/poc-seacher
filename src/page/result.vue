@@ -13,7 +13,7 @@
             <el-container>
                 <el-main>
                     <el-row :gutter="20">
-                        <result-cards :result="result"></result-cards>
+                        <result-cards></result-cards>
                     </el-row>
                 </el-main>
                 <el-footer>
@@ -40,36 +40,6 @@ import relateSearch from '../components/related-search/index';
 export default {
     data() {
         return {
-            persons: [
-                {
-                    header: require(`../assets/img/u65.png`),
-                    name: '张爱丽',
-                    IDcard: '341003198607012524',
-                    type: '欺诈在逃',
-                    address: '浙江省杭州市西湖区西溪云庐1栋1201'
-                },
-                // {
-                //     header: require(`../assets/img/u70.png`),
-                //     name: '王一凡',
-                //     IDcard: '341013198712011102',
-                //     type: '常驻人口',
-                //     address: '浙江省杭州市滨江区浦沿路口江南文苑15栋2单元1901'
-                // },
-                {
-                    header: require(`../assets/img/u65.png`),
-                    name: '张爱丽',
-                    IDcard: '341003198607012524',
-                    type: '欺诈在逃',
-                    address: '浙江省杭州市西湖区西溪云庐1栋1201'
-                },
-                // {
-                //     header: require(`../assets/img/u70.png`),
-                //     name: '王一凡',
-                //     IDcard: '341013198712011102',
-                //     type: '常驻人口',
-                //     address: '浙江省杭州市滨江区浦沿路口江南文苑15栋2单元1901'
-                // }
-            ],
             confidential: {
                 name: '高敏信息',
                 info: [
@@ -148,7 +118,7 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['keyword', 'result'])
+        ...mapGetters(['keyword'])
     },
     components: {
         autocompleteSeacher,
