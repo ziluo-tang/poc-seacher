@@ -3,39 +3,46 @@
         <div class="person-group">
             <el-row :gutter="20">
                 <div class="sort-tag">人员信息</div>
-                <el-col :span="24" v-for="(person, index) in result.list" :key="index">
-                    <personnal :person="person"></personnal>
+                <el-col :span="24" v-for="(person, index) in result.data.list" :key="index">
+                    <personal :person="person"></personal>
                 </el-col>
             </el-row>
-            <pagination :totalPage="result.list.length" @sendPrevPage="sendPrevPage" @sendNextPage="sendNextPage"></pagination>
+            <el-row>
+                <div class="sort-tag">人员关系</div>
+                <el-col :span="24">
+                    <personal-relation :relate="1"></personal-relation>
+                </el-col>
+            </el-row>
+            <pagination :totalPage="result.data.list.length" :pageSize="pageSize" @sendPrevPage="sendPageChange" @sendCurrentPage="sendPageChange" @sendNextPage="sendPageChange"></pagination>
         </div>
-        <personnal-relation :relate="relation"></personnal-relation>
     </div>
 </template>
 
 <script>
-import personnal from './personnel.vue';
+import personal from './personal.vue';
 import pagination from '../../common/pagination';
-import personnalRelation from './person-relation';
+import personalRelation from './person-relation';
 export default {
-    props: ['result', 'relation'],
     data(){
-        return {};
+        return {
+            pageSize: 1
+        };
     },
     components: {
-        personnal,
+        personal,
         pagination,
-        personnalRelation
+        personalRelation
     },
-    mounted(){
-        console.log('personnalGroup: ', this.$props.result);
+    computed: {
+        result(){
+            let {personal} = this.$store.state.search.result;
+            console.log('personal-group:', personal);
+            return personal;
+        }
     },
     methods: {
-        sendPrevPage(val){
-            console.log(val);
-        },
-        sendNextPage(val){
-            console.log(val);
+        sendPageChange(val){
+            this.$store.dispatch('PAGE_CHANGE', {page: val, size: this.pageSize, strategy: this.result.strategy});
         }
     }
 }

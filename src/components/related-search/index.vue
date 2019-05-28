@@ -31,6 +31,9 @@ export default {
         a{
             width: 20%;
             line-height: 2em;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
         }
     }
 </style>

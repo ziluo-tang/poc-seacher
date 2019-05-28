@@ -131,7 +131,10 @@ export default {
     },
     methods:{
         search() {
-            this.$store.dispatch('INSERT_RESULT', this.keyword);
+            let _this = this;
+            this.$nextTick(function(){
+                _this.$store.dispatch('INSERT_RESULT', _this.keyword)
+            });
         }
     },
     watch:{

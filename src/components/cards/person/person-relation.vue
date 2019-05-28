@@ -1,14 +1,7 @@
 <template>
-    <el-row>
-        <div class="sort-tag">人员关系</div>
-        <el-col :span="24">
-            <el-card class="box-card">
-                <div id="personnel-relation" class="base-info">
-                    
-                </div>
-            </el-card>
-        </el-col>
-    </el-row>
+    <el-card class="box-card">
+        <div id="personnal-relation" class="base-info"></div>
+    </el-card>
 </template>
 <script>
 let echarts = require('echarts/lib/echarts');
@@ -23,10 +16,10 @@ export default {
     },
     methods: {
         drawGraph(){
-            let relationGraph = echarts.init(document.getElementById('personnel-relation'));
+            let relationGraph = echarts.init(document.getElementById('personnal-relation'));
             relationGraph.setOption({
                 title: {
-                    text: 'Graph 简单示例',
+                    text: '',
                     show: false
                 },
                 tooltip: {},

@@ -7,7 +7,7 @@
       @prev-click="handlePrevClick"
       @next-click="handleNextClick"
       :current-page="currentPage"
-      :page-size="1"
+      :page-size="pageSize"
       layout="prev, pager, next"
       :total="totalPage"
     ></el-pagination>
@@ -23,6 +23,10 @@ export default {
     currentPage: {
       type: Number,
       default: 1
+    },
+    pageSize: {
+      type: Number,
+      default: 1
     }
   },
   methods: {
@@ -33,11 +37,9 @@ export default {
       this.$emit("sendCurrentPage", val);
     },
     handlePrevClick(val) {
-      console.log(1);
       this.$emit("sendPrevPage", val);
     },
     handleNextClick(val) {
-      console.log(2);
       this.$emit("sendNextPage", val);
     }
   }
@@ -47,6 +49,7 @@ export default {
 <style scoped lang="scss">
 @import "../../assets/css/them.scss";
   .pagination-content{
+    margin: 10px 0;
     text-align: center;
   }
 </style>

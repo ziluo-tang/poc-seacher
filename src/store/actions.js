@@ -1,5 +1,6 @@
 import * as types from './mutations_type';
-import { cloudQuery } from '../api/axios.js';
+import { cloudQuery, pageQuery } from '../api/axios.js';
+let ElementUi = require('element-ui');
 export default {
     [types.INSERT_KEYWORD]({commit}, keyword) {
         commit(types.INSERT_KEYWORD, keyword);
@@ -7,9 +8,27 @@ export default {
     [types.INSERT_RESULT]({commit}, keyword){
         cloudQuery({queryDetail: keyword}).then((response) => {
             if(response.resultCode==0){
-                commit(types.INSERT_RESULT, response.data);
+                let resultObiect = new Object();
+                response.data.forEach(element => {
+                    resultObiect[element.strategy.displayCard] = element;
+                });
+                commit(types.INSERT_RESULT, resultObiect);
             }else{
-                this.$message({message: response.resultMsg, type: 'warning' });
+                ElementUi.Message({message: response.resultMsg, type: 'warning' });
+            }
+        });
+    },
+    [types.PAGE_CHANGE]({commit, state}, param){
+        pageQuery(`page=${param.page}&size=${param.size}`, {strategy: param.strategy}).then((response) => {
+            if(response.resultCode==0){
+                let newState = Object.assign({}, state, {
+                    result: {
+                        personal: response.data
+                    }
+                });
+                commit(types.PAGE_CHANGE, newState);
+            }else{
+                ElementUi.Message({message: response.resultMsg, type: 'warning' });
             }
         });
     }

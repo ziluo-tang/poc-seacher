@@ -1,2 +1,3 @@
 export const INSERT_KEYWORD = 'INSERT_KEYWORD'
 export const INSERT_RESULT = 'INSERT_RESULT'
+export const PAGE_CHANGE = 'PAGE_CHANGE'
