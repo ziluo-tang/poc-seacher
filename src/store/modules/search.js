@@ -3,7 +3,7 @@ import mutations from '../mutations';
 
 const state = {
     keyword: '',
-    result: null
+    result: []
 };
 
 const getters = {

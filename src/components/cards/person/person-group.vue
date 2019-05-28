@@ -3,29 +3,32 @@
         <div class="person-group">
             <el-row :gutter="20">
                 <div class="sort-tag">人员信息</div>
-                <el-col :span="24" v-for="(person, index) in result" :key="index">
-                    <personnel :person="person"></personnel>
+                <el-col :span="24" v-for="(person, index) in result.list" :key="index">
+                    <personnal :person="person"></personnal>
                 </el-col>
             </el-row>
-            <pagination @sendPrevPage="sendPrevPage" @sendNextPage="sendNextPage"></pagination>
+            <pagination :totalPage="result.list.length" @sendPrevPage="sendPrevPage" @sendNextPage="sendNextPage"></pagination>
         </div>
-        <personnel-relation :relate="relation"></personnel-relation>
+        <personnal-relation :relate="relation"></personnal-relation>
     </div>
 </template>
 
 <script>
-import personnel from './personnel.vue';
+import personnal from './personnel.vue';
 import pagination from '../../common/pagination';
-import personnelRelation from './person-relation';
+import personnalRelation from './person-relation';
 export default {
     props: ['result', 'relation'],
     data(){
         return {};
     },
     components: {
-        personnel,
+        personnal,
         pagination,
-        personnelRelation
+        personnalRelation
+    },
+    mounted(){
+        console.log('personnalGroup: ', this.$props.result);
     },
     methods: {
         sendPrevPage(val){

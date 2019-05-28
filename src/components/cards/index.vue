@@ -10,12 +10,11 @@ export default {
         ...mapGetters(['result'])
     },
     components: allcards,
-    created(){
-        console.log('1:',this.$store.state.search);
+    mounted(){
+        console.log('cards:',this.result);
     },
     render: function(createElement){
-        let result = this.$store.state.search.result;
-        return createElement('div', result.map(function(item) {
+        return createElement('div', this.result.map(function(item) {
             return createElement(mapping[item.strategy.displayCard], 
                 {
                     props: {

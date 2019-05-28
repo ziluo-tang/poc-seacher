@@ -1,7 +1,10 @@
 import resultPerson from '../components/cards/person/person-group';
+import resultVehicle from '../components/cards/car/car';
 export const allcards = {
-    resultPerson
+    resultPerson,
+    resultVehicle
 }
 export const mapping = {
-    'personal': resultPerson
+    'personal': resultPerson,
+    'vehicle': resultVehicle
 }

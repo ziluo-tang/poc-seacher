@@ -9,7 +9,7 @@ export default {
             if(response.resultCode==0){
                 commit(types.INSERT_RESULT, response.data);
             }else{
-                alarm(response.resultMsg);
+                this.$message({message: response.resultMsg, type: 'warning' });
             }
         });
     }

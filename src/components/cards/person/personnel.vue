@@ -7,7 +7,8 @@
             <div>
                 <p>
                     <label>{{person.name}}</label>
-                    <span>({{person.IDcard}})</span>
+                    <label>({{person.IDcard || person.key}})</label>
+                    <label>{{person.age}}</label>
                 </p>
                 <p>
                     <label>人员类型：</label>
