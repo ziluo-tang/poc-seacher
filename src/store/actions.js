@@ -21,12 +21,8 @@ export default {
     [types.PAGE_CHANGE]({commit, state}, param){
         pageQuery(`page=${param.page}&size=${param.size}`, {strategy: param.strategy}).then((response) => {
             if(response.resultCode==0){
-                let newState = Object.assign({}, state, {
-                    result: {
-                        personal: response.data
-                    }
-                });
-                commit(types.PAGE_CHANGE, newState);
+                let newResult = Object.assign({}, state.result, {personal: response.data});
+                commit(types.PAGE_CHANGE, newResult);
             }else{
                 ElementUi.Message({message: response.resultMsg, type: 'warning' });
             }

@@ -13,7 +13,9 @@
             <el-container>
                 <el-main>
                     <el-row :gutter="20">
-                        <result-cards></result-cards>
+                        <el-col :span="24">
+                            <result-cards></result-cards>
+                        </el-col>
                     </el-row>
                 </el-main>
                 <el-footer>
@@ -131,10 +133,8 @@ export default {
     },
     methods:{
         search() {
-            let _this = this;
-            this.$nextTick(function(){
-                _this.$store.dispatch('INSERT_RESULT', _this.keyword)
-            });
+            var keyword = this.keyword || window.sessionStorage.getItem('keyword');
+            this.$store.dispatch('INSERT_RESULT', keyword);
         }
     },
     watch:{

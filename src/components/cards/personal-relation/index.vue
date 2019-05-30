@@ -1,6 +1,7 @@
 <template>
-    <el-card class="box-card">
-        <div id="personnal-relation" class="base-info"></div>
+    <el-card shadow="hover" :body-style="{ padding: '10px 20px'}">
+        <div class="sort-tag">人员关系</div>
+        <div id="personnal-relation" class="personal-relation"></div>
     </el-card>
 </template>
 <script>
@@ -94,11 +95,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-     .el-row {
-        margin: 0 -10px 0 10px !important;
-        .base-info{
-            width: 100%;
-            height: 400px;
-        }
-     }
+    .sort-tag{
+        font-size: 1.1em;
+        color: #888888;
+        margin-bottom: 5px;
+    }
+    .personal-relation{
+        width: 100%;
+        height: 400px;
+    }
 </style>

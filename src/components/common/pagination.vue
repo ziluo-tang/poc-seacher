@@ -10,6 +10,7 @@
       :page-size="pageSize"
       layout="prev, pager, next"
       :total="totalPage"
+      :hide-on-single-page="true"
     ></el-pagination>
   </div>
 </template>

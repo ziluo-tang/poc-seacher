@@ -1,10 +1,13 @@
-import resultPerson from '../components/cards/person/person-group';
-import resultVehicle from '../components/cards/car/car';
+import resultPersonal from '../components/cards/personal/index';
+import resultRelation from '../components/cards/personal-relation/index';
+import resultVehicle from '../components/cards/vehicle/index';
 export const allcards = {
-    resultPerson,
+    resultPersonal,
+    resultRelation,
     resultVehicle
 }
 export const mapping = {
-    'personal': resultPerson,
+    'personal': resultPersonal,
+    'relation': resultRelation,
     'vehicle': resultVehicle
 }

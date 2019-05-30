@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="related-search">
         <div class="sort-tag">{{relate.name}}</div>
         <div class="relate-list">
             <router-link v-for="(item, index) in relate.info" :key="index" :to="{ path: '/result', query: {keyword: item.title}}">
@@ -17,6 +17,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.related-search{
+    margin: 15px 0;
     .sort-tag{
         line-height: 2;
         font-size: 1.1em;
@@ -36,4 +38,5 @@ export default {
             white-space: nowrap;
         }
     }
+}
 </style>
