@@ -8,17 +8,23 @@
 let echarts = require('echarts/lib/echarts');
 require("echarts/lib/chart/graph");
 export default {
-    props: ['relate'],
+    name: 'personal-relation',
     data() {
         return {};
     },
     mounted() {
         this.drawGraph();
     },
+    computed: {
+        result(){
+            let {relation} = this.$store.state.search.result;
+        }
+    },
     methods: {
         drawGraph(){
+            console.log(document.getElementById('personnal-relation'));
             let relationGraph = echarts.init(document.getElementById('personnal-relation'));
-            relationGraph.setOption({
+            return relationGraph.setOption({
                 title: {
                     text: '',
                     show: false

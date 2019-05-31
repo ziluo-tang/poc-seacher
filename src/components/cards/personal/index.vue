@@ -4,7 +4,7 @@
         <div class="personal-item" v-for="(person, index) in result.data.list" :key="index">
             <div class="base-info">
                 <div class="person-header">
-                    <el-image :src="person.header" :fit="scale-down">
+                    <el-image :src="person.header">
                         <div slot="placeholder" class="image-slot">
                             加载中<span class="dot">...</span>
                         </div>
@@ -31,6 +31,7 @@
 <script>
 import pagination from '../../common/pagination';
 export default {
+    name: 'personal',
     data(){
         return {
             pageSize: 1
@@ -72,6 +73,9 @@ export default {
             return personal;
         }
     },
+    mounted(){
+        console.log('personal');
+    },
     methods: {
         sendPageChange(val){
             this.$store.dispatch('PAGE_CHANGE', {page: val, size: this.pageSize, strategy: this.result.strategy});
@@ -86,15 +90,15 @@ export default {
         margin-bottom: 5px;
     }
     .personal-item{
-        padding: 0 15px;
+        margin: 0 15px 1em 15px;
+        padding-bottom: 1em;
+        border-bottom: 1px dotted#888888;
         .base-info{
             display: flex;
             flex-flow: row nowrap;
             justify-content: flex-start;
             align-items: center;
-            margin-bottom: 1em;
-            padding-bottom: 1em;
-            border-bottom: 1px dotted#888888;
+            
             .person-header{
                 margin-right: 1em;
                 img{

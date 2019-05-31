@@ -138,7 +138,7 @@ export default {
         }
     },
     watch:{
-        $route(){
+        $route(to, from){
             this.$store.dispatch('INSERT_KEYWORD', this.$route.query.keyword);
             this.search();
         }
