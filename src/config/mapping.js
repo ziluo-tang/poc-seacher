@@ -7,7 +7,19 @@ export const allcards = {
     resultVehicle
 }
 export const mapping = {
-    'personal': resultPersonal,
-    'relation': resultRelation,
-    'vehicle': resultVehicle
+    'personal': {
+        label: '人员',
+        name: 'personal',
+        component: resultPersonal
+    },
+    'relation': {
+        label: '关系',
+        name: 'relation',
+        component: resultRelation
+    },
+    'vehicle': {
+        label: '车辆',
+        name: 'vehicle',
+        component: resultVehicle
+    }
 }

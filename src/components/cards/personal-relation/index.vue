@@ -1,7 +1,7 @@
 <template>
-    <el-card shadow="hover" :body-style="{ padding: '10px 20px'}">
-        <div class="sort-tag">人员关系</div>
-        <div id="personnal-relation" class="personal-relation"></div>
+    <el-card shadow="hover">
+        <!-- <div class="sort-tag">人员关系</div> -->
+        <div ref="personnal-relation" class="personal-relation"></div>
     </el-card>
 </template>
 <script>
@@ -13,7 +13,10 @@ export default {
         return {};
     },
     mounted() {
-        this.drawGraph();
+        let relationGraph = this.drawGraph();
+        window.onresize = function(){
+            relationGraph.resize();
+        }
     },
     computed: {
         result(){
@@ -22,9 +25,8 @@ export default {
     },
     methods: {
         drawGraph(){
-            console.log(document.getElementById('personnal-relation'));
-            let relationGraph = echarts.init(document.getElementById('personnal-relation'));
-            return relationGraph.setOption({
+            let relationGraph = echarts.init(this.$refs['personnal-relation']);
+            relationGraph.setOption({
                 title: {
                     text: '',
                     show: false
@@ -36,11 +38,14 @@ export default {
                     {
                         type: 'graph',
                         layout: 'none',
+                        symbol: 'circle',
                         symbolSize: 50,
                         roam: true,
                         label: {
                             normal: {
-                                show: true
+                                show: true,
+                                position: 'bottom',
+                                color: '#555555'
                             }
                         },
                         edgeSymbol: ['circle', 'arrow'],
@@ -54,34 +59,70 @@ export default {
                         },
                         data: [{
                             name: '张爱丽',
+                            symbol: `image://${require('../../../assets/img/u65.png')}`,
                             x: 300,
                             y: 300
                         }, {
                             name: '王一帆',
+                            symbol: `image://${require('../../../assets/img/u70.png')}`,
                             x: 800,
                             y: 300
                         }, {
                             name: '张xx',
+                            symbol: `image://${require('../../../assets/img/u65.png')}`,
                             x: 550,
                             y: 100
                         }, {
                             name: '李xx',
+                            symbol: `image://${require('../../../assets/img/u70.png')}`,
                             x: 550,
                             y: 500
                         }],
                         // links: [],
-                        links: [ {
+                        links: [{
                             source: '张爱丽',
-                            target: '王一帆'
+                            target: '王一帆',
+                            relation: '夫妻',
+                            label: {
+                                show: true,
+                                fontSize: 12,
+                                formatter: function(param){
+                                    return param.data.relation;
+                                }
+                            }
                         }, {
                             source: '张爱丽',
-                            target: '张xx'
+                            target: '张xx',
+                            relation: '债主',
+                            label: {
+                                show: true,
+                                fontSize: 12,
+                                formatter: function(param){
+                                    return param.data.relation;
+                                }
+                            }
                         }, {
                             source: '王一帆',
-                            target: '李xx'
+                            target: '李xx',
+                            relation: '仇人',
+                            label: {
+                                show: true,
+                                fontSize: 12,
+                                formatter: function(param){
+                                    return param.data.relation;
+                                }
+                            }
                         }, {
                             source: '张爱丽',
-                            target: '李xx'
+                            target: '李xx',
+                            relation: '仇人',
+                            label: {
+                                show: true,
+                                fontSize: 12,
+                                formatter: function(param){
+                                    return param.data.relation;
+                                }
+                            }
                         }, {
                             source: '王一帆',
                             target: '张爱丽'
@@ -89,13 +130,14 @@ export default {
                         lineStyle: {
                             normal: {
                                 opacity: 0.9,
-                                width: 2,
+                                width: 1,
                                 curveness: 0
                             }
                         }
                     }
                 ]
             });
+            return relationGraph;
         }
     }
 }

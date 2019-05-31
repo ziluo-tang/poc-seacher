@@ -1,6 +1,6 @@
 <template>
-    <el-card shadow="hover" :body-style="{ padding: '10px 20px'}">
-        <div class="sort-tag">人员信息</div>
+    <el-card shadow="hover">
+        <!-- <div class="sort-tag">人员信息</div> -->
         <div class="personal-item" v-for="(person, index) in result.data.list" :key="index">
             <div class="base-info">
                 <div class="person-header">
@@ -72,9 +72,6 @@ export default {
             };
             return personal;
         }
-    },
-    mounted(){
-        console.log('personal');
     },
     methods: {
         sendPageChange(val){

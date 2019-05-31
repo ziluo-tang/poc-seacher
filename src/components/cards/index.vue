@@ -1,6 +1,6 @@
 <template>
     <el-tabs v-model="activeName" type="card" @tab-click="handleTabClick">
-        <el-tab-pane  v-for="item in result" :key="item.name" :label="item.label" :name="item.name">
+        <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
             <keep-alive>
                 <component v-bind:is="curComponent"></component>
             </keep-alive>
@@ -22,29 +22,29 @@ export default {
     computed: {
         result(){
             // let {result} = this.$store.state.search;
-            let result = [
-                {
+            let result = {
+                'personal': {
                     label: '人员',
                     name: 'personal'
                 },
-                {
+                'relation': {
                     label: '关系',
                     name: 'relation'
                 },
-                {
-                    label: '轨迹',
-                    name: 'locus'
-                },
-                {
-                    label: '履历',
-                    name: 'experience'
+                'vehicle': {
+                    label: '车辆',
+                    name: 'vehicle'
                 }
-            ];
-            return result;
+            };
+            let cards = new Object();
+            for(let card in result){
+                cards[card] = mapping[card];
+            }
+            return cards;
         },
         activeName: {
             get(){
-                return this.activeTab || this.result[0].name;
+                return this.activeTab || this.result[Object.keys(mapping)[0]].name;
             },
             set(val){
                 this.activeTab = val;
@@ -52,7 +52,7 @@ export default {
         },
         curComponent: {
             get(){
-                return this.activeComponent || mapping[this.result[0].name];
+                return this.activeComponent || this.result[Object.keys(mapping)[0]].component;
             }
         },
         // ...mapGetters(['result'])
@@ -60,7 +60,7 @@ export default {
     components: allcards,
     methods:{
         handleTabClick(tab, event){
-            this.activeComponent = mapping[tab.name] || mapping[1];
+            this.activeComponent = this.result[tab.name].component || this.result[Object.keys(mapping)[0]].component;
         }
     }
     // render: function(createElement){
