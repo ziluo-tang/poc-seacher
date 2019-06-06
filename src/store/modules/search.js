@@ -2,7 +2,7 @@ import actions from '../actions';
 import mutations from '../mutations';
 
 const state = {
-    keyword: '',
+    keyword: window.sessionStorage.getItem('keyword') || '',
     result: {}
 };
 

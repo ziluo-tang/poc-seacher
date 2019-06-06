@@ -1,5 +1,5 @@
 <template>
-    <el-tabs v-model="activeName" type="card" @tab-click="handleTabClick">
+    <el-tabs v-model="activeName" @tab-click="handleTabClick">
         <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
             <keep-alive>
                 <component v-bind:is="curComponent"></component>
@@ -44,7 +44,8 @@ export default {
         },
         activeName: {
             get(){
-                return this.activeTab || this.result[Object.keys(mapping)[0]].name;
+                let first = Object.keys(mapping)[0];
+                return this.activeTab || this.result[first].name;
             },
             set(val){
                 this.activeTab = val;
@@ -52,7 +53,8 @@ export default {
         },
         curComponent: {
             get(){
-                return this.activeComponent || this.result[Object.keys(mapping)[0]].component;
+                let first = Object.keys(mapping)[0];
+                return this.activeComponent || this.result[first].component;
             }
         },
         // ...mapGetters(['result'])
@@ -60,28 +62,10 @@ export default {
     components: allcards,
     methods:{
         handleTabClick(tab, event){
-            this.activeComponent = this.result[tab.name].component || this.result[Object.keys(mapping)[0]].component;
+            let first = Object.keys(mapping)[0];
+            this.activeComponent = this.result[tab.name].component || this.result[first].component;
         }
     }
-    // render: function(createElement){
-    //     // return createElement('div', Object.keys(this.result).map(function(item) {
-    //     //         return createElement(mapping[item]);
-    //     //     })
-    //     // );
-    //     // return createElement('el-tabs', Object.keys(this.result).map(function(item) {
-    //     //         return createElement('el-tab-pane');
-    //     //     }),
-    //     //     {
-    //     //         type: 'card'
-    //     //     }
-    //     // );
-    //     return createElement('div', [
-    //         createElement(allcards.resultPersonal),
-    //         createElement(allcards.resultRelation)
-    //     ],{
-    //         class: 'result-cards'
-    //     });
-    // }
 }
 </script>
 <style lang="scss" scoped>

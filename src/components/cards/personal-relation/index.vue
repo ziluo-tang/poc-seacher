@@ -40,6 +40,8 @@ export default {
                         layout: 'none',
                         symbol: 'circle',
                         symbolSize: 50,
+                        minRadius: 15,
+                        maxRadius: 25,
                         roam: true,
                         label: {
                             normal: {
@@ -78,7 +80,6 @@ export default {
                             x: 550,
                             y: 500
                         }],
-                        // links: [],
                         links: [{
                             source: '张爱丽',
                             target: '王一帆',
