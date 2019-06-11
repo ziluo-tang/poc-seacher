@@ -2,7 +2,7 @@ import axios from 'axios';
 let promptBase = '/application', searchBase = '/apis';
 
 export const autoPrompt = params => {
-    return axios.post(`${promptBase}//search/default/`, params).then(res => res.data);
+    return axios.post(`${promptBase}/search/default/`, params).then(res => res.data);
 }
 
 export const cloudQuery = params => { 

@@ -8,7 +8,8 @@
             <autocompleteSeacher :search="search" @initPrompt="initPrompt"></autocompleteSeacher>
             <div class="promptTools">
                 <div v-if="desc.isShow">
-                    <div v-for="(item, index) in desc.data" :key="index">
+                    <h4>{{desc.result.name}}</h4>
+                    <div v-for="(item, index) in desc.result.data" :key="index">
                         <span>{{item.key}}</span>  :  <span>{{item.value}}</span>
                     </div>
                 </div>
@@ -18,7 +19,7 @@
                     </el-form-item>
                     <el-form-item v-for="(selectItem, index) in form.select" :key="selectItem.key+'_'+index" :label="selectItem.desc">
                         <el-select v-model="selectItem.value" :placeholder="'请选择'+selectItem.desc">
-                            <el-option v-for="optionItem in selectItem.item" :key="optionItem.lable" :label="optionItem.value" :value="optionItem.label"></el-option>
+                            <el-option v-for="optionItem in selectItem.item" :key="optionItem.lable" :label="optionItem.label" :value="optionItem.value"></el-option>
                         </el-select>
                     </el-form-item>
                     <!-- <el-form-item label="即时配送">
@@ -26,12 +27,12 @@
                     </el-form-item> -->
                     <el-form-item v-for="(radioItem, index) in form.radio" :key="radioItem.key+'_'+index" :label="radioItem.desc">
                         <el-radio-group v-model="radioItem.value">
-                            <el-radio v-for="radioInput in radioItem.item" :key="radioInput.label" :label="radioInput.value"></el-radio>
+                            <el-radio v-for="radioInput in radioItem.item" :key="radioInput.value" :label="radioInput.value"></el-radio>
                         </el-radio-group>
                     </el-form-item>
                     <el-form-item v-for="(checkboxItem, index) in form.checkbox" :key="checkboxItem+'_'+index" :label="checkboxItem.desc">
                         <el-checkbox-group v-model="checkboxItem.value">
-                            <el-checkbox v-for="checkInput in checkboxItem.item" :key="checkInput.label" :label="checkInput.label"></el-checkbox>
+                            <el-checkbox v-for="checkInput in checkboxItem.item" :key="checkInput.value" :label="checkInput.value"></el-checkbox>
                         </el-checkbox-group>
                     </el-form-item>
                     <el-form-item>
@@ -52,7 +53,10 @@ export default {
             prompt: null,
             desc: {
                 isShow: false,
-                data: []
+                result: {
+                    name: '',
+                    data: []
+                }
             },
             form: {
                 isShow: false,
@@ -71,32 +75,56 @@ export default {
             console.log(prompt);
             if(prompt && prompt.length){
                 this.prompt = prompt;
-                if(prompt[0]._source.type===0){
+                let promptItem = this.prompt[0];
+                if(promptItem._source.type===0){
+                    this.form.isShow = false;
                     //结果即达
-                    if(prompt[0]._source.code){
-                        const jsString = prompt[0]._source.code;
-                        axios.get(`${prompt[0]._source.address}?${this.urlList}`).then(res => {
-                            this.desc.isShow = true;
-                            const response = res.data.data;
-                            const code = eval(jsString);
-                            this.desc.data = code;
-                        }, err => {
-                            this.$message();
+                    if(promptItem._source.code){
+                        let params = new Array();
+                        let keyword = this.$store.state.search.keyword;
+                        let keywordArr = keyword.split(' ');
+                        let argsArr = promptItem._source.args.split(';');
+                        argsArr.forEach((element, index) => {
+                            let argItemArr = element.split(',');
+                            if (index + 1 <= keywordArr.length - 1 && keywordArr[index + 1] != "") {
+                                params.push(`${argItemArr[1]}=${keywordArr[index + 1]}`);
+                            }else{
+                                params.push(`${argItemArr[1]}=${eval(argItemArr[3].substr(1, argItemArr[3].length - 2))}`);
+                            }
                         });
-                        
+                        const jsString = promptItem._source.code;
+                        axios.get(`${promptItem._source.address}?${params.join('&')}`).then(res => {
+                            if(res.data.errorCode === 0) {
+                                this.desc.isShow = true;
+                                const response = res.data.data;
+                                const code = eval(eval(jsString));
+                                this.desc.result = {
+                                    name: promptItem._source.name,
+                                    data: code
+                                };
+                            }else{
+                                this.$message({message: res.errMsg, type: 'warning' });
+                            }
+                        }, err => {
+                            this.$message({message: '请求异常', type: 'warning' });
+                        });
                     }else{
                         this.desc.isShow = false;
                     }
-                }else if(prompt[0]._source.type===1){
+                }else if(promptItem._source.type===1){
+                    this.desc.isShow = false;
                     //应用即达
-                    if(prompt[0]._source.quickArg.length){
+                    if(promptItem._source.quickArg.length){
                         this.form.isShow = true;
                         for(let element in this.form){
                             if(element!='isShow'){
                                 this.form[element] = [];
                             }
                         }
-                        prompt[0]._source.quickArg.forEach(element => {
+                        promptItem._source.quickArg.forEach(element => {
+                            if(element.type==='select' || element.type==='radio' || element.type==='checkbox'){
+                                element.value = element.item[0].value;
+                            }
                             this.form[element.type].push(element);
                         });
                     }else{
@@ -110,15 +138,15 @@ export default {
         },
         turnToApplication(){
             let url = this.prompt[0]._source.address;
-            let param = '';
+            let param = new Array;
             for(let element in this.form){
                     if(element!='isShow'){
                         this.form[element].forEach(item => {
-                            param = param + item.key + '=' + item.value;
+                            param.push(`${item.key}=${item.value}`);
                         });
                     }
                 }
-            window.open(`${url}?${param}`);
+            window.open(`${url}?${param.join('&')}`);
         },
         search() {
             this.$router.push({ path: "/result"});

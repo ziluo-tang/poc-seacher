@@ -5,7 +5,9 @@
             v-model="keyword" 
             placeholder="输入关键词"
             :fetch-suggestions="querySearch"
+            :suffix-icon="icon"
             :trigger-on-focus="false"
+            :highlight-first-item="true"
             @select="handleSelect"
             @keyup.enter.native="search">
             <template slot-scope="props">
@@ -20,7 +22,9 @@ import {autoPrompt} from '../../api/axios';
 export default {
     props: ['search'],
     data(){
-        return {};
+        return {
+            icon: 'el-icon-camera-solid'
+        };
     },
     computed:{
         keyword: {
@@ -92,10 +96,7 @@ export default {
     align-items: center;
     .el-autocomplete{
         width: 100%;
-        
-            
     }
-    
     button{
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
@@ -108,5 +109,11 @@ export default {
         border-bottom-right-radius: 0;
         border-right: none;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    }
+    .el-input__suffix .el-icon-camera-solid{
+        font-size: 20px;
+    }
+    .el-input__suffix .el-icon-camera-solid:hover{
+        color: #409EFF;
     }
 </style>
