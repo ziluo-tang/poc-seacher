@@ -27,6 +27,10 @@ export default {
                     label: '人员',
                     name: 'personal'
                 },
+                'personalDesc': {
+                    label: '人员信息',
+                    name: 'personalDesc'
+                },
                 'relation': {
                     label: '关系',
                     name: 'relation'

@@ -122,9 +122,9 @@ export default {
                             }
                         }
                         promptItem._source.quickArg.forEach(element => {
-                            if(element.type==='select' || element.type==='radio' || element.type==='checkbox'){
-                                element.value = element.item[0].value;
-                            }
+                            // if(element.type==='select' || element.type==='radio' || element.type==='checkbox'){
+                            //     element.value = element.item[0].value;
+                            // }
                             this.form[element.type].push(element);
                         });
                     }else{

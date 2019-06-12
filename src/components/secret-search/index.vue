@@ -22,7 +22,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .sort-tag{
             line-height: 2;
             font-size: 1.1em;

@@ -1,6 +1,5 @@
 <template>
     <el-card shadow="hover">
-        <!-- <div class="sort-tag">人员信息</div> -->
         <div class="personal-item" v-for="(person, index) in result.data.list" :key="index">
             <div class="base-info">
                 <div class="person-header">
@@ -11,16 +10,13 @@
                     </el-image>
                 </div>
                 <div>
-                    <p>                    
-                        <label>{{person.name}}</label>
-                        <label>({{person.IDcard || person.key}})</label>
-                        <label>{{person.age}}</label>
+                    <p>{{person.name}}</p>
+                    <p v-if="person.sexy || person.age">
+                        <label>性别：{{person.sexy}}</label>
+                        <label>年龄：{{person.age}}</label>
                     </p>
-                    <p>
-                        <label>人员类型：</label>
-                        <label>{{person.type}}</label>
-                    </p>
-                    <p>{{person.address}}</p>
+                    <p v-if="person.IDcard">身份证：{{person.IDcard || person.key}}</p>
+                    <p v-if="person.address">现住址：{{person.address}}</p>
                 </div>
             </div>
         </div>
@@ -48,23 +44,26 @@ export default {
                     list: [
                             {
                                 name: '张三',
+                                sexy: '女',
+                                age: '24',
                                 IDcard: '31000000000000',
                                 header: require('../../../assets/img/u70.png'),
-                                age: '24',
                                 address: '浙江省杭州市上城区公安局'
                             },
                             {
                                 name: '张ss',
+                                sexy: '女',
+                                age: '24',
                                 IDcard: '31000000000000',
                                 header: require('../../../assets/img/u70.png'),
-                                age: '24',
                                 address: '浙江省杭州市上城区公安局'
                             },
                             {
                                 name: '张xx',
+                                sexy: '女',
+                                age: '24',
                                 IDcard: '31000000000000',
                                 header: require('../../../assets/img/u70.png'),
-                                age: '24',
                                 address: '浙江省杭州市上城区公安局'
                             }
                     ]
@@ -87,19 +86,27 @@ export default {
         margin-bottom: 5px;
     }
     .personal-item{
-        margin: 0 15px 1em 15px;
-        padding-bottom: 1em;
-        border-bottom: 1px dotted#888888;
+        margin: 15px;
+        cursor: pointer;
+        transition: transform 0.3s;
+        &:hover{
+            transform: scale(1.008);
+        }
         .base-info{
             display: flex;
             flex-flow: row nowrap;
             justify-content: flex-start;
             align-items: center;
-            
+            padding: 0 1em;
+            border-left: 2px solid #409EFF;
             .person-header{
                 margin-right: 1em;
-                img{
-                    width: 4em;
+                .el-image{
+                    width: 5em;
+                    height: 100%;
+                    border: 1px solid #ACCBFF;
+                    border-radius: 4px;
+                    margin-bottom: -4px;
                 }
             }
             p{
@@ -107,9 +114,17 @@ export default {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow:hidden;
-                margin: 1em 0;
+                margin: 0;
+                padding: 0.2em;
                 font-size: small;
                 color: #555;
+                &:first-child{
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+                label:not(:first-child){
+                    margin-left: 1em;
+                }
             }
         }
     }
