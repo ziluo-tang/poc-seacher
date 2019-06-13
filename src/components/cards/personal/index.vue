@@ -1,6 +1,6 @@
 <template>
     <el-card shadow="hover">
-        <div class="personal-item" v-for="(person, index) in result.data.list" :key="index">
+        <div class="personal-item" v-for="(person, index) in result.data.list" :key="index" @click="checkPersonal(person.IDcard)">
             <div class="base-info">
                 <div class="person-header">
                     <el-image :src="person.header">
@@ -54,7 +54,7 @@ export default {
                                 name: '张ss',
                                 sexy: '女',
                                 age: '24',
-                                IDcard: '31000000000000',
+                                IDcard: '31000000982730',
                                 header: require('../../../assets/img/u70.png'),
                                 address: '浙江省杭州市上城区公安局'
                             },
@@ -62,7 +62,7 @@ export default {
                                 name: '张xx',
                                 sexy: '女',
                                 age: '24',
-                                IDcard: '31000000000000',
+                                IDcard: '31000000275497',
                                 header: require('../../../assets/img/u70.png'),
                                 address: '浙江省杭州市上城区公安局'
                             }
@@ -73,6 +73,9 @@ export default {
         }
     },
     methods: {
+        checkPersonal(val){
+            this.$store.dispatch('INSERT_RESULT', val);
+        },
         sendPageChange(val){
             this.$store.dispatch('PAGE_CHANGE', {page: val, size: this.pageSize, strategy: this.result.strategy});
         }

@@ -5,6 +5,7 @@ export default {
         state.keyword = keyword;
     },
     [types.INSERT_RESULT] (state, result){
+        window.sessionStorage.setItem('result', JSON.stringify(result));
         state.result = result;
     },
     [types.PAGE_CHANGE] (state, newResult){

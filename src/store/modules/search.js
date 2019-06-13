@@ -3,7 +3,7 @@ import mutations from '../mutations';
 
 const state = {
     keyword: window.sessionStorage.getItem('keyword') || '',
-    result: {}
+    result: window.sessionStorage.getItem('result') || {}
 };
 
 const getters = {

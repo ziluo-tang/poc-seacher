@@ -1,11 +1,13 @@
 <template>
-    <el-tabs v-model="activeName" @tab-click="handleTabClick">
-        <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
-            <keep-alive>
-                <component v-bind:is="curComponent"></component>
-            </keep-alive>
-        </el-tab-pane>
-    </el-tabs>
+    <div class="result-card">
+        <el-tabs v-model="activeName" @tab-click="handleTabClick">
+            <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
+                <keep-alive>
+                    <component v-bind:is="curComponent"></component>
+                </keep-alive>
+            </el-tab-pane>
+        </el-tabs>
+    </div>
 </template>
 
 
@@ -34,10 +36,6 @@ export default {
                 'relation': {
                     label: '关系',
                     name: 'relation'
-                },
-                'vehicle': {
-                    label: '车辆',
-                    name: 'vehicle'
                 }
             };
             let cards = new Object();
@@ -72,11 +70,22 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
-    .result-cards{
-        margin: 0 -5px 0 10px;
-        .el-card{
-            margin-bottom: 15px;
-        }
+<style>
+    .result-card .el-card{
+        border: none;
+    }
+    .result-card > .el-tabs > .el-tabs__header{
+        margin: 0;    
+    }
+    .result-card > .el-tabs > .el-tabs__header > .el-tabs__nav-wrap{
+        padding: 0 125px;
+    }
+    .result-card > .el-tabs > .el-tabs__header > .el-tabs__nav-wrap::after{
+        background: none;
+    }
+    .result-card > .el-tabs > .el-tabs__content{
+        min-height: 500px;
+        padding: 15px 125px 0 125px;
+        background: linear-gradient(#ACCBFF, #F8FAFB);
     }
 </style>

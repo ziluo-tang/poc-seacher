@@ -10,24 +10,9 @@
             </div>
         </el-header>
         <el-container class="content">
-            <el-container>
-                <el-main>
-                    <el-row :gutter="20">
-                        <el-col :span="24">
-                            <result-cards></result-cards>
-                        </el-col>
-                    </el-row>
-                </el-main>
-                <el-footer>
-                    <relate-search :relate="relate"></relate-search>
-                </el-footer>
-            </el-container>
-             <el-aside style="padding: 20px;">
-                <div class="content-right">
-                    <secret-search :confidential="confidential"></secret-search>
-                    <secret-search :confidential="secretest"></secret-search>
-                </div>
-            </el-aside>
+            <el-main>
+                <result-cards></result-cards>
+            </el-main>
         </el-container>
     </el-container>
 </template>
@@ -41,100 +26,21 @@ import relateSearch from '../components/related-search/index';
 
 export default {
     data() {
-        return {
-            confidential: {
-                name: '高敏信息',
-                info: [
-                    {
-                        title: '涉事案情详情'
-                    },
-                    {
-                        title: '人员信息详情'
-                    },
-                    {
-                        title: '王源吸烟照曝光'
-                    },
-                    {
-                        title: '2019胡润慈善榜'
-                    },
-                    {
-                        title: '华为概念股涨停'
-                    },
-                    {
-                        title: '男子徒手爬埃菲尔'
-                    }
-                ]
-            },
-            secretest: {
-                name: '绝密信息',
-                info: [
-                    {
-                        title: '涉事案情详情'
-                    },
-                    {
-                        title: '人员信息详情'
-                    },
-                    {
-                        title: '王源吸烟照曝光'
-                    },
-                    {
-                        title: '2019胡润慈善榜'
-                    },
-                    {
-                        title: '华为概念股涨停'
-                    },
-                    {
-                        title: '男子徒手爬埃菲尔'
-                    }
-                ]
-            },
-            relate: {
-                name: '相关搜索',
-                info: [
-                    {
-                        title: '涉事案情详情'
-                    },
-                    {
-                        title: '人员信息详情'
-                    },
-                    {
-                        title: '王源吸烟照曝光'
-                    },
-                    {
-                        title: '2019胡润慈善榜'
-                    },
-                    {
-                        title: '华为概念股涨停'
-                    },
-                    {
-                        title: '男子徒手爬埃菲尔'
-                    },
-                    {
-                        title: '王源吸烟照曝光'
-                    },
-                    {
-                        title: '2019胡润慈善榜'
-                    }
-                ]
-            }
-        };
+        return {};
     },
     computed: {
         ...mapGetters(['keyword'])
     },
     components: {
         autocompleteSeacher,
-        resultCards,
-        secretSearch,
-        relateSearch
+        resultCards
     },
     created() {
         this.search();
     },
     methods:{
         search() {
-            var keyword = this.keyword || window.sessionStorage.getItem('keyword');
-            this.$store.dispatch('INSERT_RESULT', keyword);
+            this.$store.dispatch('INSERT_RESULT', this.keyword);
         }
     },
     watch:{
@@ -155,7 +61,7 @@ export default {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #dddddd;
+    // border-bottom: 1px solid #dddddd;
     background-color: #ffffff;
     z-index: 1000;
     .header-seacher{
@@ -184,6 +90,9 @@ export default {
 }
 .content{
     margin-top: 60px;
+    .el-main{
+        padding: 20px 0;
+    }
     .content-right{
         padding: 0 20px;
         border-left: 1px solid #dddddd;
