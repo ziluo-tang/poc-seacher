@@ -1,11 +1,8 @@
 <template>
-    <div>
-        <el-card shadow="hover">
-            <personal-desc :person="person"></personal-desc>
-        </el-card>
+    <div class="personal-relation-card">
+        <personal-desc :person="person"></personal-desc>
         <personal-relationship></personal-relationship>
     </div>
-    
 </template>
 <script>
 import personalDesc from '../personalDesc/personalDesc';
@@ -46,3 +43,10 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+    .personal-relation-card{
+        .el-card{
+            margin-bottom: 10px;
+        }
+    }
+</style>

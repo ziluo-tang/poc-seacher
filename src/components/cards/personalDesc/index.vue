@@ -1,15 +1,13 @@
 <template>
     <div>
-        <el-card shadow="hover">
-            <personal-desc :person="person"></personal-desc>
-        </el-card>
+        <personal-desc :person="person"></personal-desc>
         <el-tabs v-model="activeName" type="border-card">
             <el-tab-pane label="常规" name="routine">
                 <keep-alive>
                     <personal-routine></personal-routine>
                 </keep-alive>
             </el-tab-pane>
-            <el-tab-pane label="人物关系" name="relationship">
+            <el-tab-pane label="人物关系" name="relationship" :lazy="true">
                 <keep-alive>
                     <personal-relationship></personal-relationship>
                 </keep-alive>
@@ -87,7 +85,16 @@ export default {
             margin-bottom: 10px;
         }
     }
-    .el-tabs{
+    .el-tabs--border-card{
         border: none;
+        border-radius: 4px;
+        .el-tabs__header{
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            .el-tabs__nav-scroll{
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+            }
+        }
     }
 </style>

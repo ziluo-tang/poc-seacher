@@ -10,77 +10,29 @@ require("echarts/lib/chart/graph");
 export default {
     name: 'personal-relation',
     data() {
-        return {};
-    },
-    mounted() {
-        let relationGraph = this.drawGraph();
-        window.onresize = function(){
-            relationGraph.resize();
-        }
-    },
-    computed: {
-        result(){
-            let {relation} = this.$store.state.search.result;
-        }
-    },
-    methods: {
-        drawGraph(){
-            let relationGraph = echarts.init(this.$refs['personnal-relation']);
-            relationGraph.setOption({
-                title: {
-                    text: '',
-                    show: false
-                },
-                tooltip: {},
-                animationDurationUpdate: 1500,
-                animationEasingUpdate: 'quinticInOut',
-                series : [
-                    {
-                        type: 'graph',
-                        layout: 'none',
-                        symbol: 'circle',
-                        symbolSize: 50,
-                        minRadius: 15,
-                        maxRadius: 25,
-                        roam: true,
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'bottom',
-                                color: '#555555'
-                            }
-                        },
-                        edgeSymbol: ['circle', 'arrow'],
-                        edgeSymbolSize: [4, 10],
-                        edgeLabel: {
-                            normal: {
-                                textStyle: {
-                                    fontSize: 20
-                                }
-                            }
-                        },
-                        data: [{
+        return {
+            personals: [{
                             name: '张爱丽',
-                            symbol: `image://${require('../../../assets/img/u65.png')}`,
+                            symbol: require('../../../assets/img/u65.png'),
                             x: 300,
                             y: 300
                         }, {
                             name: '王一帆',
-                            symbol: `image://${require('../../../assets/img/u70.png')}`,
+                            symbol: require('../../../assets/img/u70.png'),
                             x: 800,
                             y: 300
                         }, {
                             name: '张xx',
-                            symbol: `image://${require('../../../assets/img/u65.png')}`,
+                            symbol: require('../../../assets/img/u65.png'),
                             x: 550,
                             y: 100
                         }, {
                             name: '李xx',
-                            symbol: `image://${require('../../../assets/img/u70.png')}`,
+                            symbol: require('../../../assets/img/u65.png'),
                             x: 550,
                             y: 500
                         }],
-                        links: [{
+            relations: [{
                             source: '张爱丽',
                             target: '王一帆',
                             relation: '夫妻',
@@ -127,16 +79,114 @@ export default {
                         }, {
                             source: '王一帆',
                             target: '张爱丽'
-                        }],
-                        lineStyle: {
-                            normal: {
-                                opacity: 0.9,
-                                width: 1,
-                                curveness: 0
+                        }]
+        };
+    },
+    mounted() {
+        let relationGraph = this.drawGraph();
+        this.pubdata(relationGraph, this.personals);
+        window.onresize = function(){
+            relationGraph.resize();
+        }
+    },
+    computed: {
+        result(){
+            let {relation} = this.$store.state.search.result;
+        }
+    },
+    methods: {
+        getImgData(imgSrc) {
+            let fun = function (resolve, reject) {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                const img = new Image();
+                img.crossOrigin = '';
+                img.onload = function () {
+                    let center = {
+                        x: img.width / 2,
+                        y: img.height / 2.5
+                    }
+                    var diameter = img.width;
+                    canvas.width = diameter;
+                    canvas.height = diameter;
+                    context.clearRect(0, 0, diameter, diameter);
+                    context.save();
+                    context.beginPath();
+                    let radius = img.width / 2;
+                    context.arc(radius, radius, radius, 0, 2 * Math.PI); //画出圆
+                    context.clip(); //裁剪上面的圆形
+                    // 在刚刚裁剪的园上画图
+                    context.drawImage(img, center.x - radius, center.y - radius, diameter, diameter, 0, 0, diameter, diameter);
+                    context.restore(); // 还原状态
+                    resolve(canvas.toDataURL('image/png', 1));
+                }
+                img.onerror = function(err) {
+                    reject(new Error('Could not load image at ' + imgSrc));
+                }
+                img.src = imgSrc;
+            }
+            return new Promise(fun);
+        },
+        pubdata(chart, data){
+            let picList = [];
+            data.forEach(element => {
+                picList.push(this.getImgData(element.symbol));
+            });
+            ;
+            Promise.all(picList)
+                .then(images => {
+                    images.forEach((element, index) => {
+                        data[index].symbol = `image://${element}`;
+                    });
+                    chart.setOption({
+                        series: [{
+                            data: data,
+                            links: this.relations
+                        }]
+                    });
+                })
+                .catch(error => this.$message({message: error, type: 'warning' }));
+        },
+        drawGraph(){
+            let relationGraph = echarts.init(this.$refs['personnal-relation']);
+            relationGraph.setOption({
+                title: {
+                    show: false
+                },
+                tooltip: {},
+                animationDurationUpdate: 1500,
+                animationEasingUpdate: 'quinticInOut',
+                series: [{
+                    type: 'graph',
+                    symbol: 'circle',
+                    symbolSize: 50,
+                    minRadius: 15,
+                    maxRadius: 25,
+                    roam: true,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'bottom',
+                            color: '#555555'
+                        }
+                    },
+                    edgeSymbol: ['circle', 'arrow'],
+                    edgeSymbolSize: [4, 10],
+                    edgeLabel: {
+                        normal: {
+                            textStyle: {
+                                fontSize: 20
                             }
                         }
+                    },
+                    lineStyle: {
+                        normal: {
+                            opacity: 0.9,
+                            width: 1,
+                            curveness: 0
+                        }
                     }
-                ]
+                }]
             });
             return relationGraph;
         }
@@ -144,6 +194,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.el-card{
+    width: 100%;
     .sort-tag{
         font-size: 1.1em;
         font-weight: 600;
@@ -155,4 +207,5 @@ export default {
         width: 100%;
         height: 400px;
     }
+}
 </style>

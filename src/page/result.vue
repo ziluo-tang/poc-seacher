@@ -1,11 +1,8 @@
 <template>
     <el-container>
-        <el-header class="header">
+        <el-header height="100px">
              <div class="header-seacher">
-                 <div class="seacher-log">
-                    <i class="iconfont iconjingwuicon_svg-"></i>
-                    <span>警务云搜</span>
-                 </div>
+                <img src="../assets/img/result-logo.png">
                 <autocomplete-seacher :search="search"></autocomplete-seacher>
             </div>
         </el-header>
@@ -26,7 +23,9 @@ import relateSearch from '../components/related-search/index';
 
 export default {
     data() {
-        return {};
+        return {
+            logo: require('../assets/img/result-logo.png')
+        };
     },
     computed: {
         ...mapGetters(['keyword'])
@@ -54,14 +53,14 @@ export default {
 
 <style lang="scss" scoped>
 // @import "../assets/css/them.scss";
-.header{
+.el-header{
     width: 100%;
     position: fixed;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    // border-bottom: 1px solid #dddddd;
+    padding: 0 125px;
     background-color: #ffffff;
     z-index: 1000;
     .header-seacher{
@@ -69,13 +68,9 @@ export default {
         flex-flow: row nowrap;
         justify-content: flex-start;
         align-items: center;
-        .seacher-log{
-            min-width: 7.5em;
-            text-align: left;
-            i, span{
-                font-size: 1.3em;
-                color: #888888;
-            }
+        img{
+            width: 165px;
+            margin-right: 10px;
         }
         .seacher-input{
             min-width: 35em;
@@ -89,9 +84,9 @@ export default {
     }
 }
 .content{
-    margin-top: 60px;
+    margin-top: 100px;
     .el-main{
-        padding: 20px 0;
+        padding: 0;
     }
     .content-right{
         padding: 0 20px;

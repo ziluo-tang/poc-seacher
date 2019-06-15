@@ -2,8 +2,11 @@
     <div class="seacher-box">
         <div class="seacher-container">
             <div class="seacher-log">
-                <i class="iconfont iconjingwuicon_svg-"></i>
-                <span>警务云搜</span>
+                 <el-image :src="logo">
+                    <div slot="placeholder" class="image-slot">
+                        加载中<span class="dot">...</span>
+                    </div>
+                </el-image>
             </div>
             <autocompleteSeacher :search="search" @initPrompt="initPrompt"></autocompleteSeacher>
             <div class="promptTools">
@@ -50,6 +53,7 @@ import autocompleteSeacher from '../components/autocomplete-seacher/index.vue';
 export default {
     data() {
         return {
+            logo: require('../assets/img/search-logo.png'),
             prompt: null,
             desc: {
                 isShow: false,
@@ -169,7 +173,7 @@ export default {
         .seacher-log{
             width: 100%;
             text-align: center;
-            margin-bottom: 1em;
+            margin-bottom: 2em;
             i, span{
                 font-size: 2.8em;
                 color: #aaaaaa;

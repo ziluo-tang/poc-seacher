@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <el-card shadow="hover">
         <div class="sort-tag">人员基本信息</div>
         <div class="base-info">
             <div class="person-header">
@@ -16,10 +16,13 @@
                     <label>身份证：{{person.IDcard || person.key}}</label>
                 </p>
                 <p>
-                    <label>黄</label>
-                    <label>赌</label>
-                    <label>毒</label>
-                    <label>偷</label>
+                    <i class="iconfont iconheisvg"></i>
+                    <i class="iconfont iconjisvg"></i>
+                    <i class="iconfont icontousvg"></i>
+                    <i class="iconfont iconpiansvg"></i>
+                    <i class="iconfont iconhuangsvg"></i>
+                    <i class="iconfont icondusvg"></i>
+                    <i class="iconfont iconbaosvg"></i>
                     <a href="javascript:void(0);" @click="powerApply">高敏高密申请</a>
                 </p>
                 <p>
@@ -38,7 +41,7 @@
                 </p>
             </div>
         </div>
-    </div>
+    </el-card>
 </template>
 <script>
 export default {

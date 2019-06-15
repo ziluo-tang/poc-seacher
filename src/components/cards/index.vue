@@ -85,7 +85,7 @@ export default {
     }
     .result-card > .el-tabs > .el-tabs__content{
         min-height: 500px;
-        padding: 15px 125px 0 125px;
+        padding: 15px 125px;
         background: linear-gradient(#ACCBFF, #F8FAFB);
     }
 </style>

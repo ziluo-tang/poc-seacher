@@ -2,6 +2,7 @@
     <el-card shadow="hover">
         <div class="personal-item" v-for="(person, index) in result.data.list" :key="index" @click="checkPersonal(person.IDcard)">
             <div class="base-info">
+                <div class="tag"></div>
                 <div class="person-header">
                     <el-image :src="person.header">
                         <div slot="placeholder" class="image-slot">
@@ -101,7 +102,14 @@ export default {
             justify-content: flex-start;
             align-items: center;
             padding: 0 1em;
-            border-left: 2px solid #409EFF;
+            // border-left: 2px solid #409EFF;
+            .tag{
+                width: 3px;
+                height: 80px;
+                background-color: #409EFF;
+                margin-right: 10px;
+                border-radius: 3px;
+            }
             .person-header{
                 margin-right: 1em;
                 .el-image{
@@ -118,7 +126,7 @@ export default {
                 text-overflow: ellipsis;
                 overflow:hidden;
                 margin: 0;
-                padding: 0.2em;
+                padding: 0.15em;
                 font-size: small;
                 color: #555;
                 &:first-child{
