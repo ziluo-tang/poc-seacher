@@ -25,17 +25,17 @@ export default {
         result(){
             // let {result} = this.$store.state.search;
             let result = {
-                'personal': {
+                'personal-list': {
                     label: '人员',
-                    name: 'personal'
+                    name: 'personal-list'
                 },
-                'personalDesc': {
+                'personal-info': {
                     label: '人员信息',
-                    name: 'personalDesc'
+                    name: 'personal-info'
                 },
-                'relation': {
+                'personal-relation': {
                     label: '关系',
-                    name: 'relation'
+                    name: 'personal-relation'
                 }
             };
             let cards = new Object();

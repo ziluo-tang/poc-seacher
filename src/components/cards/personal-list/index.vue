@@ -28,7 +28,7 @@
 <script>
 import pagination from '../../common/pagination';
 export default {
-    name: 'personal',
+    name: 'personalList',
     data(){
         return {
             pageSize: 1
@@ -39,7 +39,7 @@ export default {
     },
     computed: {
         result(){
-            // let {personal} = this.$store.state.search.result;
+            // let {personalList} = this.$store.state.search.result;
             let personal = {
                 data: {
                     list: [

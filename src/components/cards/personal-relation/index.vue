@@ -5,10 +5,10 @@
     </div>
 </template>
 <script>
-import personalDesc from '../personalDesc/personalDesc';
-import personalRelationship from '../personalDesc/relation';
+import personalDesc from '../personal-info/personalDesc';
+import personalRelationship from '../personal-info/relation';
 export default {
-    name: 'personal-relation',
+    name: 'personalRelation',
     data() {
         return {
             person: {

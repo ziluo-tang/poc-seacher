@@ -44,6 +44,7 @@ import personalCase from './case';
 import personalFinance from './finance';
 import personalTrajectory from './trajectory';
 export default {
+    name: 'personalInfo',
     data() {
         return {
             activeName: 'routine',

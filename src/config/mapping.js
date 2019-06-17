@@ -1,5 +1,5 @@
-import resultPersonal from '../components/cards/personal/index';
-import resultPersonalDesc from '../components/cards/personalDesc/index.vue';
+import resultPersonal from '../components/cards/personal-list/index';
+import resultPersonalDesc from '../components/cards/personal-info/index.vue';
 import resultRelation from '../components/cards/personal-relation/index';
 import resultVehicle from '../components/cards/vehicle/index';
 export const allcards = {
@@ -10,19 +10,19 @@ export const allcards = {
 
 }
 export const mapping = {
-    'personal': {
+    'personal-list': {
         label: '人员',
-        name: 'personal',
+        name: 'personal-list',
         component: resultPersonal
     },
-    'personalDesc': {
+    'personal-info': {
         label: '人员信息',
-        name: 'personalDesc',
+        name: 'personal-info',
         component: resultPersonalDesc
     },
-    'relation': {
+    'personal-relation': {
         label: '关系',
-        name: 'relation',
+        name: 'personal-relation',
         component: resultRelation
     },
     'vehicle': {

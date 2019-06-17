@@ -8,6 +8,7 @@
       @next-click="handleNextClick"
       :current-page="currentPage"
       :page-size="pageSize"
+      :page-count="pageCount"
       layout="prev, pager, next"
       :total="totalPage"
       :hide-on-single-page="true"
@@ -24,6 +25,10 @@ export default {
     currentPage: {
       type: Number,
       default: 1
+    },
+    pageCount: {
+      type: Number,
+      default: 10
     },
     pageSize: {
       type: Number,
