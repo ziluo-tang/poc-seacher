@@ -69,6 +69,12 @@ export default {
             }
         }
     },
+    computed: {
+        result(){
+            let {personalInfo} = this.$store.state.search.result;
+            return personalInfo;
+        }
+    },
     components: {
         personalRoutine,
         personalRelationship,

@@ -31,7 +31,7 @@ export default {
     name: 'personalList',
     data(){
         return {
-            pageSize: 1
+            pageSize: 5
         };
     },
     components: {

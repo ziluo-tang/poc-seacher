@@ -8,7 +8,7 @@
 let echarts = require('echarts/lib/echarts');
 require("echarts/lib/chart/graph");
 export default {
-    name: 'personal-relation',
+    name: 'personalRelation',
     data() {
         return {
             personals: [{

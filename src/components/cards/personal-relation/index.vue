@@ -34,7 +34,8 @@ export default {
     },
     computed: {
         result(){
-            let {relation} = this.$store.state.search.result;
+            let {personalRelation} = this.$store.state.search.result;
+            return personalRelation;
         }
     },
     components: {

@@ -9,21 +9,33 @@
         <el-card shadow="hover">
             <div class="sort-tag">教育经历</div>
             <div>
-                <div></div>
+                <div class="identity">
+                    <label>最高学历: 本科</label>
+                    <label>毕业院校: 斯坦福</label>
+                </div>
                 <el-table :data="tableData" style="width: 100%">
                     <el-table-column
-                        prop="date"
-                        label="日期"
-                        width="180">
+                        type="index"
+                        label="序号"
+                        width="100">
                     </el-table-column>
                     <el-table-column
                         prop="name"
-                        label="姓名"
+                        label="学历"
                         width="180">
                     </el-table-column>
                     <el-table-column
                         prop="address"
-                        label="地址">
+                        label="学校名称">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="专业">
+                    </el-table-column>
+                    <el-table-column
+                        prop="date"
+                        label="入学/毕业时间"
+                        width="180">
                     </el-table-column>
                 </el-table>
             </div>
@@ -31,21 +43,32 @@
         <el-card shadow="hover">
             <div class="sort-tag">现住地情况</div>
             <div>
-                <div></div>
+                <div class="identity">
+                    <span>现住地址: 上海市普陀区金沙江路 1517 弄</span>
+                </div>
                 <el-table :data="tableData" style="width: 100%">
                     <el-table-column
-                        prop="date"
-                        label="日期"
-                        width="180">
-                    </el-table-column>
-                    <el-table-column
-                        prop="name"
-                        label="姓名"
-                        width="180">
+                        type="index"
+                        label="序号"
+                        width="100">
                     </el-table-column>
                     <el-table-column
                         prop="address"
-                        label="地址">
+                        label="迁出地址">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="迁入地址">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="地址属性"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="date"
+                        label="迁移时间"
+                        width="180">
                     </el-table-column>
                 </el-table>
             </div>
@@ -53,21 +76,37 @@
         <el-card shadow="hover">
             <div class="sort-tag">从业情况</div>
             <div>
-                <div></div>
+                <div class="identity">
+                    <span>现工作单位: 上海市普陀区金沙江路 1517 弄</span>
+                </div>
                 <el-table :data="tableData" style="width: 100%">
                     <el-table-column
-                        prop="date"
-                        label="日期"
-                        width="180">
-                    </el-table-column>
-                    <el-table-column
-                        prop="name"
-                        label="姓名"
-                        width="180">
+                        type="index"
+                        label="序号"
+                        width="100">
                     </el-table-column>
                     <el-table-column
                         prop="address"
-                        label="地址">
+                        label="企业名称">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="职务"
+                        width="160">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="职级"
+                        width="160">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="企业地址">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="从业状态"
+                        width="160">
                     </el-table-column>
                 </el-table>
             </div>
