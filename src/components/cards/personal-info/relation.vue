@@ -116,7 +116,7 @@ export default {
                     context.arc(radius, radius, radius, 0, 2 * Math.PI); //画出圆
                     context.clip(); //裁剪上面的圆形
                     // 在刚刚裁剪的园上画图
-                    context.drawImage(img, center.x - radius, center.y - radius, diameter, diameter, 0, 0, diameter, diameter);
+                    context.drawImage(img, 0, 0, img.width, img.height, 0, 0, diameter, diameter);
                     context.restore(); // 还原状态
                     resolve(canvas.toDataURL('image/png', 1));
                 }
@@ -206,6 +206,9 @@ export default {
     .personal-relation{
         width: 100%;
         height: 400px;
+        background-color: #F8FAFB;
+        border-radius: 4px;
+        margin-top: 10px; 
     }
 }
 </style>

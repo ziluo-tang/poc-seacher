@@ -1,6 +1,6 @@
 <template>
     <el-card shadow="hover">
-        <div class="sort-tag">人员基本信息</div>
+        <div class="sort-tag">{{tag || '人员基本信息'}}</div>
         <div class="base-info">
             <div class="person-header">
                 <el-image :src="person.header">
@@ -45,7 +45,7 @@
 </template>
 <script>
 export default {
-    props: ['person'],
+    props: ['person', 'tag'],
     data() {
         return {};
     },
