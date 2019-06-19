@@ -5,6 +5,7 @@ import VueRouter from "vue-router"
 
 import notFound from '../page/404.vue'
 import seacher from '../page/seacher.vue'
+import extendApp from '../page/extendApp.vue'
 import result from '../page/result.vue'
 // 要告诉 vue 使用 vueRouter
 Vue.use(VueRouter);
@@ -19,6 +20,12 @@ let routes = [
     path: '/seacher',
     component: seacher,
     name: 'seacher',
+    hidden: true
+  },
+  {
+    path: '/extendApp',
+    component: extendApp,
+    name: 'extendApp',
     hidden: true
   },
   {

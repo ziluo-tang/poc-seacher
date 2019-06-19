@@ -208,7 +208,7 @@ export default {
         height: 400px;
         background-color: #F8FAFB;
         border-radius: 4px;
-        margin-top: 10px; 
+        margin-top: 20px; 
     }
 }
 </style>
