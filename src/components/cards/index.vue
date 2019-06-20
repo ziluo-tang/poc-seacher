@@ -23,37 +23,8 @@ export default {
     },
     computed: {
         result(){
-            // let {result} = this.$store.state.search;
-            let result = {
-                'personalList': {
-                    label: '人员',
-                    name: 'personalList'
-                },
-                'personalInfo': {
-                    label: '人员信息',
-                    name: 'personalInfo'
-                },
-                'personalRelation': {
-                    label: '关系',
-                    name: 'personalRelation'
-                },
-               'enterpriseList': {
-                    label: '企业',
-                    name: 'enterpriseList'
-                },
-                'enterpriseInfo': {
-                    label: '企业信息',
-                    name: 'enterpriseInfo'
-                },
-                'registerList': {
-                    label: '户籍',
-                    name: 'registerList'
-                },
-                'registerInfo': {
-                    label: '户籍详情',
-                    name: 'registerInfo'
-                },
-            };
+            let {result} = this.$store.state.search;
+            console.log('result', result);
             let cards = new Object();
             for(let card in result){
                 cards[card] = mapping[card];

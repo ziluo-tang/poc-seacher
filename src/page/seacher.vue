@@ -52,6 +52,7 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from "vuex";
 import autocompleteSeacher from '../components/autocomplete-seacher/index.vue';
 export default {
     data() {
@@ -74,6 +75,9 @@ export default {
                 checkbox: []
             }
         };
+    },
+    computed: {
+        ...mapGetters(['keyword'])
     },
     components:{
         autocompleteSeacher
@@ -163,6 +167,7 @@ export default {
             window.open(`${url}?${param.join('&')}`);
         },
         search() {
+            this.$store.dispatch('INSERT_RESULT', this.keyword);
             this.$router.push({ path: "/result"});
         }
     }

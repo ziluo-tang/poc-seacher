@@ -7,7 +7,7 @@ export default {
     },
     [types.INSERT_RESULT]({commit}, keyword){
         cloudQuery({queryDetail: keyword}).then((response) => {
-            if(response.resultCode==0){
+            if(response.status==0){
                 let resultObiect = new Object();
                 response.data.forEach(element => {
                     resultObiect[element.strategy.displayCard] = element;

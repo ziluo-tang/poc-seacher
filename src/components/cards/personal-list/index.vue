@@ -1,23 +1,23 @@
 <template>
     <el-card shadow="hover">
-        <div class="personal-item" v-for="(person, index) in result.data.list" :key="index" @click="checkPersonal(person.IDcard)">
+        <div class="personal-item" v-for="person in result.data.list" :key="person.id" @click="checkPersonal(person.id)">
             <div class="base-info">
                 <div class="tag"></div>
                 <div class="person-header">
-                    <el-image :src="person.header">
+                    <el-image :src="header">
                         <div slot="placeholder" class="image-slot">
                             加载中<span class="dot">...</span>
                         </div>
                     </el-image>
                 </div>
                 <div>
-                    <p>{{person.name}}</p>
-                    <p v-if="person.sexy || person.age">
-                        <label>性别：{{person.sexy}}</label>
+                    <p>{{person.chname}}</p>
+                    <p v-if="person.sex || person.age">
+                        <label>性别：{{person.sex}}</label>
                         <label>年龄：{{person.age}}</label>
                     </p>
-                    <p v-if="person.IDcard">身份证：{{person.IDcard || person.key}}</p>
-                    <p v-if="person.address">现住址：{{person.address}}</p>
+                    <p v-if="person.idcard_num">身份证：{{person.idcard_num}}</p>
+                    <p v-if="person.domplace">现住址：{{person.domplace}}</p>
                 </div>
             </div>
         </div>
@@ -31,7 +31,8 @@ export default {
     name: 'personalList',
     data(){
         return {
-            pageSize: 5
+            pageSize: 2,
+            header: require('../../../assets/img/u70.png')
         };
     },
     components: {
@@ -39,38 +40,8 @@ export default {
     },
     computed: {
         result(){
-            // let {personalList} = this.$store.state.search.result;
-            let personal = {
-                data: {
-                    list: [
-                            {
-                                name: '张三',
-                                sexy: '女',
-                                age: '24',
-                                IDcard: '31000000000000',
-                                header: require('../../../assets/img/u70.png'),
-                                address: '浙江省杭州市上城区公安局'
-                            },
-                            {
-                                name: '张ss',
-                                sexy: '女',
-                                age: '24',
-                                IDcard: '31000000982730',
-                                header: require('../../../assets/img/u70.png'),
-                                address: '浙江省杭州市上城区公安局'
-                            },
-                            {
-                                name: '张xx',
-                                sexy: '女',
-                                age: '24',
-                                IDcard: '31000000275497',
-                                header: require('../../../assets/img/u70.png'),
-                                address: '浙江省杭州市上城区公安局'
-                            }
-                    ]
-                }
-            };
-            return personal;
+            let {personalList} = this.$store.state.search.result;
+            return personalList;
         }
     },
     methods: {
@@ -121,7 +92,7 @@ export default {
                 }
             }
             p{
-                max-width: 20em;
+                width: 100%;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow:hidden;
