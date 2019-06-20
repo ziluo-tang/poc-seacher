@@ -25,18 +25,34 @@ export default {
         result(){
             // let {result} = this.$store.state.search;
             let result = {
-                'personal-list': {
+                'personalList': {
                     label: '人员',
-                    name: 'personal-list'
+                    name: 'personalList'
                 },
-                'personal-info': {
+                'personalInfo': {
                     label: '人员信息',
-                    name: 'personal-info'
+                    name: 'personalInfo'
                 },
-                'personal-relation': {
+                'personalRelation': {
                     label: '关系',
-                    name: 'personal-relation'
-                }
+                    name: 'personalRelation'
+                },
+               'enterpriseList': {
+                    label: '企业',
+                    name: 'enterpriseList'
+                },
+                'enterpriseInfo': {
+                    label: '企业信息',
+                    name: 'enterpriseInfo'
+                },
+                'registerList': {
+                    label: '户籍',
+                    name: 'registerList'
+                },
+                'registerInfo': {
+                    label: '户籍详情',
+                    name: 'registerInfo'
+                },
             };
             let cards = new Object();
             for(let card in result){

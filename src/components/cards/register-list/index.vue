@@ -27,6 +27,12 @@
     </el-card>
 </template>
 <script>
+/**
+    @author 唐小新 1302947749@qq.com
+ */
+ /**
+    模糊搜索户籍列表
+  */
 export default {
     name: 'registerList',
     data() {
@@ -112,7 +118,7 @@ export default {
                 }
             }
             p{
-                max-width: 20em;
+                width: 100%;
                 margin: 0;
                 padding: 0.15em;
                 font-size: small;

@@ -31,8 +31,10 @@
         <personal-desc :person="master" :tag="'户主'"></personal-desc>
         <el-card shadow="hover">
             <div class="sort-tag">户籍成员</div>
-            <div class="identity">
-                <label>户籍人数: {{member.length}}</label>
+            <div>
+                <div class="identity">
+                    <label>户籍人数: {{member.length}}</label>
+                </div>
                 <el-table :data="member" style="width: 100%">
                     <el-table-column
                         type="index"
@@ -41,22 +43,23 @@
                     </el-table-column>
                     <el-table-column
                         prop="herader"
-                        label="人像">
+                        label="人像"
+                        width="150">
                     </el-table-column>
                     <el-table-column
                         prop="name"
                         label="姓名"
-                        width="150">
+                        width="100">
                     </el-table-column>
                     <el-table-column
                         prop="sexy"
                         label="性别"
-                        width="150">
+                        width="100">
                     </el-table-column>
                     <el-table-column
                         prop="age"
                         label="年龄"
-                        width="150">
+                        width="100">
                     </el-table-column>
                     <el-table-column
                         prop="IDcard"
@@ -77,8 +80,10 @@
         </el-card>
         <el-card shadow="hover">
             <div class="sort-tag">户籍变更情况</div>
-            <div class="identity">
-                <label>变更次数: {{registerChange.length}}</label>
+            <div>
+                <div class="identity">
+                    <label>变更次数: {{registerChange.length}}</label>
+                </div>
                 <el-table :data="registerChange" style="width: 100%">
                     <el-table-column
                         type="index"
@@ -202,10 +207,6 @@ export default {
             border-left: 2px solid #409EFF;
         }
         .base-info{
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: flex-start;
-            align-items: center;
             padding: 1em 0.8em;
             .person-header{
                 margin-right: 2em;
@@ -265,6 +266,7 @@ export default {
         }
         .identity{
             padding: 1em 0.8em;
+            color: #606266;
         }
     }
 </style>
