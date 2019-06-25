@@ -1,10 +1,10 @@
 <template>
     <div>
-        <personal-desc :person="person"></personal-desc>
+        <personal-desc :person="personAttr"></personal-desc>
         <el-tabs v-model="activeName" type="border-card">
             <el-tab-pane label="常规" name="routine">
                 <keep-alive>
-                    <personal-routine></personal-routine>
+                    <personal-routine :routine="personAttr"></personal-routine>
                 </keep-alive>
             </el-tab-pane>
             <el-tab-pane label="人物关系" name="relationship" :lazy="true">
@@ -47,32 +47,16 @@ export default {
     name: 'personalInfo',
     data() {
         return {
-            activeName: 'routine',
-            person: {
-                name: '张三',
-                sexy: '女',
-                age: '24',
-                IDcard: '31000000000000',
-                header: require('../../../assets/img/u70.png'),
-                oldname: '张xx',
-                nickname: '小张',
-                birthday: '1993/10/1',
-                nation: '汉',
-                marriage: '未婚',
-                politics: '党员',
-                religion: '无',
-                weight: '60KG',
-                height: '170CM',
-                blood: 'A',
-                healthy: '健康', 
-                address: '浙江省杭州市上城区公安局'
-            }
+            activeName: 'routine'
         }
     },
     computed: {
-        result(){
-            let {personalInfo} = this.$store.state.search.result;
-            return personalInfo;
+        result() {
+            let { personInfo } = this.$store.state.search.result;
+            return personInfo;
+        },
+        personAttr() {
+            return this.result.data.list[0];
         }
     },
     components: {

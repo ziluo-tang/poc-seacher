@@ -6,7 +6,7 @@
 </template>
 <script>
 import personalDesc from '../personal-info/personalDesc';
-import personalRelationship from '../personal-info/relation';
+import personalRelationship from '../../common/graph';
 export default {
     name: 'personalRelation',
     data() {

@@ -10,5 +10,9 @@ export default {
     },
     [types.PAGE_CHANGE] (state, newResult){
         state.result = newResult;
+    },
+    [types.DETAILS_QUERY] (state, result) {
+        window.sessionStorage.setItem('result', JSON.stringify(result));
+        state.result = result;
     }
 }

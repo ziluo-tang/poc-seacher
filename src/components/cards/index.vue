@@ -1,18 +1,16 @@
 <template>
     <div class="result-card">
-        <el-tabs v-model="activeName" @tab-click="handleTabClick">
+        <el-tabs v-if="Object.keys(result).length" v-model="activeName" @tab-click="handleTabClick">
             <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
                 <keep-alive>
-                    <component v-bind:is="curComponent"></component>
+                    <component v-bind:is="curComponent" :lazy="true"></component>
                 </keep-alive>
             </el-tab-pane>
         </el-tabs>
+        <p class="search-none" v-if="!Object.keys(result).length">无搜索结果</p>
     </div>
 </template>
-
-
 <script>
-import { mapGetters } from "vuex";
 import {allcards, mapping} from '../../config/mapping';
 export default {
     data(){
@@ -23,7 +21,7 @@ export default {
     },
     computed: {
         result(){
-            let {result} = this.$store.state.search;
+            let { result } = this.$store.state.search;
             console.log('result', result);
             let cards = new Object();
             for(let card in result){
@@ -33,25 +31,26 @@ export default {
         },
         activeName: {
             get(){
-                let first = Object.keys(mapping)[0];
-                return this.activeTab || this.result[first].name;
+                let first = Object.keys(this.result)[0];
+                if(first){
+                    return this.activeTab || this.result[first].name;
+                }else{
+                    return this.activeTab;
+                }
             },
             set(val){
                 this.activeTab = val;
             }
         },
-        curComponent: {
-            get(){
-                let first = Object.keys(mapping)[0];
-                return this.activeComponent || this.result[first].component;
-            }
-        },
-        // ...mapGetters(['result'])
+        curComponent() {
+            let first = Object.keys(this.result)[0];
+            return this.activeComponent || this.result[first].component;
+        }
     },
     components: allcards,
     methods:{
         handleTabClick(tab, event){
-            let first = Object.keys(mapping)[0];
+            let first = Object.keys(result)[0];
             this.activeComponent = this.result[tab.name].component || this.result[first].component;
         }
     }
@@ -74,5 +73,15 @@ export default {
         min-height: 500px;
         padding: 15px 125px;
         background: linear-gradient(#ACCBFF, #F8FAFB);
+    }
+    .result-card .search-none{
+        margin: 0 auto;
+        width: 300px;
+        height: 500px; 
+        line-height: 500px;
+        font-size: 30px;
+        color: #aaaaaa;
+        text-align: center;
+        letter-spacing: 5px;
     }
 </style>

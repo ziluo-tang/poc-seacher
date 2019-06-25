@@ -11,17 +11,17 @@
                     </el-image>
                 </div>
                 <div>
-                    <p>{{person.chname}}</p>
-                    <p v-if="person.sex || person.age">
-                        <label>性别：{{person.sex}}</label>
-                        <label>年龄：{{person.age}}</label>
+                    <p>{{person.xm}}</p>
+                    <p v-if="person.xb || person.csrq">
+                        <label>性别：{{person.xb}}</label>
+                        <label>出生日期：{{person.csrq}}</label>
                     </p>
-                    <p v-if="person.idcard_num">身份证：{{person.idcard_num}}</p>
-                    <p v-if="person.domplace">现住址：{{person.domplace}}</p>
+                    <p v-if="person.gmsfhm">身份证：{{person.gmsfhm}}</p>
+                    <p v-if="person.jzd">现住址：{{person.jzd}}</p>
                 </div>
             </div>
         </div>
-        <pagination :totalPage="result.data.list.length" :pageSize="pageSize" @sendPrevPage="sendPageChange" @sendCurrentPage="sendPageChange" @sendNextPage="sendPageChange"></pagination>
+        <pagination :totalPage="result.data.total" :pageSize="result.data.pageSize" @sendPrevPage="sendPageChange" @sendCurrentPage="sendPageChange" @sendNextPage="sendPageChange"></pagination>
     </el-card>
 </template>
 
@@ -31,7 +31,7 @@ export default {
     name: 'personalList',
     data(){
         return {
-            pageSize: 2,
+            pageSize: 1,
             header: require('../../../assets/img/u70.png')
         };
     },
@@ -41,12 +41,19 @@ export default {
     computed: {
         result(){
             let {personalList} = this.$store.state.search.result;
+            // this.pageSize = result.data.pageSize;
             return personalList;
         }
     },
     methods: {
         checkPersonal(val){
-            this.$store.dispatch('INSERT_RESULT', val);
+            this.$store.dispatch('DETAILS_QUERY', {
+                strategy: this.result.strategy,
+                terms: [{
+                    key: 'id',
+                    value: val
+                }]
+            });
         },
         sendPageChange(val){
             this.$store.dispatch('PAGE_CHANGE', {page: val, size: this.pageSize, strategy: this.result.strategy});

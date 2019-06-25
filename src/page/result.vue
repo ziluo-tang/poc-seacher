@@ -34,6 +34,9 @@ export default {
         autocompleteSeacher,
         resultCards
     },
+    created() {
+        this.search();
+    },
     methods:{
         search() {
             this.$store.dispatch('INSERT_RESULT', this.keyword);

@@ -1,16 +1,147 @@
 <template>
     <div>
         <el-card shadow="hover">
-            <div class="sort-tag">涉案特长</div>
-            <div>
-
+            <div class="sort-tag">风险情况</div>
+            <div class="case-number">
+                <label>是否重点人员：</label>
+                <label>是否涉稳人员：</label>
+                <label>是否在逃人员：</label>
             </div>
         </el-card>
         <el-card shadow="hover">
-            <div class="sort-tag">涉案情况</div>
+            <div class="sort-tag">涉案特长</div>
+            <div class="case-number">
+                <label>涉案特长：</label>
+                <label>特殊专长：</label>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">涉及案件</div>
             <div>
                 <div class="case-number">
-                    <label>涉案数量: {{tableData.length}}</label>
+                    <label>涉案数量：{{tableData.length}}</label>
+                </div>
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="地址">
+                    </el-table-column>
+                </el-table>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">涉及事件</div>
+            <div>
+                <div class="case-number">
+                    <label>涉及事件数量：{{tableData.length}}</label>
+                </div>
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="地址">
+                    </el-table-column>
+                </el-table>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">涉及线索</div>
+            <div>
+                <div class="case-number">
+                    <label>涉及线索数量：{{tableData.length}}</label>
+                </div>
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="地址">
+                    </el-table-column>
+                </el-table>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">涉及敏感信息</div>
+            <div>
+                <div class="case-number">
+                    <label>涉及敏感信息数量：{{tableData.length}}</label>
+                </div>
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="地址">
+                    </el-table-column>
+                </el-table>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">服刑情况</div>
+            <div>
+                <div class="case-number">
+                    <label>服刑次数：{{tableData.length}}</label>
+                </div>
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="地址">
+                    </el-table-column>
+                </el-table>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">涉毒详情</div>
+            <div>
+                <div class="case-number">
+                    <label>涉毒次数：{{tableData.length}}</label>
+                    <label>吸毒次数：{{tableData.length}}</label>
+                    <label>戒毒次数：{{tableData.length}}</label>
                 </div>
                 <el-table :data="tableData" style="width: 100%">
                     <el-table-column
@@ -70,8 +201,16 @@ export default {
             border-left: 2px solid #409EFF;
         }
         .case-number{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            align-items: center;
             padding: 1em 0.8em;
             color: #606266;
+            label{
+                display: block;
+                width: 25%;
+            }
         }
     }
 </style>

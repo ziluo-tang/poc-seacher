@@ -84,7 +84,6 @@ export default {
     },
     methods: {
         initPrompt(prompt){
-            console.log(prompt);
             if(prompt && prompt.length){
                 this.prompt = prompt;
                 let promptItem = this.prompt[0];
@@ -167,9 +166,13 @@ export default {
             window.open(`${url}?${param.join('&')}`);
         },
         search() {
+            window.sessionStorage.removeItem('result');
             this.$store.dispatch('INSERT_RESULT', this.keyword);
             this.$router.push({ path: "/result"});
         }
+    },
+    beforeRouteLeave (to, from, next) {
+        next();
     }
 }
 </script>

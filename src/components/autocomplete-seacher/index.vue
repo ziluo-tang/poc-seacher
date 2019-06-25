@@ -18,7 +18,7 @@
     </div>
 </template>
 <script>
-import {autoPrompt} from '../../api/axios';
+import { autoPrompt } from '../../api/axios';
 export default {
     props: ['search'],
     data(){

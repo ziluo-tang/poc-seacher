@@ -3,7 +3,8 @@
         <el-card shadow="hover">
             <div class="sort-tag">关联身份信息</div>
             <div class="identity">
-                <label v-for="(info, index) in identity" :key="index">{{info.name}}: {{info.value}}</label>
+                <label>常用证件类型：{{routine.zjzl}}</label>
+                <label>常用证件号码：{{routine.zjhm}}</label>
             </div>
         </el-card>
         <el-card shadow="hover">
@@ -113,40 +114,56 @@
         </el-card>
         <el-card shadow="hover">
             <div class="sort-tag">兵役情况</div>
-            <div></div>
+            <div class="identity">
+                <label>兵役情况：{{routine.byzk}}</label>
+                <label>兵役状况代码：{{routine.byzkdm}}</label>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">网络身份信息</div>
+            <div>
+                <div class="identity">
+                    <span>网络身份数量: {{work[0].enterprise}}</span>
+                </div>
+                <el-table :data="work" style="width: 100%">
+                    <el-table-column
+                        type="index"
+                        label="序号"
+                        width="100">
+                    </el-table-column>
+                    <el-table-column
+                        prop="enterprise"
+                        label="企业名称">
+                    </el-table-column>
+                    <el-table-column
+                        prop="post"
+                        label="职务"
+                        width="160">
+                    </el-table-column>
+                    <el-table-column
+                        prop="level"
+                        label="职级"
+                        width="160">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="企业地址">
+                    </el-table-column>
+                    <el-table-column
+                        prop="status"
+                        label="从业状态"
+                        width="160">
+                    </el-table-column>
+                </el-table>
+            </div>
         </el-card>
     </div>
 </template>
 <script>
 export default {
+    props: ['routine'],
     data() {
         return {
-            identity: [
-                {
-                    name: '电话/手机',
-                    value: '18478877435'
-                },
-                {
-                    name: '社保号码',
-                    value: '87w298428'
-                },
-                {
-                    name: '常用QQ',
-                    value: '872984280'
-                },
-                {
-                    name: '常用微信',
-                    value: '87w298428'
-                },
-                {
-                    name: '社保号码',
-                    value: '87w298428'
-                },
-                {
-                    name: '社保号码',
-                    value: '87w298428'
-                }
-            ],
             education: [{
                 credentials: '本科',
                 school: '加州理工学院',
