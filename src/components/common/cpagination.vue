@@ -31,6 +31,12 @@ export default {
             for(let page=pageNum+1;page<=pageNum+next;page++){
                 pages.push(page);
             }
+            if(this.currentPage!=pages[0]){
+                this.prevDisabled = false;
+            }
+            if(this.currentPage!=pages[pages.length-1]){
+                this.nextDisabled = false;
+            }
             return pages;
         }
     },
@@ -68,6 +74,14 @@ export default {
                 this.nextDisabled = true;
             }
             this.$emit("sendNextPage", this.currentPage);
+        }
+    },
+    watch: {
+        prev(val){
+            if(val===0){
+                this.currentPage = this.pages[0];
+                this.prevDisabled = true;
+            }
         }
     }
 }
