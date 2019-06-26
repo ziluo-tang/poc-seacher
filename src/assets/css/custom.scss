@@ -2,38 +2,31 @@
 body{
     overflow: auto;
 }
-.el-menu-vertical-demo{
-    background-color: $globalBgColor !important;
-    width: 180px;
+.icontaosvg:before {
+    color: #d4237a;
+    font-size: $iconSize;
 }
-.el-menu-item, .el-submenu__title{
-    height: 42px;
-    line-height: 42px;
-    border-top: 1px solid $borderColor;
+.iconwensvg:before {
+    color: #1296db;
+    font-size: $iconSize;
 }
-.el-submenu .el-menu-item{
-    height: 42px;
-    line-height: 42px;
-    background-color: $globalBgColor !important;
-    text-align: center;
+.iconqiansvg:before {
+    color: #1afa29;
+    font-size: $iconSize;
 }
-.el-menu-item.is-active {
-    color: #ffffff;
-    background-color: $baseColor !important;
+.iconfangsvg:before {
+    color: #21D9FF;
+    font-size: $iconSize;
 }
-.menu-expanded a {
-    text-decoration: none;
+.iconkongsvg:before {
+    color: red;
+    font-size: $iconSize;
 }
-.menu-expanded .router-link-exact-active{
-    text-decoration: none;
+.icondusvg:before {
+    color: #00B188;
+    font-size: $iconSize;
 }
-.content-container {
-    padding: 0px !important;
-    padding-top: 0 !important;
-}
-.el-breadcrumb__inner{
-    color: #fff !important;
-}
-.el-submenu .el-menu-item{
-    min-width: 180px;
+.iconhuangsvg:before {
+    color: yellow;
+    font-size: $iconSize;
 }

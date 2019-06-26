@@ -16,13 +16,12 @@
                     <label>身份证：{{person.gmsfhm}}</label>
                 </p>
                 <p>
-                    <!-- <i v-if="person" class="iconfont iconheisvg"></i> -->
-                    <i v-if="person.sfztry==1" class="iconfont iconjisvg"></i>
-                    <!-- <i class="iconfont icontousvg"></i> -->
-                    <!-- <i class="iconfont iconpiansvg"></i> -->
-                    <!-- <i class="iconfont iconhuangsvg"></i> -->
+                    <i v-if="person.sfqkry==1" class="iconfont iconqiansvg"></i>
+                    <i v-if="person.sfztry==1" class="iconfont icontaosvg"></i>
+                    <i v-if="person.sfskry==1" class="iconfont iconkongsvg"></i>
+                    <i v-if="person.sfswry==1" class="iconfont iconwensvg"></i>
+                    <i v-if="person.sfzdsfry==1" class="iconfont iconfangsvg"></i>
                     <i v-if="person.sfsdry==1" class="iconfont icondusvg"></i>
-                    <!-- <i class="iconfont iconbaosvg"></i> -->
                     <a href="javascript:void(0);" @click="powerApply">高敏高密申请</a>
                 </p>
                 <p>
@@ -60,6 +59,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "../../../assets/css/custom.scss";
     .sort-tag{
         font-size: 1.1em;
         font-weight: 600;

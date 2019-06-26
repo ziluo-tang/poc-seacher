@@ -8,6 +8,10 @@ export default {
         window.sessionStorage.setItem('result', JSON.stringify(result));
         state.result = result;
     },
+    [types.REMOVE_RESULT] (state){
+        window.sessionStorage.removeItem('result');
+        state.result = {};
+    },
     [types.PAGE_CHANGE] (state, newResult){
         state.result = newResult;
     },

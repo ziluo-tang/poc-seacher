@@ -1,4 +1,5 @@
 export const INSERT_KEYWORD = 'INSERT_KEYWORD'
 export const INSERT_RESULT = 'INSERT_RESULT'
+export const REMOVE_RESULT = 'REMOVE_RESULT'
 export const PAGE_CHANGE = 'PAGE_CHANGE'
 export const DETAILS_QUERY = 'DETAILS_QUERY'

@@ -21,27 +21,36 @@
                 </div>
             </div>
         </div>
-        <pagination :totalPage="result.data.total" :pageSize="result.data.pageSize" @sendPrevPage="sendPageChange" @sendCurrentPage="sendPageChange" @sendNextPage="sendPageChange"></pagination>
+        <cpagination 
+            :prev="result.data.previous" 
+            :pageNum="result.data.pageNum" 
+            :next="result.data.next"
+            @sendPrevPage="sendPageChange" 
+            @sendCurrentPage="sendPageChange" 
+            @sendNextPage="sendPageChange">
+        </cpagination>
     </el-card>
 </template>
 
 <script>
 import pagination from '../../common/pagination';
+import cpagination from '../../common/cpagination';
 export default {
     name: 'personalList',
     data(){
         return {
-            pageSize: 1,
+            pageSize: 5,
             header: require('../../../assets/img/u70.png')
         };
     },
     components: {
-        pagination
+        pagination,
+        cpagination
     },
     computed: {
         result(){
             let {personalList} = this.$store.state.search.result;
-            // this.pageSize = result.data.pageSize;
+            this.pageSize = personalList.data.pageSize;
             return personalList;
         }
     },

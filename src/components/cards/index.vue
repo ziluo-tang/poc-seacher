@@ -1,13 +1,13 @@
 <template>
-    <div class="result-card">
-        <el-tabs v-if="Object.keys(result).length" v-model="activeName" @tab-click="handleTabClick">
+    <div class="result-card" v-loading="isLoading" element-loading-text="玩命搜索中...">
+        <el-tabs v-if="tabShow" v-model="activeName" @tab-click="handleTabClick">
             <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
                 <keep-alive>
-                    <component v-bind:is="curComponent" :lazy="true"></component>
+                    <component v-bind:is="curComponent"></component>
                 </keep-alive>
             </el-tab-pane>
         </el-tabs>
-        <p class="search-none" v-if="!Object.keys(result).length">无搜索结果</p>
+        <div class="search-none" v-if="isEmpty">无搜索结果</div>
     </div>
 </template>
 <script>
@@ -15,6 +15,9 @@ import {allcards, mapping} from '../../config/mapping';
 export default {
     data(){
         return {
+            isLoading: true,
+            tabShow: false,
+            isEmpty: false,
             activeTab: '',
             activeComponent: ''
         };
@@ -22,7 +25,6 @@ export default {
     computed: {
         result(){
             let { result } = this.$store.state.search;
-            console.log('result', result);
             let cards = new Object();
             for(let card in result){
                 cards[card] = mapping[card];
@@ -31,27 +33,35 @@ export default {
         },
         activeName: {
             get(){
-                let first = Object.keys(this.result)[0];
-                if(first){
-                    return this.activeTab || this.result[first].name;
-                }else{
-                    return this.activeTab;
-                }
+                return this.activeTab;
             },
             set(val){
                 this.activeTab = val;
             }
         },
         curComponent() {
-            let first = Object.keys(this.result)[0];
-            return this.activeComponent || this.result[first].component;
+            return this.activeComponent;
         }
     },
     components: allcards,
     methods:{
         handleTabClick(tab, event){
-            let first = Object.keys(result)[0];
-            this.activeComponent = this.result[tab.name].component || this.result[first].component;
+            this.activeComponent = this.result[tab.name].component;
+        }
+    },
+    watch: {
+        result: function(value) {
+            let cards = Object.keys(value);
+            if(cards.length){
+                this.isLoading = false;
+                this.tabShow = true;
+                this.activeTab = value[cards[0]].name;
+                this.activeComponent = value[cards[0]].component;
+            }else{
+                this.isEmpty = true;
+                this.activeTab = '';
+                this.activeComponent = '';
+            }
         }
     }
 }
@@ -70,7 +80,7 @@ export default {
         background: none;
     }
     .result-card > .el-tabs > .el-tabs__content{
-        min-height: 500px;
+        min-height: 480px;
         padding: 15px 125px;
         background: linear-gradient(#ACCBFF, #F8FAFB);
     }
