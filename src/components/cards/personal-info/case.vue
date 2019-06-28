@@ -40,6 +40,59 @@
             </div>
         </el-card>
         <el-card shadow="hover">
+            <div class="sort-tag">涉毒详情</div>
+            <div>
+                <div class="case-number">
+                    <label>涉毒次数：{{tableData.length}}</label>
+                    <label>吸毒次数：{{tableData.length}}</label>
+                    <label>戒毒次数：{{tableData.length}}</label>
+                </div>
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="地址">
+                    </el-table-column>
+                </el-table>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">服刑情况</div>
+            <div>
+                <div class="case-number">
+                    <label>服刑次数：{{tableData.length}}</label>
+                    <label>拘留次数：{{tableData.length}}</label>
+                    <label>看守次数：{{tableData.length}}</label>
+                    <label>监狱次数：{{tableData.length}}</label>
+                </div>
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="地址">
+                    </el-table-column>
+                </el-table>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
             <div class="sort-tag">涉及事件</div>
             <div>
                 <div class="case-number">
@@ -112,10 +165,10 @@
             </div>
         </el-card>
         <el-card shadow="hover">
-            <div class="sort-tag">服刑情况</div>
+            <div class="sort-tag">上访情况</div>
             <div>
                 <div class="case-number">
-                    <label>服刑次数：{{tableData.length}}</label>
+                    <label>上访次数：{{tableData.length}}</label>
                 </div>
                 <el-table :data="tableData" style="width: 100%">
                     <el-table-column
@@ -136,12 +189,35 @@
             </div>
         </el-card>
         <el-card shadow="hover">
-            <div class="sort-tag">涉毒详情</div>
+            <div class="sort-tag">精神病人肇事肇祸</div>
             <div>
                 <div class="case-number">
-                    <label>涉毒次数：{{tableData.length}}</label>
-                    <label>吸毒次数：{{tableData.length}}</label>
-                    <label>戒毒次数：{{tableData.length}}</label>
+                    <label>肇事次数：{{tableData.length}}</label>
+                    <label>安康医院入院次数：{{tableData.length}}</label>
+                </div>
+                <el-table :data="tableData" style="width: 100%">
+                    <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="address"
+                        label="地址">
+                    </el-table-column>
+                </el-table>
+            </div>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">收容教育</div>
+            <div>
+                <div class="case-number">
+                    <label>收容教育次数：{{tableData.length}}</label>
                 </div>
                 <el-table :data="tableData" style="width: 100%">
                     <el-table-column

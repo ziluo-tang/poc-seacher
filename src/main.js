@@ -11,12 +11,14 @@ import VueAxios from 'vue-axios';
 import App from './App.vue';
 import 'font-awesome/css/font-awesome.min.css';
 import router from "./router";
-import VCharts from 'v-charts'
+import animated from 'animate.css';
+
+
 
 Vue.use(ElementUI);
 Vue.use(Router);
-Vue.use(VCharts);
 Vue.use(VueAxios, axios);
+Vue.use(animated);
 
 Vue.config.productionTip = false
  /**

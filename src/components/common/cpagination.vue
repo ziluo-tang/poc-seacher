@@ -15,7 +15,7 @@ export default {
     data() {
         return {
             currentPage: 1,
-            prevDisabled: false,
+            prevDisabled: true,
             nextDisabled: false
         };
     },

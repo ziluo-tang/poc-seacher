@@ -2,9 +2,14 @@
     <div class="result-card" v-loading="isLoading" element-loading-text="玩命搜索中...">
         <el-tabs v-if="tabShow" v-model="activeName" @tab-click="handleTabClick">
             <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
-                <keep-alive>
-                    <component v-bind:is="curComponent"></component>
-                </keep-alive>
+                <transition
+                    enter-active-class="animated bounceInRight"
+                    leave-active-class="animated bounceOutLeft"
+                >
+                    <keep-alive>
+                        <component v-bind:is="curComponent"></component>
+                    </keep-alive>
+                </transition>
             </el-tab-pane>
         </el-tabs>
         <div class="search-none" v-if="isEmpty">无搜索结果</div>

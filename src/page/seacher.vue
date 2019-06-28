@@ -1,12 +1,18 @@
 <template>
+    <transition
+        :duration="500"
+        enter-active-class="animated zoomInRight"
+        leave-active-class="animated zoomOutLeft"
+    >
     <div class="seacher-box">
         <div class="seacher-container">
             <div class="seacher-log">
-                 <el-image :src="logo">
+                <img src="../assets/img/search-logo.png">
+                 <!-- <el-image :src="logo">
                     <div slot="placeholder" class="image-slot">
                         加载中<span class="dot">...</span>
                     </div>
-                </el-image>
+                </el-image> -->
             </div>
             <autocompleteSeacher :search="search" @initPrompt="initPrompt"></autocompleteSeacher>
             <div class="promptTools">
@@ -48,6 +54,7 @@
             <el-button icon="el-icon-plus" size="mini" circle @click="addApplication"></el-button>
         </div>
     </div>
+    </transition>
 </template>
 
 <script>

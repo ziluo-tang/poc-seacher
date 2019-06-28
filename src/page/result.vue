@@ -1,4 +1,9 @@
 <template>
+    <transition
+        :duration="500"
+        enter-active-class="animated zoomInRight"
+        leave-active-class="animated zoomOutLeft"
+    >
     <el-container>
         <el-header height="100px">
              <div class="header-seacher">
@@ -8,10 +13,17 @@
         </el-header>
         <el-container class="content">
             <el-main>
-                <result-cards></result-cards>
+                <transition
+                    name="custom-classes-transition"
+                    enter-active-class="animated zoomIn"
+                    leave-active-class="animated zoomOut"
+                >
+                    <result-cards></result-cards>
+                </transition>
             </el-main>
         </el-container>
     </el-container>
+    </transition>
 </template>
 
 <script>

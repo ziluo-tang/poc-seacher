@@ -1,12 +1,12 @@
-import resultPersonal from '../components/cards/personal-list/index';
-import resultPersonalDesc from '../components/cards/personal-info/index.vue';
-import resultRelation from '../components/cards/personal-relation/index';
+const resultPersonal = () => import('../components/cards/personal-list/index.vue');
+const resultPersonalDesc = () => import('../components/cards/personal-info/index.vue');
+const resultRelation = () => import('../components/cards/personal-relation/index.vue');
 
-import resultRegister from '../components/cards/register-list/index.vue';
-import resultRegisterDesc from '../components/cards/register-info/index.vue';
+const resultRegister = () => import('../components/cards/register-list/index.vue');
+const resultRegisterDesc = () => import('../components/cards/register-info/index.vue');
 
-import resultEnterprise from '../components/cards/enterprise-list/index.vue';
-import resultEnterpriseDesc from '../components/cards/enterprise-info/index.vue'
+const resultEnterprise = () => import('../components/cards/enterprise-list/index.vue');
+const resultEnterpriseDesc = () => import('../components/cards/enterprise-info/index.vue');
 
 export const allcards = {
     resultPersonal,
