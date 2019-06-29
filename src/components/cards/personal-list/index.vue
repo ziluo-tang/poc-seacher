@@ -65,7 +65,11 @@ export default {
             });
         },
         sendPageChange(val){
-            this.$store.dispatch('PAGE_CHANGE', {page: val, size: this.pageSize, strategy: this.result.strategy});
+            this.$store.dispatch('PAGE_CHANGE', {
+                page: val, 
+                size: this.pageSize, 
+                strategy: this.result.strategy
+            });
         }
     }
 }

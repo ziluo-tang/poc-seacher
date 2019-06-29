@@ -12,7 +12,7 @@
                 </transition>
             </el-tab-pane>
         </el-tabs>
-        <div class="search-none" v-if="isEmpty">无搜索结果</div>
+        <div class="search-none" v-if="isEmpty">额...搜索结果走丢了！！！</div>
     </div>
 </template>
 <script>
@@ -58,7 +58,6 @@ export default {
         result: function(value) {
             let cards = Object.keys(value);
             if(cards.length){
-                this.isLoading = false;
                 this.tabShow = true;
                 this.activeTab = value[cards[0]].name;
                 this.activeComponent = value[cards[0]].component;
@@ -67,6 +66,7 @@ export default {
                 this.activeTab = '';
                 this.activeComponent = '';
             }
+            this.isLoading = false;
         }
     }
 }
@@ -91,7 +91,7 @@ export default {
     }
     .result-card .search-none{
         margin: 0 auto;
-        width: 300px;
+        width: 500px;
         height: 500px; 
         line-height: 500px;
         font-size: 30px;

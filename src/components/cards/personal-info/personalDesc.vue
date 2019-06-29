@@ -48,12 +48,11 @@
 export default {
     props: ['person', 'tag'],
     data() {
-        console.log(this.$props.person)
         return {};
     },
     methods: {
         powerApply() {
-            alert('this is powerApply');
+            this.$message({$message: '申请成功', type: 'success'});
         }
     }
 }
