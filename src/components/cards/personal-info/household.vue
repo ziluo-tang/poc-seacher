@@ -2,9 +2,12 @@
     <el-card shadow="hover">
         <div class="sort-tag">户籍情况</div>
         <div class="household">
-            <label v-for="(item, index) in info" :key="index">{{item.name}}: {{item.value}}</label>
+            <label v-show="person.hh">户号：{{person.hh}}</label>
+            <label v-show="person.hjd_addr">户籍详细地址：{{person.hjd_addr}}</label>
+            <label v-show="person.hjdpcs">户籍地派出所：{{person.hjdpcs}}</label>
+            <label v-show="person.hjdpcsdm">户籍地派出所代码：{{person.hjdpcsdm}}</label>
         </div>
-        <div>
+        <!-- <div>
             <el-table :data="tableData" style="width: 100%">
                 <el-table-column
                         prop="date"
@@ -21,53 +24,14 @@
                         label="地址">
                 </el-table-column>
             </el-table>
-        </div>
+        </div> -->
     </el-card>
 </template>
 <script>
 export default {
+    props: ['person'],
     data() {
-        return {
-            info: [
-                {
-                    name: '户籍名称',
-                    value: '杭州市户籍'
-                },
-                {
-                    name: '户籍地址',
-                    value: '杭州市公安局'
-                },
-                {
-                    name: '户主',
-                    value: '局长'
-                },
-                {
-                    name: '与户主关系',
-                    value: '父子'
-                },
-                {
-                    name: '户籍人数',
-                    value: '3'
-                }
-            ],
-            tableData: [{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-            }]
-        };
+        return {};
     }
 }
 </script>
@@ -81,14 +45,17 @@ export default {
     }
     .household{
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row wrap;
         justify-content: flex-start;
         align-items: center;
         padding: 1em 0.8em;
         color: #606266;
         label{
             display: block;
-            width: 20%;
+            width: 50%;
+            &:not(:last-child){
+                margin-bottom: 10px;
+            }
         }
     }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-card shadow="hover">
+        <!-- <el-card shadow="hover">
             <div class="sort-tag">轨迹特征</div>
             <div>
                 <div class="identity">
@@ -59,68 +59,85 @@
                     </el-table-column>
                 </el-table>
             </div>
-        </el-card>
+        </el-card> -->
         <el-card shadow="hover">
             <div class="sort-tag">出行方式特征</div>
-            <div class="identity">
+            <!-- <div class="identity">
                 <label>常去境内地：{{}}</label>
                 <label>常去境外地：{{}}</label>
                 <label>国内跨省出行率（月）：{{}}</label>
                 <label>跨境出行率（月）：{{}}</label>
                 <label>经常来往地：{{}}</label>
                 <label>最新出现地/时间：{{}}</label>
-            </div>
-            <el-table :data="tableData" style="width: 100%">
+            </div> -->
+            <el-table :data="train" style="width: 100%">
                     <el-table-column
                         type="index"
                         label="序号"
                         width="100">
                     </el-table-column>
                     <el-table-column
-                        prop="date"
-                        label="日期"
+                        prop="b_time"
+                        label="开始日期 - 结束日期"
                         width="180">
                     </el-table-column>
                     <el-table-column
-                        prop="address"
-                        label="出行性质"
+                        prop="b_addr"
+                        label="出发地 - 目的地"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="e_spot"
+                        label="开始站点 - 结束站点"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="type"
+                        label="出行类型"
                         width="100">
                     </el-table-column>
                     <el-table-column
-                        prop="address"
-                        label="出行方式"
-                        width="150">
+                        prop="lcbc"
+                        label="列车班次">
                     </el-table-column>
-                    <el-table-column
-                        prop="date"
-                        label="出行方式编号">
-                    </el-table-column>
-                    <el-table-column
-                        prop="date"
-                        label="出发地 - 目的地"
-                        width="180">
+                   <el-table-column
+                        prop="cxh"
+                        label="车厢/座位">
                     </el-table-column>
                 </el-table>
         </el-card>
         <el-card shadow="hover">
             <div class="sort-tag">住宿轨迹特征</div>
-            <el-table :data="tableData" style="width: 100%">
+            <el-table :data="hotel" style="width: 100%">
                     <el-table-column
                         type="index"
                         label="序号"
                         width="100">
                     </el-table-column>
                     <el-table-column
-                        prop="date"
-                        label="住宿周期"
+                        prop="b_time"
+                        label="开始日期 - 结束日期"
                         width="180">
                     </el-table-column>
                     <el-table-column
-                        prop="city"
-                        label="住宿城市"
+                        prop="b_time"
+                        label="开始地址 - 结束地址"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="jdmc"
+                        label="酒店名称">
+                    </el-table-column>
+                    <el-table-column
+                        prop="fjh"
+                        label="房间号"
                         width="100">
                     </el-table-column>
                     <el-table-column
+                        prop="jdssxzqh"
+                        label="酒店所属区域">
+                    </el-table-column>
+                    <!-- <el-table-column
                         prop="address"
                         label="住宿地址">
                     </el-table-column>
@@ -128,10 +145,10 @@
                         prop="date"
                         label="登记人数"
                         width="100">
-                    </el-table-column>
+                    </el-table-column> -->
                 </el-table>
         </el-card>
-        <el-card shadow="hover">
+        <!-- <el-card shadow="hover">
             <div class="sort-tag">消费轨迹特征</div>
             <el-table :data="tableData" style="width: 100%">
                     <el-table-column
@@ -212,11 +229,12 @@
                         width="180">
                     </el-table-column>
                 </el-table>
-        </el-card>
+        </el-card> -->
     </div>
 </template>
 <script>
 export default {
+    props: ['train', 'hotel'],
     data() {
         return {
             tableData: [{

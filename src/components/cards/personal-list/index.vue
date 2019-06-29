@@ -1,6 +1,6 @@
 <template>
     <el-card shadow="hover">
-        <div class="personal-item" v-for="person in result.data.list" :key="person.id" @click="checkPersonal(person.id)">
+        <div class="personal-item" v-for="person in result.data.list" :key="person.id" @click="checkPersonal(person.gmsfhm)">
             <div class="base-info">
                 <div class="tag"></div>
                 <div class="person-header">
@@ -56,13 +56,7 @@ export default {
     },
     methods: {
         checkPersonal(val){
-            this.$store.dispatch('DETAILS_QUERY', {
-                strategy: this.result.strategy,
-                terms: [{
-                    key: 'id',
-                    value: val
-                }]
-            });
+            this.$store.dispatch('INSERT_RESULT', val);
         },
         sendPageChange(val){
             this.$store.dispatch('PAGE_CHANGE', {

@@ -2,6 +2,85 @@
     <div>
         <personal-graph></personal-graph>
         <el-card shadow="hover">
+            <div class="sort-tag">同酒店</div>
+            <el-table :data="hotel" style="width: 100%">
+                    <el-table-column
+                        type="index"
+                        label="序号"
+                        width="100">
+                    </el-table-column>
+                    <el-table-column
+                        prop="b_time"
+                        label="开始日期-结束日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="b_spot"
+                        label="开始地址 - 结束地址"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="jdmc"
+                        label="酒店名称">
+                    </el-table-column>
+                    <el-table-column
+                        prop="fjh2"
+                        label="同住人房间号"
+                        width="100">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name2"
+                        label="同住人姓名"
+                        width="100">
+                    </el-table-column>
+                    <el-table-column
+                        prop="gmsfhm2"
+                        label="同住人身份证号"
+                        width="100">
+                    </el-table-column>
+                </el-table>
+        </el-card>
+        <el-card shadow="hover">
+            <div class="sort-tag">同房间</div>
+            <el-table :data="room" style="width: 100%">
+                    <el-table-column
+                        type="index"
+                        label="序号"
+                        width="100">
+                    </el-table-column>
+                    <el-table-column
+                        prop="b_time"
+                        label="开始日期-结束日期"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="b_spot"
+                        label="开始地址 - 结束地址"
+                        width="180">
+                    </el-table-column>
+                    <el-table-column
+                        prop="jdmc"
+                        label="酒店名称">
+                    </el-table-column>
+                    <el-table-column
+                        prop="name2"
+                        label="同房间人姓名"
+                        width="100">
+                    </el-table-column>
+                    <el-table-column
+                        prop="gmsfhm2"
+                        label="同房间人身份证号"
+                        width="100">
+                    </el-table-column>
+                    <el-table-column
+                        prop="fjh2"
+                        label="房间号"
+                        width="100">
+                    </el-table-column>
+                   
+                </el-table>
+        </el-card>
+        <!-- <el-card shadow="hover">
             <div class="sort-tag">关系人员来往信息</div>
             <div class="dealings">
                 <p class="subtag">频繁/重点人员来往信息</p>
@@ -70,12 +149,13 @@
                     </el-table-column>
                 </el-table>
             </div>
-        </el-card>
+        </el-card> -->
     </div>
 </template>
 <script>
 import personalGraph from '../../common/graph';
 export default {
+    props: ['hotel', 'room'],
     data() {
         return {
             tableData: []

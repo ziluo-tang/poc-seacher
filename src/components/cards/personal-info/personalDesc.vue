@@ -52,7 +52,7 @@ export default {
     },
     methods: {
         powerApply() {
-            this.$message({$message: '申请成功', type: 'success'});
+            this.$message({message: '申请成功', type: 'success'});
         }
     }
 }

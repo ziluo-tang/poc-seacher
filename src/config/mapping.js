@@ -23,9 +23,9 @@ export const mapping = {
         name: 'personalList',
         component: resultPersonal
     },
-    'personInfo': {
+    'personalInfo': {
         label: '人员信息',
-        name: 'personInfo',
+        name: 'personalInfo',
         component: resultPersonalDesc
     },
     'personalRelation': {

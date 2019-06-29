@@ -3,18 +3,19 @@
         <el-card shadow="hover">
             <div class="sort-tag">关联身份信息</div>
             <div class="identity">
-                <label>常用证件类型：{{routine.zjzl}}</label>
-                <label>常用证件号码：{{routine.zjhm}}</label>
+                <label v-show="routine.zjzl">证件类型：{{routine.zjzl}}</label>
+                <label v-show="routine.zjhm">证件号码：{{routine.zjhm}}</label>
+                <label v-show="routine.zjzldm">证件代码：{{routine.zjzldm}}</label>
             </div>
         </el-card>
         <el-card shadow="hover">
             <div class="sort-tag">教育经历</div>
             <div>
                 <div class="identity">
-                    <label>最高学历: {{education[0].credentials}}</label>
-                    <label>毕业院校: {{education[0].school}}</label>
+                    <label v-show="routine.whcd">文化程度: {{routine.whcd}}</label>
+                    <label v-show="routine.whcddm">文化程度代码: {{routine.whcddm}}</label>
                 </div>
-                <el-table :data="education" style="width: 100%">
+                <!-- <el-table :data="education" style="width: 100%">
                     <el-table-column
                         type="index"
                         label="序号"
@@ -38,16 +39,17 @@
                         label="入学/毕业时间"
                         width="180">
                     </el-table-column>
-                </el-table>
+                </el-table> -->
             </div>
         </el-card>
         <el-card shadow="hover">
-            <div class="sort-tag">现住地情况</div>
+            <div class="sort-tag">居住地情况</div>
             <div>
                 <div class="identity">
-                    <span>现住地址: {{address[0].moveIn}}</span>
+                    <label v-show="routine.jzd">居住地：{{routine.jzd}}</label>
+                    <label v-show="routine.jzd_addr">居住地详址: {{routine.jzd_addr}}</label>
                 </div>
-                <el-table :data="address" style="width: 100%">
+                <!-- <el-table :data="address" style="width: 100%">
                     <el-table-column
                         type="index"
                         label="序号"
@@ -71,16 +73,19 @@
                         label="迁移时间"
                         width="180">
                     </el-table-column>
-                </el-table>
+                </el-table> -->
             </div>
         </el-card>
         <el-card shadow="hover">
             <div class="sort-tag">从业情况</div>
             <div>
                 <div class="identity">
-                    <span>现工作单位: {{work[0].enterprise}}</span>
+                    <label v-show="routine.zy">职业：{{routine.zy}}</label>
+                    <label v-show="routine.zydm">职业代码：{{routine.zydm}}</label>
+                    <label v-show="routine.gzdwmc">工作单位: {{routine.gzdwmc}}</label>
+                    <label v-show="routine.gzdwdm">工作单位代码: {{routine.gzdwdm}}</label>
                 </div>
-                <el-table :data="work" style="width: 100%">
+                <!-- <el-table :data="work" style="width: 100%">
                     <el-table-column
                         type="index"
                         label="序号"
@@ -109,7 +114,7 @@
                         label="从业状态"
                         width="160">
                     </el-table-column>
-                </el-table>
+                </el-table> -->
             </div>
         </el-card>
         <el-card shadow="hover">
@@ -119,7 +124,7 @@
                 <label>兵役状况代码：{{routine.byzkdm}}</label>
             </div>
         </el-card>
-        <el-card shadow="hover">
+        <!-- <el-card shadow="hover">
             <div class="sort-tag">网络身份信息</div>
             <div>
                 <div class="identity">
@@ -156,69 +161,14 @@
                     </el-table-column>
                 </el-table>
             </div>
-        </el-card>
+        </el-card> -->
     </div>
 </template>
 <script>
 export default {
     props: ['routine'],
     data() {
-        return {
-            education: [{
-                credentials: '本科',
-                school: '加州理工学院',
-                major: '计算机科学技术',
-                period: '2012/9-2016/7'
-            }, {
-                credentials: '高中',
-                school: '杭州学军中学',
-                major: '理科',
-                period: '2009/9-2012/7'
-            }],
-            address: [{
-                moveOut: '上海市普陀区金沙江路 1518 弄',
-                moveIn: '杭州市上城区公安局',
-                attribute: '员工宿舍',
-                date: '2019/5/1'
-            },
-            {
-                moveOut: '杭州市西湖区xxx路',
-                moveIn: '上海市普陀区金沙江路 1518 弄',
-                attribute: '租赁',
-                date: '2018/5/1'
-            }],
-            work: [{
-                enterprise: '蚂蚁金服',
-                post: '前端开发工程师',
-                level: 'P6',
-                address: '杭州市西湖区天目山路',
-                status: '在职'
-            },
-            {
-                enterprise: '支付宝',
-                post: '前端开发工程师',
-                level: 'P5',
-                address: '杭州市西湖区天目山路',
-                status: '离职'
-            }],
-            tableData: [{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-            }]
-        };
+        return {};
     }
 }
 </script>
