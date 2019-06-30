@@ -1,7 +1,7 @@
 <template>
     <div class="personal-relation-card">
         <personal-desc :person="person"></personal-desc>
-        <personal-relationship></personal-relationship>
+        <personal-relationship :relation="result.graph"></personal-relationship>
     </div>
 </template>
 <script>
@@ -34,8 +34,8 @@ export default {
     },
     computed: {
         result(){
-            let {personalRelation} = this.$store.state.search.result;
-            return personalRelation;
+            let { personalRelation } = this.$store.state.search.result;
+            return personalRelation.data.list[0];
         }
     },
     components: {

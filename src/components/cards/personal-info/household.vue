@@ -53,6 +53,9 @@ export default {
         label{
             display: block;
             width: 50%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow:hidden;
             &:not(:last-child){
                 margin-bottom: 10px;
             }

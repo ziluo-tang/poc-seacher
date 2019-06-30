@@ -9,7 +9,7 @@
             </el-tab-pane>
             <el-tab-pane label="人物关系" name="relationship" :lazy="true">
                 <keep-alive>
-                    <personal-relationship :hotel="personAttr.relationTongjiudian" :room="personAttr.relationTongfangjian"></personal-relationship>
+                    <personal-relationship :relation="personAttr.graph" :hotel="personAttr.relationTongjiudian" :room="personAttr.relationTongfangjian"></personal-relationship>
                 </keep-alive>
             </el-tab-pane>
             <el-tab-pane label="户籍状况" name="household">

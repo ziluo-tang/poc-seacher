@@ -9,89 +9,41 @@ let echarts = require('echarts/lib/echarts');
 require("echarts/lib/chart/graph");
 export default {
     name: 'personalRelation',
+    props: ['relation'],
     data() {
-        return {
-            personals: [{
-                            name: '张爱丽',
-                            symbol: require('../../assets/img/u70.png'),
-                            x: 300,
-                            y: 300
-                        }, {
-                            name: '王一帆',
-                            symbol: require('../../assets/img/u70.png'),
-                            x: 800,
-                            y: 300
-                        }, {
-                            name: '张xx',
-                            symbol: require('../../assets/img/u65.png'),
-                            x: 550,
-                            y: 100
-                        }, {
-                            name: '李xx',
-                            symbol: require('../../assets/img/u65.png'),
-                            x: 550,
-                            y: 500
-                        }],
-            relations: [{
-                            source: '张爱丽',
-                            target: '王一帆',
-                            relation: '夫妻',
-                            label: {
-                                show: true,
-                                fontSize: 12,
-                                formatter: function(param){
-                                    return param.data.relation;
-                                }
-                            }
-                        }, {
-                            source: '张爱丽',
-                            target: '张xx',
-                            relation: '债主',
-                            label: {
-                                show: true,
-                                fontSize: 12,
-                                formatter: function(param){
-                                    return param.data.relation;
-                                }
-                            }
-                        }, {
-                            source: '王一帆',
-                            target: '李xx',
-                            relation: '仇人',
-                            label: {
-                                show: true,
-                                fontSize: 12,
-                                formatter: function(param){
-                                    return param.data.relation;
-                                }
-                            }
-                        }, {
-                            source: '张爱丽',
-                            target: '李xx',
-                            relation: '仇人',
-                            label: {
-                                show: true,
-                                fontSize: 12,
-                                formatter: function(param){
-                                    return param.data.relation;
-                                }
-                            }
-                        }, {
-                            source: '王一帆',
-                            target: '张爱丽'
-                        }]
-        };
+        return {};
     },
     mounted() {
-        let relationGraph = this.drawGraph();
-        this.pubdata(relationGraph, this.personals);
+        let relation = this.$props.relation;
+        let categories = new Array();
+        relation.nodes.forEach(element => {
+            element.symbolSize = 50;
+            categories.push(element.category);
+        });
+        relation.links.forEach(element => {
+            element.value = 0;
+            element.lineStyle = {
+                width: 2
+            };
+            element.label = {
+                show: true,
+                fontSize: 12,
+                formatter: function(param){
+                    return param.data.name;
+                }
+            };
+        });
+        relation.categories = categories;
+        console.log(relation);
+        let relationGraph = this.drawGraph(relation);
+        // this.pubdata(relationGraph, this.personals);
         window.onresize = function(){
             relationGraph.resize();
         }
     },
     computed: {
         result(){
-            let {relation} = this.$store.state.search.result;
+            let { relation } = this.$store.state.search.result;
         }
     },
     methods: {
@@ -147,43 +99,36 @@ export default {
                 })
                 .catch(error => this.$message({message: error, type: 'warning' }));
         },
-        drawGraph(){
+        drawGraph(graph){
             let relationGraph = echarts.init(this.$refs['personnal-relation']);
             relationGraph.setOption({
                 title: {
                     show: false
                 },
                 tooltip: {},
+                color: ['rgba(0,128,255,0.5)', 'rgba(64,0,128,0.5)', 'rgba(255,128,0,0.5)', 'rgba(255,128,192,0.5)'],
                 animationDurationUpdate: 1500,
                 animationEasingUpdate: 'quinticInOut',
-                series: [{
+                series : [{
+                    name: 'Les Miserables',
                     type: 'graph',
-                    symbol: 'circle',
-                    symbolSize: 50,
-                    minRadius: 15,
-                    maxRadius: 25,
+                    layout: 'force',
+                    data: graph.nodes,
+                    links: graph.links,
+                    categories: graph.categories,
                     roam: true,
+                    force: {
+                        repulsion: 10000,
+                        gravity: 0.01,
+                        edgeLength: [1, 5]
+                    },
                     label: {
                         normal: {
                             show: true,
-                            position: 'bottom',
-                            color: '#555555'
-                        }
-                    },
-                    edgeSymbol: ['circle', 'arrow'],
-                    edgeSymbolSize: [4, 10],
-                    edgeLabel: {
-                        normal: {
-                            textStyle: {
-                                fontSize: 20
-                            }
-                        }
-                    },
-                    lineStyle: {
-                        normal: {
-                            opacity: 0.9,
-                            width: 1,
-                            curveness: 0
+                            position: 'inside',
+                            color: '#ffffff',
+                            fontSize: 14,
+                            fontWeight: 'bolder'
                         }
                     }
                 }]

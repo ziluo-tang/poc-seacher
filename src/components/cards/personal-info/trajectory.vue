@@ -79,17 +79,26 @@
                     <el-table-column
                         prop="b_time"
                         label="开始日期 - 结束日期"
-                        width="180">
+                        width="190">
+                        <template slot-scope="scope">
+                            <span>{{ scope.row.b_time | formatDate }} - {{ scope.row.e_time | formatDate }}</span>
+                        </template>
                     </el-table-column>
                     <el-table-column
                         prop="b_addr"
                         label="出发地 - 目的地"
                         width="180">
+                        <template slot-scope="scope">
+                            <span>{{ scope.row.b_addr }} - {{ scope.row.e_addr }}</span>
+                        </template>
                     </el-table-column>
                     <el-table-column
                         prop="e_spot"
                         label="开始站点 - 结束站点"
                         width="180">
+                        <template slot-scope="scope">
+                            <span>{{ scope.row.b_spot }} - {{ scope.row.e_spot }}</span>
+                        </template>
                     </el-table-column>
                     <el-table-column
                         prop="type"
@@ -103,6 +112,9 @@
                    <el-table-column
                         prop="cxh"
                         label="车厢/座位">
+                        <template slot-scope="scope">
+                            <span>{{ scope.row.cxh + '/' + scope.row.zwh }}</span>
+                        </template>
                     </el-table-column>
                 </el-table>
         </el-card>
@@ -117,12 +129,18 @@
                     <el-table-column
                         prop="b_time"
                         label="开始日期 - 结束日期"
-                        width="180">
+                        width="190">
+                        <template slot-scope="scope">
+                            <span>{{ scope.row.b_time | formatDate }} - {{ scope.row.e_time | formatDate }}</span>
+                        </template>
                     </el-table-column>
                     <el-table-column
                         prop="b_time"
                         label="开始地址 - 结束地址"
                         width="180">
+                        <template slot-scope="scope">
+                            <span>{{ scope.row.b_addr + '-' + scope.row.e_addr }}</span>
+                        </template>
                     </el-table-column>
                     <el-table-column
                         prop="jdmc"
@@ -236,25 +254,15 @@
 export default {
     props: ['train', 'hotel'],
     data() {
-        return {
-            tableData: [{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-            }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-            }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-            }]
-        };
+        return {};
+    },
+    filters: {
+        formatDate(val) {
+            let year = val.substring(0, 4);
+            let month = val.substring(4, 6);
+            let date = val.substring(6, 8);
+            return `${year}/${month}/${date}`;
+        }
     }
 }
 </script>

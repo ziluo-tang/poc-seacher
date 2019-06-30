@@ -20,7 +20,7 @@ module.exports = {
             }   
         },
         '/apis': {
-            target: 'http://139.64.40.240:8881',
+            target: 'http://192.168.0.140:8881',
             secure: false,
             changeOrigin: true,
             pathRewrite: {

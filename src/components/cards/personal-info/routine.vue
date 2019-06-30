@@ -195,6 +195,9 @@ export default {
                 display: block;
                 width: 25%;
                 margin: 5px 0;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow:hidden;
             }
         }
     }

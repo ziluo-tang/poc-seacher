@@ -279,6 +279,9 @@ export default {
             label{
                 display: block;
                 width: 33.3%;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow:hidden;
             }
         }
     }

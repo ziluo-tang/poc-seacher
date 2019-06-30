@@ -12,7 +12,7 @@
             <div class="person-info">
                 <p>
                     <label>姓名：{{person.xm}}</label>
-                    <label>年龄：{{person.csrq}}</label>
+                    <label>年龄：{{person.csrq | formatDate | calculateAge}}</label>
                     <label>身份证：{{person.gmsfhm}}</label>
                 </p>
                 <p>
@@ -29,7 +29,7 @@
                     <label>曾用名：{{person.cym}}</label>
                     <label>别名/绰号：{{person.bmch}}</label>
                     <label>英文名：{{person.ywxm}}</label>
-                    <label>出生日期：{{person.csrq}}</label>
+                    <label>出生日期：{{person.csrq | formatDate}}</label>
                     <label>民族：{{person.mz}}</label>
                     <label>婚姻状况：{{person.hyzk}}</label>
                     <label>宗教信仰：{{person.zjxy}}</label>
@@ -53,6 +53,20 @@ export default {
     methods: {
         powerApply() {
             this.$message({message: '申请成功', type: 'success'});
+        }
+    },
+    filters: {
+        formatDate(val) {
+            let year = val.substring(0, 4);
+            let month = val.substring(4, 6);
+            let date = val.substring(6);
+            return `${year} / ${month} / ${date}`;
+        },
+        calculateAge(val) {
+            let date = new Date();
+            let curYear = date.getFullYear();
+            let bYear = val.split('/')[0];
+            return curYear - bYear;
         }
     }
 }
