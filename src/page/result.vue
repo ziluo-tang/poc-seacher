@@ -7,7 +7,7 @@
     <el-container>
         <el-header height="100px">
              <div class="header-seacher">
-                <img src="../assets/img/result-logo.png">
+                <img src="../assets/img/result-logo.png" @click="trunToSearch">
                 <autocomplete-seacher :search="search"></autocomplete-seacher>
             </div>
         </el-header>
@@ -52,6 +52,9 @@ export default {
     methods:{
         search() {
             this.$store.dispatch('INSERT_RESULT', this.keyword);
+        },
+        trunToSearch() {
+            this.$router.push({ path: "/seacher"});
         }
     },
     watch:{

@@ -1,6 +1,6 @@
 <template>
     <div class="personal-relation-card">
-        <personal-desc :person="person"></personal-desc>
+        <personal-desc :person="result.info"></personal-desc>
         <personal-relationship :relation="result.graph"></personal-relationship>
     </div>
 </template>
@@ -10,32 +10,16 @@ import personalRelationship from '../../common/graph';
 export default {
     name: 'personalRelation',
     data() {
-        return {
-            person: {
-                name: '张三',
-                sexy: '女',
-                age: '24',
-                IDcard: '31000000000000',
-                header: require('../../../assets/img/u70.png'),
-                oldname: '张xx',
-                nickname: '小张',
-                birthday: '1993/10/1',
-                nation: '汉',
-                marriage: '未婚',
-                politics: '党员',
-                religion: '无',
-                weight: '60KG',
-                height: '170CM',
-                blood: 'A',
-                healthy: '健康', 
-                address: '浙江省杭州市上城区公安局'
-            }
-        };
+        return {};
     },
     computed: {
         result(){
+            let { personalInfo } = this.$store.state.search.result;
             let { personalRelation } = this.$store.state.search.result;
-            return personalRelation.data.list[0];
+            return {
+                info: personalInfo.data.list[0].baseInfo,
+                graph: personalRelation.data.list[0].graph
+            };
         }
     },
     components: {

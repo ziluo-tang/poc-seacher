@@ -4,17 +4,18 @@
             <div class="base-info">
                 <div class="tag"></div>
                 <div class="person-header">
-                    <el-image :src="header">
+                    <img :src="header" alt="头像">
+                    <!-- <el-image :src="header">
                         <div slot="placeholder" class="image-slot">
                             加载中<span class="dot">...</span>
                         </div>
-                    </el-image>
+                    </el-image> -->
                 </div>
                 <div>
                     <p>{{person.xm}}</p>
                     <p v-if="person.xb || person.csrq">
                         <label>性别：{{person.xb}}</label>
-                        <label>出生日期：{{person.csrq}}</label>
+                        <label>出生日期：{{person.csrq | formatDate}}</label>
                     </p>
                     <p v-if="person.gmsfhm">身份证：{{person.gmsfhm}}</p>
                     <p v-if="person.jzd">现住址：{{person.jzd}}</p>
@@ -64,6 +65,17 @@ export default {
                 size: this.pageSize, 
                 strategy: this.result.strategy
             });
+        }
+    },
+    filters: {
+        formatDate(val) {
+            if(!val){
+                return '';
+            }
+            let year = val.substring(0, 4);
+            let month = val.substring(4, 6);
+            let date = val.substring(6);
+            return `${year} / ${month} / ${date}`;
         }
     }
 }

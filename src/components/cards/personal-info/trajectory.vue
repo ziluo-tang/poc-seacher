@@ -113,7 +113,7 @@
                         prop="cxh"
                         label="车厢/座位">
                         <template slot-scope="scope">
-                            <span>{{ scope.row.cxh + '/' + scope.row.zwh }}</span>
+                            <span>{{ scope.row.cxh?scope.row.cxh:'未知'}} / {{ scope.row.zwh?scope.row.zwh:'未知' }}</span>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -258,6 +258,9 @@ export default {
     },
     filters: {
         formatDate(val) {
+            if(!val){
+                return '';
+            }
             let year = val.substring(0, 4);
             let month = val.substring(4, 6);
             let date = val.substring(6, 8);

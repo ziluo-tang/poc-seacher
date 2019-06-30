@@ -17,7 +17,7 @@ export default {
         let relation = this.$props.relation;
         let categories = new Array();
         relation.nodes.forEach(element => {
-            element.symbolSize = 50;
+            element.symbolSize = 80;
             categories.push(element.category);
         });
         relation.links.forEach(element => {

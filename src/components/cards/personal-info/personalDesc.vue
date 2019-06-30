@@ -3,11 +3,12 @@
         <div class="sort-tag">{{tag || '人员基本信息'}}</div>
         <div class="base-info">
             <div class="person-header">
-                <el-image :src="person.face">
+                <img :src="heard" alt="头像">
+                <!-- <el-image :src="person.face">
                     <div slot="placeholder" class="image-slot">
                         加载中<span class="dot">...</span>
                     </div>
-                </el-image>
+                </el-image> -->
             </div>
             <div class="person-info">
                 <p>
@@ -48,7 +49,9 @@
 export default {
     props: ['person', 'tag'],
     data() {
-        return {};
+        return {
+            heard: require('../../../assets/img/u65.png')
+        };
     },
     methods: {
         powerApply() {
@@ -57,6 +60,9 @@ export default {
     },
     filters: {
         formatDate(val) {
+            if(!val){
+                return '';
+            }
             let year = val.substring(0, 4);
             let month = val.substring(4, 6);
             let date = val.substring(6);

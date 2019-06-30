@@ -180,6 +180,9 @@ export default {
     },
     filters: {
         formatDate(val) {
+            if(!val){
+                return '';
+            }
             let year = val.substring(0, 4);
             let month = val.substring(4, 6);
             let date = val.substring(6, 8);

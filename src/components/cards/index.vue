@@ -3,6 +3,7 @@
         <el-tabs v-if="tabShow" v-model="activeName" @tab-click="handleTabClick">
             <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
                 <transition
+                    :duration="500"
                     enter-active-class="animated bounceInRight"
                     leave-active-class="animated bounceOutLeft"
                 >
