@@ -35,7 +35,6 @@ export default {
             for(let card in result){
                 cards[card] = mapping[card];
             }
-            console.log(1);
             return cards;
         },
         activeName: {

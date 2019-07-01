@@ -3,7 +3,7 @@
         <div class="sort-tag">{{tag || '人员基本信息'}}</div>
         <div class="base-info">
             <div class="person-header">
-                <img :src="heard" alt="头像">
+                <img :src="heard" alt="头像" class="header-image">
                 <!-- <el-image :src="person.face">
                     <div slot="placeholder" class="image-slot">
                         加载中<span class="dot">...</span>
@@ -94,7 +94,7 @@ export default {
         padding: 1em 0.8em;
         .person-header{
             margin-right: 2em;
-            .el-image{
+            .header-image{
                 width: 8em;
                 height: 100%;
                 border: 1px solid #ACCBFF;

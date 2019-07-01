@@ -1,24 +1,33 @@
 <template>
     <el-card shadow="hover">
-        <div class="personal-item" v-for="person in result.data.list" :key="person.id" @click="checkPersonal(person.gmsfhm)">
+        <div class="personal-item" v-for="person in result.data.list" :key="person.id">
             <div class="base-info">
                 <div class="tag"></div>
                 <div class="person-header">
-                    <img :src="header" alt="头像">
+                    <img :src="header" alt="头像" class="header-image">
                     <!-- <el-image :src="header">
                         <div slot="placeholder" class="image-slot">
                             加载中<span class="dot">...</span>
                         </div>
                     </el-image> -->
                 </div>
-                <div>
-                    <p><a href="javascript:void(0);">{{person.xm}}</a></p>
-                    <p v-if="person.xb || person.csrq">
-                        <label>性别：{{person.xb}}</label>
-                        <label>出生日期：{{person.csrq | formatDate}}</label>
+                <div class="person-info">
+                    <p>
+                        <a href="javascript:void(0);" @click="checkPersonal(person.gmsfhm)">{{person.xm}}</a>
+                        <i v-if="person.sfqkry==1" class="iconfont iconqiansvg status-tag"></i>
+                        <i v-if="person.sfztry==1" class="iconfont icontaosvg status-tag"></i>
+                        <i v-if="person.sfskry==1" class="iconfont iconkongsvg status-tag"></i>
+                        <i v-if="person.sfswry==1" class="iconfont iconwensvg status-tag"></i>
+                        <i v-if="person.sfzdsfry==1" class="iconfont iconfangsvg status-tag"></i>
+                        <i v-if="person.sfsdry==1" class="iconfont icondusvg status-tag"></i>
                     </p>
-                    <p v-if="person.gmsfhm">身份证：{{person.gmsfhm}}</p>
-                    <p v-if="person.jzd">现住址：{{person.jzd}}</p>
+                    <p>
+                        <label v-show="person.xb">性别：{{person.xb}}</label>
+                        <label v-show="person.zy">职业：{{person.zy}}</label>
+                        <label v-show="person.csrq">生日：{{person.csrq | formatDate}}</label>
+                        <label v-show="person.gmsfhm">身份证：{{person.gmsfhm}}</label>
+                        <label v-show="person.jzd">住址：{{person.jzd}}</label>
+                    </p>
                 </div>
             </div>
         </div>
@@ -101,35 +110,44 @@ export default {
             padding: 0 1em;
             .tag{
                 width: 3px;
-                height: 80px;
+                height: 100px;
                 background-color: #409EFF;
-                margin-right: 10px;
-                border-radius: 3px;
+                margin-right: 15px;
+                border-radius: 5px;
             }
             .person-header{
-                margin-right: 1em;
-                .el-image{
-                    width: 5em;
+                margin-right: 1.5em;
+                .header-image{
+                    width: 7.5em;
                     height: 100%;
                     border: 1px solid #ACCBFF;
                     border-radius: 4px;
                     margin-bottom: -4px;
                 }
             }
-            p{
+            .person-info{
                 width: 100%;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow:hidden;
-                margin: 0;
-                padding: 0.15em;
-                font-size: small;
-                color: #555;
-                &:first-child{
-                    font-size: 16px;
-                }
-                label:not(:first-child){
-                    margin-left: 1em;
+                p{
+                    width: 100%;
+                    margin: 0;
+                    padding: 0.15em;
+                    font-size: small;
+                    color: #555;
+                    &:first-child{
+                        font-size: 16px;
+                    }
+                    label{
+                        display: block;
+                        width: 100%;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow:hidden;
+                        margin: 0.1em 0;
+                    }
+                    .status-tag{
+                        float: right;
+                        margin: 0 0.1em;
+                    }
                 }
             }
         }
