@@ -34,7 +34,6 @@ export default {
             };
         });
         relation.categories = categories;
-        console.log(relation);
         let relationGraph = this.drawGraph(relation);
         // this.pubdata(relationGraph, this.personals);
         window.onresize = function(){

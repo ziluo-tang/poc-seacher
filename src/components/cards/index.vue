@@ -1,5 +1,5 @@
 <template>
-    <div class="result-card" v-loading="isLoading" element-loading-text="玩命搜索中...">
+    <div class="result-card">
         <el-tabs v-if="tabShow" v-model="activeName" @tab-click="handleTabClick">
             <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
                 <transition
@@ -21,12 +21,24 @@ import {allcards, mapping} from '../../config/mapping';
 export default {
     data(){
         return {
-            isLoading: true,
+            loading: '',
             tabShow: false,
             isEmpty: false,
             activeTab: '',
             activeComponent: ''
         };
+    },
+    created() {
+        this.loadAnimate();
+    },
+    mounted() {
+        this.closeAnimate();
+    },
+    beforeUpdate() {
+        this.loadAnimate();
+    },
+    updated() {
+        this.closeAnimate();
     },
     computed: {
         result(){
@@ -51,6 +63,18 @@ export default {
     },
     components: allcards,
     methods:{
+        loadAnimate() {
+            this.loading = this.$loading({
+                lock: true,
+                text: '玩命搜索中...',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.7)',
+                target: document.querySelector('.result-card')
+            });
+        },
+        closeAnimate() {
+            this.loading.close();
+        },
         handleTabClick(tab, event){
             this.activeComponent = this.result[tab.name].component;
         }
@@ -67,7 +91,6 @@ export default {
                 this.activeTab = '';
                 this.activeComponent = '';
             }
-            this.isLoading = false;
         }
     }
 }
