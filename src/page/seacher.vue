@@ -175,7 +175,7 @@ export default {
         search() {
             this.$store.dispatch('REMOVE_RESULT');
             this.$store.dispatch('INSERT_RESULT', this.keyword);
-            this.$router.push({ path: "/result"});
+            this.$router.push({ path: "/result", query: {keyword: encodeURIComponent(this.keyword)}});
         }
     }
 }

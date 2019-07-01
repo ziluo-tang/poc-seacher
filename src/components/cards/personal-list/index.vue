@@ -12,7 +12,7 @@
                     </el-image> -->
                 </div>
                 <div>
-                    <p>{{person.xm}}</p>
+                    <p><a href="javascript:void(0);">{{person.xm}}</a></p>
                     <p v-if="person.xb || person.csrq">
                         <label>性别：{{person.xb}}</label>
                         <label>出生日期：{{person.csrq | formatDate}}</label>
@@ -57,7 +57,7 @@ export default {
     },
     methods: {
         checkPersonal(val){
-            this.$store.dispatch('INSERT_RESULT', val);
+            this.$router.push({ path: "/result", query: {keyword: encodeURIComponent(val)}});
         },
         sendPageChange(val){
             this.$store.dispatch('PAGE_CHANGE', {
@@ -99,7 +99,6 @@ export default {
             justify-content: flex-start;
             align-items: center;
             padding: 0 1em;
-            // border-left: 2px solid #409EFF;
             .tag{
                 width: 3px;
                 height: 80px;
@@ -127,8 +126,7 @@ export default {
                 font-size: small;
                 color: #555;
                 &:first-child{
-                    font-size: 18px;
-                    font-weight: 600;
+                    font-size: 16px;
                 }
                 label:not(:first-child){
                     margin-left: 1em;

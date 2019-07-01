@@ -46,9 +46,6 @@ export default {
         autocompleteSeacher,
         resultCards
     },
-    created() {
-        this.search();
-    },
     methods:{
         search() {
             this.$store.dispatch('INSERT_RESULT', this.keyword);
@@ -59,7 +56,7 @@ export default {
     },
     watch:{
         $route(to, from){
-            this.$store.dispatch('INSERT_KEYWORD', this.$route.query.keyword);
+            this.$store.dispatch('INSERT_KEYWORD', decodeURIComponent(this.$route.query.keyword));
             this.search();
         }
     }
