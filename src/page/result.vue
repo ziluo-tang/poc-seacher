@@ -14,7 +14,7 @@
         <el-container class="content">
             <el-main>
                 <transition
-                    name="custom-classes-transition"
+                    :duration="500"
                     enter-active-class="animated zoomIn"
                     leave-active-class="animated zoomOut"
                 >
@@ -57,7 +57,7 @@ export default {
     watch:{
         $route(to, from){
             this.$store.dispatch('INSERT_KEYWORD', decodeURIComponent(this.$route.query.keyword));
-            this.$store.dispatch('INSERT_RESULT', this.$route.query.keyword);
+            this.$store.dispatch('INSERT_RESULT', decodeURIComponent(this.$route.query.keyword));
         }
     }
 }

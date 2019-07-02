@@ -9,7 +9,6 @@ export default {
         const loading = ElementUi.Loading.service({
             lock: true,
             text: '玩命加载中...',
-            spinner: 'el-icon-loading',
             background: '#ffffff'
         });
         cloudQuery({queryDetail: keyword}).then((response) => {
