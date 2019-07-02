@@ -48,7 +48,6 @@ export default {
     },
     methods:{
         search() {
-            this.$store.dispatch('INSERT_RESULT', this.keyword);
             this.$router.push({ path: "/result", query: {keyword: encodeURIComponent(this.keyword)}});
         },
         trunToSearch() {

@@ -13,7 +13,7 @@
                 </transition>
             </el-tab-pane>
         </el-tabs>
-        <div class="search-none" v-if="isEmpty">额...搜索结果走丢了！！！</div>
+        <div class="search-none" v-if="resultTips">{{resultTips}}</div>
     </div>
 </template>
 <script>
@@ -21,33 +21,24 @@ import {allcards, mapping} from '../../config/mapping';
 export default {
     data(){
         return {
-            loading: null,
             tabShow: false,
-            isEmpty: false,
+            resultTips: '',
             activeTab: '',
             activeComponent: ''
         };
     },
-    created() {
-        this.openLoading();
-    },
-    mounted() {
-        this.closeLoading();
-    },
-    beforeUpdate() {
-        this.openLoading();
-    },
-    updated() {
-        this.closeLoading();
-    },
     computed: {
         result(){
             let { result } = this.$store.state.search;
-            let cards = new Object();
-            for(let card in result){
-                cards[card] = mapping[card];
+            if(typeof result=='string'){
+                return result;
+            }else{
+                let cards = new Object();
+                for(let card in result){
+                    cards[card] = mapping[card];
+                }
+                return cards;
             }
-            return cards;
         },
         activeName: {
             get(){
@@ -63,34 +54,28 @@ export default {
     },
     components: allcards,
     methods:{
-        openLoading() {
-            this.loading = this.$loading({
-                lock: true,
-                text: '玩命加载中...',
-                spinner: 'el-icon-loading',
-                background: '#ffffff'
-            });
-        },
-        closeLoading() {
-            this.loading.close();
-        },
         handleTabClick(tab, event){
             this.activeComponent = this.result[tab.name].component;
         }
     },
     watch: {
         result: function(value) {
-            let cards = Object.keys(value);
-            if(cards.length){
-                this.isEmpty = false;
-                this.tabShow = true;
-                this.activeTab = value[cards[0]].name;
-                this.activeComponent = value[cards[0]].component;
+            if(typeof value=='string'){
+                this.resultTips = value;
+                return;
             }else{
-                this.isEmpty = true;
-                this.tabShow = false;
-                this.activeTab = '';
-                this.activeComponent = '';
+                let cards = Object.keys(value);
+                if(cards.length){
+                    this.resultTips = '';
+                    this.tabShow = true;
+                    this.activeTab = value[cards[0]].name;
+                    this.activeComponent = value[cards[0]].component;
+                }else{
+                    this.resultTips = '无搜索结果';
+                    this.tabShow = false;
+                    this.activeTab = '';
+                    this.activeComponent = '';
+                }
             }
         }
     }

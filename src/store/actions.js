@@ -6,6 +6,12 @@ export default {
         commit(types.INSERT_KEYWORD, keyword);
     },
     [types.INSERT_RESULT]({commit}, keyword){
+        const loading = ElementUi.Loading.service({
+            lock: true,
+            text: '玩命加载中...',
+            spinner: 'el-icon-loading',
+            background: '#ffffff'
+        });
         cloudQuery({queryDetail: keyword}).then((response) => {
             if(response.status==0){
                 let resultObiect = new Object();
@@ -16,6 +22,10 @@ export default {
             }else{
                 ElementUi.Message({message: response.statusInfo, type: 'warning' });
             }
+            loading.close();
+        }).catch(error => {
+            commit(types.INSERT_RESULT, '额...网络连接中断!');
+            loading.close();
         });
     },
     [types.REMOVE_RESULT] ({commit}){
