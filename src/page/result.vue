@@ -49,6 +49,7 @@ export default {
     methods:{
         search() {
             this.$store.dispatch('INSERT_RESULT', this.keyword);
+            this.$router.push({ path: "/result", query: {keyword: encodeURIComponent(this.keyword)}});
         },
         trunToSearch() {
             this.$router.push({ path: "/seacher"});
@@ -57,7 +58,7 @@ export default {
     watch:{
         $route(to, from){
             this.$store.dispatch('INSERT_KEYWORD', decodeURIComponent(this.$route.query.keyword));
-            this.search();
+            this.$store.dispatch('INSERT_RESULT', this.$route.query.keyword);
         }
     }
 }
@@ -96,9 +97,12 @@ export default {
     }
 }
 .content{
-    margin-top: 100px;
+    margin-top: 150px;
+    min-height: 480px;
+    background: linear-gradient(#ACCBFF, #F8FAFB);
     .el-main{
         padding: 0;
+        margin-top: -40px;
     }
     .content-right{
         padding: 0 20px;

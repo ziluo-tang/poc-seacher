@@ -21,7 +21,7 @@ import {allcards, mapping} from '../../config/mapping';
 export default {
     data(){
         return {
-            loading: '',
+            loading: null,
             tabShow: false,
             isEmpty: false,
             activeTab: '',
@@ -29,16 +29,16 @@ export default {
         };
     },
     created() {
-        this.loadAnimate();
+        this.openLoading();
     },
     mounted() {
-        this.closeAnimate();
+        this.closeLoading();
     },
     beforeUpdate() {
-        this.loadAnimate();
+        this.openLoading();
     },
     updated() {
-        this.closeAnimate();
+        this.closeLoading();
     },
     computed: {
         result(){
@@ -63,16 +63,15 @@ export default {
     },
     components: allcards,
     methods:{
-        loadAnimate() {
+        openLoading() {
             this.loading = this.$loading({
                 lock: true,
-                text: '玩命搜索中...',
+                text: '玩命加载中...',
                 spinner: 'el-icon-loading',
-                background: 'rgba(0, 0, 0, 0.7)',
-                target: document.querySelector('.result-card')
+                background: '#ffffff'
             });
         },
-        closeAnimate() {
+        closeLoading() {
             this.loading.close();
         },
         handleTabClick(tab, event){
@@ -83,11 +82,13 @@ export default {
         result: function(value) {
             let cards = Object.keys(value);
             if(cards.length){
+                this.isEmpty = false;
                 this.tabShow = true;
                 this.activeTab = value[cards[0]].name;
                 this.activeComponent = value[cards[0]].component;
             }else{
                 this.isEmpty = true;
+                this.tabShow = false;
                 this.activeTab = '';
                 this.activeComponent = '';
             }
@@ -109,9 +110,7 @@ export default {
         background: none;
     }
     .result-card > .el-tabs > .el-tabs__content{
-        min-height: 480px;
         padding: 15px 125px;
-        background: linear-gradient(#ACCBFF, #F8FAFB);
     }
     .result-card .search-none{
         margin: 0 auto;
