@@ -60,7 +60,7 @@
 <script>
 import axios from 'axios';
 import { mapGetters } from "vuex";
-import autocompleteSeacher from '../components/autocomplete-seacher/index.vue';
+import autocompleteSeacher from '../components/autocomplete-seacher/index2.vue';
 export default {
     data() {
         return {

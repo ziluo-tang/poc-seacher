@@ -11,7 +11,7 @@
                 <autocomplete-seacher :search="search"></autocomplete-seacher>
             </div>
         </el-header>
-        <el-container class="content">
+        <el-container class="content" :style="{'minHeight':minHeight+'px'}">
             <el-main>
                 <transition
                     :duration="500"
@@ -28,7 +28,7 @@
 
 <script>
 import { mapGetters, mapState, mapMutations } from "vuex";
-import autocompleteSeacher from '../components/autocomplete-seacher/index';
+import autocompleteSeacher from '../components/autocomplete-seacher/index2.vue';
 import resultCards from '../components/cards/index';
 import secretSearch from '../components/secret-search/index';
 import relateSearch from '../components/related-search/index';
@@ -36,6 +36,7 @@ import relateSearch from '../components/related-search/index';
 export default {
     data() {
         return {
+            minHeight: '',
             logo: require('../assets/img/result-logo.png')
         };
     },
@@ -45,6 +46,9 @@ export default {
     components: {
         autocompleteSeacher,
         resultCards
+    },
+    mounted() {
+        this.minHeight = window.screen.availHeight - 222;
     },
     methods:{
         search() {
@@ -97,7 +101,6 @@ export default {
 }
 .content{
     margin-top: 150px;
-    min-height: 480px;
     background: linear-gradient(#ACCBFF, #F8FAFB);
     .el-main{
         padding: 0;
@@ -109,3 +112,4 @@ export default {
     }
 }
 </style>
+
