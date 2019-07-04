@@ -7,6 +7,7 @@ import notFound from '../page/404.vue'
 import seacher from '../page/seacher.vue'
 import extendApp from '../page/extendApp.vue'
 import result from '../page/result.vue'
+import relationship from '../components/cards/personal-relation/relationship.vue'
 // 要告诉 vue 使用 vueRouter
 Vue.use(VueRouter);
 
@@ -14,8 +15,14 @@ export default new VueRouter({
   routes: [
     {
       path: "/",
-      redirect: '/seacher',
+      redirect: '/relationship',
       hidden: true
+    },
+    {
+      path: '/relationship',
+      component: resolve => (require(["../components/cards/personal-relation/relationship.vue"], resolve)),
+      name: 'relationship',
+      // hidden: true
     },
     {
       path: '/seacher',
