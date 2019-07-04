@@ -1,10 +1,7 @@
 <template>
   <ul class="stack" ref="card">
     <li class="stack-item"  v-for="(item, index) in headerData" :style="[transformIndex(index),transform(index)]"
-        @touchmove.stop.capture.prevent="touchmove"
-        @touchstart.stop.capture.prevent="touchstart"
-        @touchend.stop.capture.prevent="touchend"
-        @touchcancel.stop.capture.prevent="touchend"
+
         @mousedown.stop.capture.prevent="touchstart"
         @mouseup.stop.capture.prevent="touchend"
         @mousemove.stop.capture.prevent="touchmove"
@@ -73,12 +70,9 @@
       computed: {
         // 划出面积比例
         offsetRatio () {
-          // let width = this.$el.offsetWidth
-          // let height = this.$el.offsetHeight
           let offsetWidth = this.width - Math.abs(this.temporaryData.poswidth)
           let offsetHeight = this.height - Math.abs(this.temporaryData.posheight)
           let ratio = 1 - (offsetWidth * offsetHeight) / (this.width * this.height) || 0
-          console.log(ratio)
           return ratio > 1 ? 1 : ratio
         },
         // 划出宽度比例
@@ -86,7 +80,6 @@
           let width = this.width
           let offsetWidth = width - Math.abs(this.temporaryData.poswidth)
           let ratio = 1 - offsetWidth / width || 0
-          console.log(ratio)
           return ratio
         }
       },
@@ -122,7 +115,7 @@
               this.basicdata.end.x = e.targetTouches[0].clientX
               this.basicdata.end.y = e.targetTouches[0].clientY
               // offsetY在touch事件中没有，只能自己计算
-              this.temporaryData.offsetY = e.targetTouches[0].pageY - this.$el.offsetParent.offsetTop
+              this.temporaryData.offsetY = e.targetTouches[0].pageY - this.$refs.card.offsetParent.offsetTop
             }
             // pc操作
           } else {
@@ -238,7 +231,7 @@
           }
         },
         angleRatio () {
-          let height = this.$el.offsetHeight
+          let height = this.$refs.card.offsetHeight
           let offsetY = this.temporaryData.offsetY
           let ratio = -1 * (2 * offsetY / height - 1)
           return ratio || 0
@@ -302,28 +295,6 @@
           }
         }
       }
-      // methods: {
-      //   // 遍历样式
-      //   transform(index) {
-      //     if (index >= this.basicdata.currentPage) {
-      //       let style = {}
-      //       let visible = this.temporaryData.visible
-      //       let perIndex = index - this.basicdata.currentPage
-      //       // visible可见数量前滑块的样式
-      //       if (index <= this.basicdata.currentPage + visible - 1) {
-      //         style['opacity'] = '1'
-      //         style['transform'] = 'translate3D(' + perIndex * 60 + 'px,' + -1 * perIndex * 60 + 'px' + ',' + -1 * perIndex * 60 + 'px' + ')'
-      //         style['zIndex'] = visible - index + this.basicdata.currentPage
-      //         style['transitionTimingFunction'] = 'ease'
-      //         style['transitionDuration'] = 300 + 'ms'
-      //       } else {
-      //         style['zIndex'] = '-1'
-      //         style['transform'] = 'translate3D(' + visible * 60 + 'px,' + -1 * visible * 60 + 'px' + ',' + -1 * visible * 60 + 'px' + ')'
-      //       }
-      //       return style
-      //     }
-      //   }
-      // }
     }
 </script>
 
