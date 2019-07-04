@@ -9,6 +9,7 @@
             :suffix-icon="icon"
             :remote-method="remoteMethod"
             :loading="loading"
+            no-data-text="无应用"
             @change="handleSelect"
             @keyup.enter.native="search"
         >
@@ -29,6 +30,7 @@
 </template>
 <script>
 import { autoPrompt } from '../../api/axios';
+import axios from 'axios';
 export default {
     props: ['search'],
     data(){
@@ -55,36 +57,37 @@ export default {
             if (query !== '') {
                 this.loading = true;
                 this.loadAll(query).then(res => {
-                    if(res.errCode===0){
+                    let applicationsRes = res[0];
+                    let daRes = res[1];
+                    if(applicationsRes.status===200){
                         this.loading = false;
                         let applications = new Array(), results = new Array();
-                        this.$emit('initPrompt', res.data);
-                        res.data.forEach((element, index) => {
-                            if(element._source.type===0){
+                        applicationsRes.data.data.apps.forEach((element, index) => {
+                            if(element.type===0){
                                 results.push({
                                     value: JSON.stringify({
-                                        label: element._source.name,
-                                        type: element._source.type
+                                        label: element.name,
+                                        type: element.type
                                     }),
-                                    label: element._source.name
+                                    label: element.name
                                 });
-                            }else if(element._source.type===1){
+                            }else if(element.type===1){
                                 applications.push({
                                     value: JSON.stringify({
-                                        label: element._source.name,
-                                        address: element._source.address,
-                                        type: element._source.type
+                                        label: element.name,
+                                        address: element.address,
+                                        type: element.type
                                     }),
-                                    label: element._source.name
+                                    label: element.name
                                 });
                                 
                             }
                         });
-                        if(applications.length){
+                       if(applications.length){
                             this.searchDA.push({
                                 label: '应用',
                                 options: applications
-                            });
+                            });        
                         }
                         if(results.length){
                             this.searchDA.push({
@@ -92,10 +95,18 @@ export default {
                                 options: results
                             });
                         }
-                    }else{
-                        this.$message({message: res.errMsg, type: 'warning' });
+                    }else {
+                        this.$message({message: applicationsRes.data.errMsg, type: 'warning' });
+                    }
+
+                    if(daRes.status===200){
+                        this.$emit('initPrompt', daRes.data.data);
+                    }else {
+                        this.$message({message: daRes.data.resultMsg, type: 'warning' });
                     }
                 });
+            }else{
+                this.$emit('initPrompt', null);
             }
         },
         loadAll(query) {
@@ -103,9 +114,7 @@ export default {
                 from:0,
                 size:10,
                 data:{
-                    attr:{
-                        name: query
-                    }
+                    text: query
                 }
             };
             return autoPrompt(params);
