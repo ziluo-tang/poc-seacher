@@ -1,5 +1,5 @@
 <template>
-    <div class="result-card">
+    <div class="result-card" v-loading="isLoading" element-loading-text="玩命搜索中...">
         <el-tabs v-if="tabShow" v-model="activeName" @tab-click="handleTabClick">
             <el-tab-pane  v-for="(value, name) in result" :key="name" :label="value.label" :name="name">
                 <transition
@@ -13,7 +13,7 @@
                 </transition>
             </el-tab-pane>
         </el-tabs>
-        <div class="search-none" v-if="resultTips">{{resultTips}}</div>
+        <div class="search-none" v-if="isEmpty">额...搜索结果走丢了！！！</div>
     </div>
 </template>
 <script>
@@ -21,24 +21,21 @@ import {allcards, mapping} from '../../config/mapping';
 export default {
     data(){
         return {
+            isLoading: true,
             tabShow: false,
-            resultTips: '',
+            isEmpty: false,
             activeTab: '',
-            activeComponent: ''
+            activeComponent: '',
         };
     },
     computed: {
         result(){
             let { result } = this.$store.state.search;
-            if(typeof result=='string'){
-                return result;
-            }else{
-                let cards = new Object();
-                for(let card in result){
-                    cards[card] = mapping[card];
-                }
-                return cards;
+            let cards = new Object();
+            for(let card in result){
+                cards[card] = mapping[card];
             }
+            return cards;
         },
         activeName: {
             get(){
@@ -60,23 +57,17 @@ export default {
     },
     watch: {
         result: function(value) {
-            if(typeof value=='string'){
-                this.resultTips = value;
-                return;
+            let cards = Object.keys(value);
+            if(cards.length){
+                this.tabShow = true;
+                this.activeTab = value[cards[0]].name;
+                this.activeComponent = value[cards[0]].component;
             }else{
-                let cards = Object.keys(value);
-                if(cards.length){
-                    this.resultTips = '';
-                    this.tabShow = true;
-                    this.activeTab = value[cards[0]].name;
-                    this.activeComponent = value[cards[0]].component;
-                }else{
-                    this.resultTips = '无搜索结果';
-                    this.tabShow = false;
-                    this.activeTab = '';
-                    this.activeComponent = '';
-                }
+                this.isEmpty = true;
+                this.activeTab = '';
+                this.activeComponent = '';
             }
+            this.isLoading = false;
         }
     }
 }
@@ -95,7 +86,9 @@ export default {
         background: none;
     }
     .result-card > .el-tabs > .el-tabs__content{
+        min-height: 480px;
         padding: 15px 125px;
+        background: linear-gradient(#ACCBFF, #F8FAFB);
     }
     .result-card .search-none{
         margin: 0 auto;
