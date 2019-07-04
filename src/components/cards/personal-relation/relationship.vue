@@ -38,12 +38,7 @@
         components:{imgCard},
         data(){
           return{
-            header:[require('../../../assets/img/u70.png'),
-                    require('../../../assets/img/u70.png'),
-                    require('../../../assets/img/u70.png'),
-                    require('../../../assets/img/u70.png'),
-                    require('../../../assets/img/u70.png'),
-                    ]
+
           };
         },
     }
