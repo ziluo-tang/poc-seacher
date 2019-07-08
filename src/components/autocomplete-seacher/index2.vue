@@ -12,6 +12,7 @@
             no-data-text="无应用"
             @change="handleSelect"
             @focus="setMinWidth"
+            @keyup.backspace.native="clearKeyword"
             @keyup.enter.native="search"
         >
             <el-option-group
@@ -138,6 +139,11 @@ export default {
 		        dropdownEmpty[0].style['min-width'] = val.srcElement.clientWidth + 2 + 'px'
             }
             
+        },
+        clearKeyword(ev) {
+            if(!ev.srcElement.value){
+                this.keyword = ev.srcElement.value;
+            }
         }
     },
     watch: {

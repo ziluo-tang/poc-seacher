@@ -52,18 +52,34 @@ export default {
     },
     methods:{
         search() {
-            this.$router.push({ path: "/result", query: {keyword: encodeURIComponent(this.keyword)}});
+            if(this.keyword.trim()){
+                this.$router.push({ 
+                    path: "/result", 
+                    query: {
+                        keyword: encodeURIComponent(this.keyword)
+                    }
+                });
+            } else {
+                this.$router.push({ 
+                    path: "/seacher" 
+                });
+            }
+            
         },
         trunToSearch() {
             this.$router.push({ path: "/seacher"});
         }
     },
     watch:{
-        $route(to, from){
-            if(decodeURIComponent(this.$route.query.keyword).trim()){
-                this.$store.dispatch('INSERT_KEYWORD', decodeURIComponent(this.$route.query.keyword));
-                this.$store.dispatch('INSERT_RESULT', decodeURIComponent(this.$route.query.keyword));
-            }
+        $route: {
+            handler(to, from) {
+                let keyword = decodeURIComponent(this.$route.query.keyword);
+                if(keyword.trim()){
+                    this.$store.dispatch('INSERT_KEYWORD', keyword);
+                    this.$store.dispatch('INSERT_RESULT', keyword);
+                }
+            },
+            immediate: true
         }
     }
 }

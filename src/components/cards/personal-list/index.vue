@@ -77,6 +77,7 @@ export default {
                 size: this.pageSize, 
                 strategy: this.result.strategy
             });
+            document.getElementsByClassName('el-container')[1].scrollTop = 0;
         }
     },
     filters: {
