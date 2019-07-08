@@ -11,41 +11,54 @@ export default {
     name: 'personalRelation',
     props: ['relation'],
     data() {
-        return {};
+        return {
+            relationGraph: null
+        };
     },
     mounted() {
-        let relation = this.$props.relation;
-        let categories = new Array();
-        relation.nodes.forEach(element => {
-            element.symbolSize = 80;
-            categories.push(element.category);
-        });
-        relation.links.forEach(element => {
-            element.value = 0;
-            element.lineStyle = {
-                width: 2
-            };
-            element.label = {
-                show: true,
-                fontSize: 12,
-                formatter: function(param){
-                    return param.data.name;
-                }
-            };
-        });
-        relation.categories = categories;
-        let relationGraph = this.drawGraph(relation);
+        let relation = this.initData();
+        this.relationGraph = this.drawGraph(relation);
         // this.pubdata(relationGraph, this.personals);
-        window.onresize = function(){
-            relationGraph.resize();
+        window.onresize = () => {
+            this.relationGraph.resize();
         }
     },
-    computed: {
-        result(){
-            let { relation } = this.$store.state.search.result;
+    watch: {
+        relation(val) {
+            let relation = this.initData();
+            this.relationGraph.setOption({
+                series: [{
+                    data: relation.nodes,
+                    links: relation.links,
+                    categories: relation.categories,
+                }]
+            });
         }
     },
     methods: {
+        initData() {
+            let relation = this.$props.relation;
+            let categories = new Array();
+            relation.nodes.forEach(element => {
+                element.symbolSize = 80;
+                categories.push(element.category);
+            });
+            relation.links.forEach(element => {
+                element.value = 0;
+                element.lineStyle = {
+                    width: 2
+                };
+                element.label = {
+                    show: true,
+                    fontSize: 12,
+                    formatter: function(param){
+                        return param.data.name;
+                    }
+                };
+            });
+            relation.categories = categories;
+            return relation;
+        },
         getImgData(imgSrc) {
             let fun = function (resolve, reject) {
                 const canvas = document.createElement('canvas');

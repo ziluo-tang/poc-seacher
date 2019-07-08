@@ -59,23 +59,26 @@ export default {
         }
     },
     watch: {
-        result: function(value) {
-            if(typeof value=='string'){
-                this.resultTips = value;
-            }else if(typeof value=='object'){
-                let cards = Object.keys(value);
-                if(cards.length){
-                    this.tabShow = true;
-                    this.resultTips = null;
-                    this.activeTab = value[cards[0]].name;
-                    this.activeComponent = value[cards[0]].component;
-                }else{
-                    this.tabShow = false;
-                    this.resultTips = '额...搜索结果走丢了！！！';
-                    this.activeTab = '';
-                    this.activeComponent = '';
+        result: {
+            handler: function(value) {
+                if(typeof value=='string'){
+                    this.resultTips = value;
+                }else if(typeof value=='object'){
+                    let cards = Object.keys(value);
+                    if(cards.length){
+                        this.tabShow = true;
+                        this.resultTips = null;
+                        this.activeTab = value[cards[0]].name;
+                        this.activeComponent = value[cards[0]].component;
+                    }else{
+                        this.tabShow = false;
+                        this.resultTips = '额...搜索结果走丢了！！！';
+                        this.activeTab = '';
+                        this.activeComponent = '';
+                    }
                 }
-            }
+            },
+            immediate: true
         }
     }
 }

@@ -8,7 +8,7 @@ export default {
     [types.INSERT_RESULT]({commit}, keyword){
         const loading = ElementUi.Loading.service({
             lock: true,
-            text: '玩命加载中...',
+            text: '玩命搜索中...',
             background: '#ffffff'
         });
         cloudQuery({queryDetail: keyword}).then((response) => {
