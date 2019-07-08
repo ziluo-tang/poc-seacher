@@ -1,5 +1,8 @@
 <template>
     <div>
+        <el-card shadow="hover" v-if="result.data.description">
+            <p class="description">{{result.data.description}}</p>
+        </el-card>
         <personal-desc :person="personAttr.baseInfo"></personal-desc>
         <el-tabs v-model="activeName" type="border-card">
             <el-tab-pane label="常规" name="routine">
@@ -81,6 +84,14 @@ export default {
     .el-card{
         &:not(:last-child){
             margin-bottom: 10px;
+        }
+        .description{
+            text-align: center;
+            font-size: 24px;
+            color: #888888;
+            height: 50px;
+            line-height: 50px;
+            letter-spacing: 2px;
         }
     }
     .el-tabs--border-card{

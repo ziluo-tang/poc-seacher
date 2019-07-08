@@ -60,8 +60,10 @@ export default {
     },
     watch:{
         $route(to, from){
-            this.$store.dispatch('INSERT_KEYWORD', decodeURIComponent(this.$route.query.keyword));
-            this.$store.dispatch('INSERT_RESULT', decodeURIComponent(this.$route.query.keyword));
+            if(decodeURIComponent(this.$route.query.keyword).trim()){
+                this.$store.dispatch('INSERT_KEYWORD', decodeURIComponent(this.$route.query.keyword));
+                this.$store.dispatch('INSERT_RESULT', decodeURIComponent(this.$route.query.keyword));
+            }
         }
     }
 }

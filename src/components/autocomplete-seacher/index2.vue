@@ -11,6 +11,7 @@
             :loading="loading"
             no-data-text="无应用"
             @change="handleSelect"
+            @focus="setMinWidth"
             @keyup.enter.native="search"
         >
             <el-option-group
@@ -126,6 +127,15 @@ export default {
                 this.$props.search();   //搜索
             }else if(itemValue.type===1){
                 window.open(itemValue.address);   //应用即达
+            }
+            
+        },
+        setMinWidth(val) {
+            let dropdown = document.getElementsByClassName('el-select-dropdown');
+            let dropdownEmpty = document.getElementsByClassName('el-select-dropdown__empty');
+            dropdown[0].style['min-width'] = val.srcElement.clientWidth + 2 + 'px';
+            if (dropdownEmpty.length > 0) {
+		        dropdownEmpty[0].style['min-width'] = val.srcElement.clientWidth + 2 + 'px'
             }
             
         }

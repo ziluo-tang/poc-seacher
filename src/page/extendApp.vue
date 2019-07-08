@@ -50,7 +50,6 @@ export default {
     methods: {
         onSubmit() {
           this.$refs['form'].validate((valid) => {
-            console.log(valid);
               if (valid) {
                 addApplication({data: this.form}).then(res => {
                     if(res.resultCode==0){

@@ -11,13 +11,29 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '/application': {
-            target: 'http://47.103.73.10:8801',
-            secure: false,
-            changeOrigin: true,
-            pathRewrite: {
-              '^/application': ''
-            }   
+        '/add-apps': {
+          target: 'http://192.168.8.120:8811',
+          secure: false,
+          changeOrigin: true,
+          pathRewrite: {
+            '^/add-apps': ''
+          }   
+        },
+        '/prompt-apps': {
+          target: 'http://192.168.8.120:8810',
+          secure: false,
+          changeOrigin: true,
+          pathRewrite: {
+            '^/prompt-apps': ''
+          }   
+        },
+        '/prompt-base': {
+          target: 'http://192.168.8.120:8809',
+          secure: false,
+          changeOrigin: true,
+          pathRewrite: {
+            '^/prompt-base': ''
+          }   
         },
         '/apis': {
             target: 'http://192.168.8.120:8881',
