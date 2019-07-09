@@ -20,6 +20,7 @@
 import {allcards, mapping} from '../../config/mapping';
 export default {
     data(){
+        console.log('分支测试');
         return {
             tabShow: false,
             resultTips: null,
