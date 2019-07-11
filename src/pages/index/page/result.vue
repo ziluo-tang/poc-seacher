@@ -7,7 +7,7 @@
     <el-container>
         <el-header height="100px">
              <div class="header-seacher">
-                <img src="../assets/img/result-logo.png" @click="trunToSearch">
+                <img src="../../../assets/img/result-logo.png" @click="trunToSearch">
                 <autocomplete-seacher :search="search"></autocomplete-seacher>
             </div>
         </el-header>
@@ -37,7 +37,7 @@ export default {
     data() {
         return {
             minHeight: '',
-            logo: require('../assets/img/result-logo.png')
+            logo: require('../../../assets/img/result-logo.png')
         };
     },
     computed: {

@@ -48,7 +48,7 @@ export default {
                 policeStation: '杭州市西湖区派出所',
                 country: 'xxx居委会',
                 master: '张xx',
-                header: require('../../../assets/img/u70.png')
+                header: require('../../../../../assets/img/u70.png')
             }, {
                 registerId: 'ZAS2y492742',
                 attribute: '城镇户口',
@@ -57,7 +57,7 @@ export default {
                 policeStation: '杭州市西湖区派出所',
                 country: 'xxx居委会',
                 master: '张xx',
-                header: require('../../../assets/img/u70.png')
+                header: require('../../../../../assets/img/u70.png')
             }, {
                 registerId: 'ZAS2y492742',
                 attribute: '城镇户口',
@@ -66,7 +66,7 @@ export default {
                 policeStation: '杭州市西湖区派出所',
                 country: 'xxx居委会',
                 master: '张xx',
-                header: require('../../../assets/img/u70.png')
+                header: require('../../../../../assets/img/u70.png')
             }];
             return registers;
         }

@@ -54,7 +54,7 @@ export default {
     data(){
         return {
             pageSize: 5,
-            header: require('../../../assets/img/u70.png')
+            header: require('../../../../../assets/img/u70.png')
         };
     },
     components: {

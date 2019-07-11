@@ -136,7 +136,7 @@ export default {
                 sexy: '女',
                 age: '24',
                 IDcard: '31000000000000',
-                header: require('../../../assets/img/u70.png'),
+                header: require('../../../../../assets/img/u70.png'),
                 oldname: '张xx',
                 nickname: '小张',
                 birthday: '1993/10/1',
@@ -151,14 +151,14 @@ export default {
                 address: '浙江省杭州市上城区公安局'
             },
             member: [{
-                header: require('../../../assets/img/u70.png'),
+                header: require('../../../../../assets/img/u70.png'),
                 name: '张三',
                 sexy: '女',
                 age: '25',
                 IDcard: '42108923798735998',
                 education: '本科'
             }, {
-                header: require('../../../assets/img/u65.png'),
+                header: require('../../../../../assets/img/u65.png'),
                 name: '李三',
                 sexy: '女',
                 age: '25',

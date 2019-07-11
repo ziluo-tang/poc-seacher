@@ -7,7 +7,7 @@
     <div class="seacher-box">
         <div class="seacher-container">
             <div class="seacher-log">
-                <img src="../assets/img/search-logo.png">
+                <img src="../../../assets/img/search-logo.png">
                  <!-- <el-image :src="blogo">
                     <div slot="placeholder" class="image-slot">
                         加载中<span class="dot">...</span>
@@ -47,8 +47,8 @@ import autocompleteSeacher from '../components/autocomplete-seacher/index2.vue';
 export default {
     data() {
         return {
-            slogo: require('../assets/img/result-logo.png'),
-            blogo: require('../assets/img/search-logo.png'),
+            slogo: require('../../../assets/img/result-logo.png'),
+            blogo: require('../../../assets/img/search-logo.png'),
             prompt: null,
             desc: {
                 isShow: false,

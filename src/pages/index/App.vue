@@ -5,11 +5,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'App'
+}
 </script>
 
 <style lang="scss">
-@import "./assets/css/index.scss";
+@import "../../assets/css/index";
 body {
     margin: 0;
     padding: 0;

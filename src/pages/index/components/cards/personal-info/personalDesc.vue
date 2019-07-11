@@ -50,7 +50,7 @@ export default {
     props: ['person', 'tag'],
     data() {
         return {
-            heard: require('../../../assets/img/u65.png')
+            heard: require('../../../../../assets/img/u65.png')
         };
     },
     methods: {
@@ -78,7 +78,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "../../../assets/css/custom.scss";
+@import "../../../../../assets/css/custom";
     .sort-tag{
         font-size: 1.1em;
         font-weight: 600;

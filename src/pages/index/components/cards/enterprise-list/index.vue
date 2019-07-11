@@ -37,19 +37,19 @@ export default {
         enterprises() {
             const enterprises = [{
                 name: '杭州xxxx科技公司',
-                header: require('../../../assets/img/u70.png'),
+                header: require('../../../../../assets/img/u70.png'),
                 code: 'aiwurh29847',
                 registerAddr: '杭州市西湖区xxx办公楼',
                 workAddr: '杭州市西湖区xxx办公楼'
             }, {
                 name: '杭州xxxx科技公司',
-                header: require('../../../assets/img/u70.png'),
+                header: require('../../../../../assets/img/u70.png'),
                 code: 'aiwurh29847',
                 registerAddr: '杭州市西湖区xxx办公楼',
                 workAddr: '杭州市西湖区xxx办公楼'
             }, {
                 name: '杭州xxxx科技公司',
-                header: require('../../../assets/img/u70.png'),
+                header: require('../../../../../assets/img/u70.png'),
                 code: 'aiwurh29847',
                 registerAddr: '杭州市西湖区xxx办公楼',
                 workAddr: '杭州市西湖区xxx办公楼'

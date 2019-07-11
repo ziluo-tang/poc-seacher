@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/css/them.scss";
+@import "../../../../assets/css/them";
   .pagination-content{
     margin: 10px 0;
     text-align: center;
