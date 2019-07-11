@@ -1,7 +1,5 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-
-import relationship from '../components/cards/personal-relation/relationship.vue'
 // 要告诉 vue 使用 vueRouter
 Vue.use(VueRouter);
 
