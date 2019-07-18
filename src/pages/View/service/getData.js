@@ -19,3 +19,6 @@ export const testNode = (data)=>axios.post('/openApi/aiSearch/patternMatch',{dat
 export const exportText =(filePath)=>axios.post('/openApi/ai-search/version1.0/rule/save_file',{filePath}).then((res)=>{
   return res.data
 })
+export const switchChange = (ruleId,status)=>axios.post('/openApi/ai-search/version1.0/rule/update_status',{ruleId,status}).then((res)=>{
+  return res.data
+})

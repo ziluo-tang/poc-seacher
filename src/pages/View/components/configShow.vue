@@ -33,6 +33,19 @@
           label="更新时间">
         </el-table-column>
         <el-table-column
+          label="状态">
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row.status"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+              active-text="已完成"
+              inactive-text="未完成"
+              @change.self="switchChange(scope.row.id,scope.row.status)" :key="scope.row.id">
+            </el-switch>
+          </template>
+        </el-table-column>
+        <el-table-column
           label="操作">
           <template slot-scope="scope">
             <i class="el-icon-edit font-mouse-move handle" @click="showDialog(scope.row)">更新 </i>
@@ -67,6 +80,7 @@
         <span slot="footer" class="dialog-footer">
           <el-button size="mini" @click="test()">测试</el-button>
           <el-button @click="dialogVisible = false" size="mini">取 消</el-button>
+          <el-button type="primary" @click="saveUp(dialogData.script_name,dialogData.script_content,dialogData.id)" size="mini">保存</el-button>
           <el-button type="primary" @click="codeUp(dialogData.script_name,dialogData.script_content,dialogData.id)" size="mini">确 定</el-button>
         </span>
       </el-dialog>
@@ -101,7 +115,7 @@
   //导入指定语言的提示文件
   require("codemirror/addon/hint/javascript-hint.js");
   let moment = require('moment');
-  import {getList_all,update_data,delete_data,testNode,exportText} from '../service/getData'
+  import {getList_all,update_data,delete_data,testNode,exportText,switchChange} from '../service/getData'
     export default {
       name: "configShow",
       //注册组件
@@ -143,7 +157,7 @@
           readOnly:true    //只读
           },
           dialogUrl:false,
-          input:''
+          input:'',
         }
       },
       mounted(){
@@ -151,6 +165,24 @@
         this.getHeight();
       },
       methods:{
+        switchChange(id,status){
+          if(status == true){
+            status = 1
+          }else {
+            status = 0
+          }
+          let data = switchChange(id,status)
+          data.then((res)=>{
+            console.log(res)
+            if(res.status == 0){
+              this.$elementMessage('更改成功','success')
+              this.getList()
+            }else {
+              this.$elementMessage('更改失败','error')
+              this.getList()
+            }
+          })
+        },
         //时间格式转换
         formatTime(row,column) {
           if(column.label === '创建时间'){
@@ -170,7 +202,14 @@
           let data = getList_all();
           data.then((res)=>{
             if(res.status == "0"){
-              this.allData = res.data
+              this.allData = res.data;
+              this.allData.forEach(ele=>{
+                if(ele.status == 1){
+                  ele.status = true
+                }else {
+                  ele.status = false
+                }
+              })
               console.log(this.allData);
             }
           })
@@ -178,21 +217,39 @@
         //点击显示更新弹窗
         showDialog(item){
           this.dialogData = item
+          console.log(this.dialogData)
           this.dialogVisible = true
           this.$nextTick(()=>{
             let mirror = this.$refs.code.codemirror
             mirror.setSize('100%','600px')
           })
         },
-        //点击确定完成更改上传
-        codeUp(ruleName,ruleContent,ruleId){
-          this.dialogVisible = false
+        //点击保存完成更改上传
+        saveUp(ruleName,ruleContent,ruleId){
           let data = update_data(ruleName,ruleContent,ruleId)
           data.then((res)=>{
+            console.log(res)
             if(res.status === 0){
               this.getList();
               this.$elementMessage('更改成功','success')
             }else {
+              this.getList();
+              this.$elementMessage('更改失败','error')
+            }
+          })
+        },
+        //点击确定完成更改上传
+        codeUp(ruleName,ruleContent,ruleId){
+          let data = update_data(ruleName,ruleContent,ruleId)
+          data.then((res)=>{
+            console.log(res)
+            if(res.status === 0){
+              this.getList();
+              this.dialogVisible = false
+              this.$elementMessage('更改成功','success')
+            }else {
+              this.getList();
+              this.dialogVisible = true
               this.$elementMessage('更改失败','error')
             }
           })

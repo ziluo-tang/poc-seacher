@@ -76,7 +76,34 @@
         info_name:false,
         availHeight:'',
         //编辑器的默认输入值
-        code: "var a=1\nlet b=2",
+        code:`rule "example",{
+      //author
+      fact context
+      priority 4
+      hit "single"
+      conditions {
+          println intention
+          println entities
+          intention != null && intention.size==1 && intention[0]=='target_intention'
+      }
+      actions {
+          adsAction "resule_name",{
+              select "*"
+              from "*"
+              where "*"
+          }
+      }
+      displays {
+          display "target_intention","page",{
+              if(result["*"].data.list.size() > 0){
+                result["*"].data.description = "description"
+              }else {
+                result["*"].data.description = "description"
+              }
+            result["*"]
+         }
+      }
+  }`,
         cmOptions: {
           tabSize: 4,
           mode: "text/javascript", //识别的语言javascript
