@@ -9,12 +9,16 @@
       <el-table
         :data="allData"
         tooltip-effect="dark"
+        @cell-dblclick="rowDblclick"
         style="width: 100%;"
         :cell-style="{padding:'5px 0'}">
         <el-table-column
-          prop="script_name"
           label="规则名称"
           width="180">
+          <template slot-scope="scope">
+            <span v-if="!isEdit[scope.row.id]">{{scope.row.script_name}}</span>
+            <el-input v-if=isEdit[scope.row.id] @blur="saveEdit(scope.row)" v-model="name" placeholder="请输入内容"></el-input>
+          </template>
         </el-table-column>
         <el-table-column
           prop="author"
@@ -158,6 +162,8 @@
           },
           dialogUrl:false,
           input:'',
+          name:'',
+          isEdit:{}
         }
       },
       mounted(){
@@ -165,6 +171,22 @@
         this.getHeight();
       },
       methods:{
+        rowDblclick(row, column, cell, event){
+          //判断是否是需要编辑的列 再改变对应的值
+          if(column.label == '规则名称') {
+            /*第一个参数是你要改变的数组，
+              第二个参数是你要改变数组中对应值的索引，
+              第三个参数是你要将这个值改成什么*/
+            console.log(row.id);
+            this.$set(this.isEdit, row.id, true)
+            console.log(this.isEdit)
+          }
+        },
+        saveEdit(row){
+          this.$set(this.isEdit, row.id, false);
+          alert('保存规则名称功能未开发')
+          this.getList()
+        },
         switchChange(id,status){
           if(status == true){
             status = 1
