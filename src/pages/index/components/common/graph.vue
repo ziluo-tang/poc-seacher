@@ -18,6 +18,11 @@ export default {
     mounted() {
         let relation = this.initData();
         this.relationGraph = this.drawGraph(relation);
+        this.relationGraph.on('click', param => {
+            if(param.dataType==='node'){
+                this.$router.push({ path: "/result", query: {keyword: encodeURIComponent(param.data.id)}});
+            }
+        });
         // this.pubdata(relationGraph, this.personals);
         window.onresize = () => {
             this.relationGraph.resize();
