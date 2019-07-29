@@ -36,20 +36,20 @@ module.exports = {
           }   
         },
         '/apis': {
-            target: 'http://192.168.8.120:8881',
+            target: 'http://192.168.8.120:8882',
             secure: false,
             changeOrigin: true,
             pathRewrite: {
               '^/apis': ''
             }   
         },
-      '/openApi': {
-        target: 'http://192.168.8.120:8882',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/openApi': ''
+        '/openApi': {
+          target: 'http://192.168.8.120:8882',
+          changeOrigin: true,
+          pathRewrite: {
+            '^/openApi': ''
+          }
         }
-      }
     },
 
     // Various Dev Server settings

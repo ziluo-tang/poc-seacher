@@ -3,9 +3,9 @@ import { promises } from 'fs';
 let addAppsBase = process.env.NODE_ENV==="development" ? '/add-apps' : 'http://139.64.40.240:8811',
     promptApp = process.env.NODE_ENV==="development" ? '/prompt-apps' : 'http://139.64.40.240:8810',
     promptBase = process.env.NODE_ENV==="development" ? '/prompt-base' : 'http://139.64.40.240:8809',
-    searchBase = process.env.NODE_ENV==="development" ? '/apis' : 'http://139.64.40.240:8881';
+    searchBase = process.env.NODE_ENV==="development" ? '/apis' : 'http://139.64.40.240:8882';
     
-
+console.log(axios.defaults);
 
 export const addApplication = params => {
     return axios.post(`${addAppsBase}/app/addApplication`, params).then(res => res.data);
